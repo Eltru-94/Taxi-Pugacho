@@ -1,24 +1,25 @@
 <?= $this->extend('./plantilla/layout')?>
-
 <?= $this->section('titulo')?>
-Users
+<?php echo $title ?>
 <?= $this->endSection()?>
-
+//Main User
 <?= $this->section('contenido')?>
-<br>
+
+<h1 class="mt-4">Usuarios</h1>
+
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="index.html">Sidenav Light</a></li>
+    <li class="breadcrumb-item"><a href="index.html">Sidenav Light</a></li>
+</ol>
 <?=$this->include('/admin/users/formulario') ?>
-<hr>
+<br>
+<br>
 <?=$this->include('/admin/users/tabla') ?>
 
 
-
-<script>
-$(document).ready(function() {
-
-    $(document).on('click', '.btnCrearUser', function() {
-        alert("si entramoss");
-    });
-
-});
-</script>
+<?= $this->endSection()?>
+/*Scripts Usuario*/
+<?= $this->section('scripts')?>
+<?=$this->include('/admin/users/user') ?>
 <?= $this->endSection()?>

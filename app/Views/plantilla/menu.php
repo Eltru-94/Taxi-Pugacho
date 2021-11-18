@@ -12,8 +12,8 @@
                 <div class="collapse" id="admin" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="/users">Usuario</a>
-                        <a class="nav-link" href="/rol">Roles</a>
-                        <a class="nav-link" href="layout-sidenav-light.html">Funcionalidad</a>
+                        <a class="nav-link" href="/roles">Roles</a>
+                        <a class="nav-link" href="/funcionalidad">Funcionalidad</a>
                     </nav>
                 </div>
 
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="sb-sidenav-footer">
-            <?=$persona[0]['correo'] ?>
+        <?php echo session('nombre'); ?>
         </div>
     </nav>
 </div>

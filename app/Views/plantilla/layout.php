@@ -14,7 +14,7 @@
         <?= $this->include('plantilla/menu')?>
 
         <div id="layoutSidenav_content">
-            <main class="container">
+            <main>
                 <div class="container-fluid">
 
                     <?= $this->renderSection('contenido')?>
@@ -25,6 +25,7 @@
         </div>
 
     </div>
+    <?= $this->renderSection('scripts')?>
     <?=$this->include('plantilla/links')?>
 </body>
 

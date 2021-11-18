@@ -5,7 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 //Libraries para cifrar
 use App\Libraries\Hash;
-use \App\Models\PersonaModel;
+use \App\Models\Users;
 class Auth extends Controller
 
 {
@@ -36,7 +36,7 @@ class Auth extends Controller
         if(!$validation){
             return view('auth/register',['validation'=>$this->validator]);
         }else{
-            //Registro
+            //Registro Users
             $nombre = $this->request->getPost('nombre');
             $apellido = $this->request->getPost('apellido');
             $cedula = $this->request->getPost('cedula');
@@ -53,7 +53,7 @@ class Auth extends Controller
                 'clave'=>Hash::make($password)
             ];
 
-            $PersonaModel = new PersonaModel($db);
+            $PersonaModel = new Users($db);
             $query=$PersonaModel->insert($persona);
             if(!$query){
 
@@ -83,7 +83,7 @@ class Auth extends Controller
 
             $correo = $this->request->getPost('correo');
             $password= $this->request->getPost('password');
-            $PersonaModel = new PersonaModel($db);
+            $PersonaModel = new Users($db);
             $personainfo=$PersonaModel->where('correo',$correo)->first();
             $checkpassword=Hash::check($password, $personainfo['clave']);
             if(!$checkpassword){
@@ -91,11 +91,13 @@ class Auth extends Controller
                 session()->setFlashdata('fail','Password Incorrecto');
                 return redirect()->to('/auth')->withInput();
             }else{
-                $perid=$personainfo['id_per'];
+                $perid=$personainfo['id_user'];
                 $nombre=$personainfo['nombre'].' '.$personainfo['apellido'];
+                $foto=$personainfo['foto'];
                 $data=[
                     "loggedUser"=>$perid,
-                    "nombre"=>$nombre
+                    "nombre"=>$nombre,
+                    "foto"=>$foto,
                 ];
                 session()->set($data);
                

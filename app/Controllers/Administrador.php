@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Controllers;
-use \App\Models\PersonaModel;
+use \App\Models\Users;
 
 class Administrador extends BaseController
 {
     public function index()
     {
-        $PerModel = new PersonaModel($db);
+        $PerModel = new Users($db);
         $loggedUserID=session()->get('loggedUser');
-        $perInfo=$PerModel->where('id_per',$loggedUserID)->findAll();
+        $perInfo=$PerModel->where('id_user',$loggedUserID)->findAll();
 
         $datos=[
             'title'=>"Admin",
@@ -19,18 +19,5 @@ class Administrador extends BaseController
         return view('administrador/index',$datos);
     }
 
-    public function profile()
-    {
-        $PerModel = new PersonaModel($db);
-          
-        $loggedUserID=session()->get('loggedUser');
-        //$a = $PerModel() -> find(8);
-
-        $datos=[
-            'title'=>"Perfil",
-            'id'=>$loggedUserID
-        ];
-
-        return view('administrador/perfil',$datos);
-    }
+   
 }

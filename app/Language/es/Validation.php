@@ -58,6 +58,7 @@ return [
     'valid_ip'              => 'El campo {field} debe contener una IP válida.',
     'valid_url'             => 'El campo {field} debe contener una URL válida.',
     'valid_date'            => 'El campo {field} debe contener una fecha válida.',
+    'cedula'            => 'El campo {field} es incorrecta.',
 
     // Credit Cards
     'valid_cc_num' => '{field} no parece ser un número de tarjeta de crédito válida.',

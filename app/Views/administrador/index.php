@@ -1,13 +1,18 @@
 <?= $this->extend('plantilla/layout')?>
 
 <?= $this->section('titulo')?>
-Admin juab
+Administrador
 <?= $this->endSection()?>
-<?= $this->section('informacion')?>
-<?= $persona[0]['nombre'].' '.$persona[0]['apellido']?>
-<?= $this->endSection()?>
+
+
+
 <?= $this->section('contenido')?>
 
-<h1>Administrativo</h1>
 
+<h1 class="mt-4">Administrativo</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="index.html">Sidenav Light</a></li>
+    <li class="breadcrumb-item"><a href="index.html">Sidenav Light</a></li>
+</ol>
 <?= $this->endSection()?>

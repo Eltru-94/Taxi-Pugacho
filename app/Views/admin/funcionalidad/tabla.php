@@ -1,13 +1,11 @@
 <div class="col-md-12">
-    <table class="table table-striped" id="tablaRoles" name="tablaRoles">
+    <table class="table table-striped" id="tablaFuncionalidades" name="tablaFuncionalidades">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Roles</th>
+                <th>Funcionalidad</th>
                 <th>Descripción</th>
-                <th>Acción</th>
-    
-                
+            
             </tr>
 
         </thead>

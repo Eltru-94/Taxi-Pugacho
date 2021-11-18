@@ -33,13 +33,32 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+
 /* Ruta de loggin */
 $routes->group('',['filter'=>'AuthCheck'],function($routes){
-    $routes->get('/administrador','Administrador::index');
-    $routes->get('/administrador/profile','Administrador::profile');
-    $routes->get('/auth/register','Auth::register');
 
-    $routes->get('/users','Users::index');
+
+    $routes->get('/administrador','Administrador::index');
+    $routes->get('/auth/register','Auth::register');
+    //Users
+    $routes->get('/users','UsersController::index');
+    $routes->get('/users/fetch','UsersController::fetch');
+    $routes->post('/users/save','UsersController::save');
+    $routes->post('/users/deleteUser','UsersController::delete');
+    $routes->post('/users/update','UsersController::update');
+    $routes->post('/users/updateUser','UsersController::updateUser');
+    //Roles
+    $routes->get('/roles','RolController::index');
+    $routes->post('/roles/save','RolController::save');
+    $routes->get('/roles/fetch','RolController::fetch');
+    $routes->post('/roles/update','RolController::update');
+    $routes->post('/roles/updateRol','RolController::updateRol');
+    $routes->post('/roles/deleteRol','RolController::delete');
+    //Funcionalidades
+    $routes->get('/funcionalidad','FuncionalidadesController::index');
+    $routes->get('/funcionalidad/fetch','FuncionalidadesController::fetch');
+   
+    
 });
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes){
