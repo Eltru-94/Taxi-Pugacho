@@ -4,17 +4,11 @@
 <?= $this->endSection()?>
 //Main User
 <?= $this->section('contenido')?>
+<br>
+<h2 class="text-center">Usuarios</h2>
 
-<h1 class="mt-4">Usuarios</h1>
-
-<ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="index.html">Sidenav Light</a></li>
-    <li class="breadcrumb-item"><a href="index.html">Sidenav Light</a></li>
-</ol>
 <?=$this->include('/admin/users/formulario') ?>
-<br>
-<br>
+
 <?=$this->include('/admin/users/tabla') ?>
 
 

@@ -16,3 +16,13 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="<?=base_url('js/jquery.dataTables.min.js')?>" crossorigin="anonymous"></script>
 <script src="<?=base_url('js/dataTables.bootstrap4.min.js')?>" crossorigin="anonymous"></script>
+
+<script src="<?=base_url('js/toastr.min.js')?>" crossorigin="anonymous"></script>
+<link href="<?= base_url('/css/toastr.min.css')?>" rel="stylesheet" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>

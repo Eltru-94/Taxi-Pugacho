@@ -7,9 +7,9 @@
 <?= $this->section('contenido')?>
 <br>
 <h3 class="text-center">Funcionalidades</h3>
-<hr>
 
-<br>
+
+
 <?=$this->include('/admin/funcionalidad/tabla')?>
 
 <?= $this->endSection()?>
@@ -45,7 +45,7 @@ function loadFuncionalidades() {
         success: function(res) {
             let cont = 1;
             var temp = "";
-            res['funcionalidades'].forEach(fun => {
+            res.forEach(fun => {
                 temp = tablaRoles.row.add([cont, fun.funcionalidad, fun.descripcion
                 ]);
                 cont++;

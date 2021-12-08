@@ -54,7 +54,9 @@ class Validation
         'direccion'=>'required',
         'correo'=>'required|valid_email',
         'password'=>'required|min_length[5]|max_length[12]',
-        'cpassword'=>'required|min_length[5]|max_length[12]|matches[password]'
+        'cpassword'=>'required|min_length[5]|max_length[12]|matches[password]',
+        'imagen'=>'uploaded[imagen]|max_size[imagen,255]|is_image[imagen]',
+        'roles'=>'required',
     ];
 
     public $userupdate=[
@@ -64,14 +66,31 @@ class Validation
         'telefono'=>'required',
         'fechanacimiento'=>'required',
         'genero'=>'required',
+        'roles'=>'required',
         'licencia'=>'required',
         'direccion'=>'required',
-        'correo'=>'required|valid_email'
+        'correo'=>'required|valid_email',
+        'imagen'=>'uploaded[imagen]|max_size[imagen,255]|is_image[imagen]',
+        'roles'=>'required',
     ];
 
     public $rol=[
         'rol'=>'required|alpha_space|is_unique[roles.rol]',
         'descripcion'=>'required',
+    ];
+    public $searchID=[
+
+        'cedula'=>'required|exact_length[10]|cedula'
+    ];
+    public $vehiculo=[
+
+        'imagen1'=>'uploaded[imagen1]|max_size[imagen1,255]|is_image[imagen1]',
+        'imagen2'=>'uploaded[imagen2]|max_size[imagen2,255]|is_image[imagen2]',
+        'imagen3'=>'uploaded[imagen3]|max_size[imagen3,255]|is_image[imagen3]',
+        'placa'=>'required',
+        'marca'=>'required',
+        'modelo'=>'required',
+        'fechafabricacion'=>'required',
     ];
 
 

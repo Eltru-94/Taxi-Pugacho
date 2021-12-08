@@ -1,11 +1,3 @@
-
-<!-- Button trigger modal -->
-
-<button type="button" class="btn btn-outline-primary my-2 my-sm-0" onclick="tituloUser()" data-bs-toggle="modal"
-    data-bs-target="#modalUser">
-    Registrar Usuario
-</button>
-
 <!-- Modal -->
 <div class="modal fade" id="modalUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -57,7 +49,7 @@
 
                         <div class="col-sm-4 mb-4 mb-sm-0">
                             <label class="small mb-1">Fecha Nacimiento</label>
-                            <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento">
+                            <input type="date" class="form-control" id="fechanacimiento"  value="2000-01-01" name="fechanacimiento">
                             <span class="text-danger error-text fechanacimiento_error"></span>
                         </div>
                         <div class="col-sm-4 mb-4 mb-sm-0">
@@ -76,7 +68,7 @@
 
                     <div class="form-group row">
 
-                        <div class="col-sm-4 mb-4 mb-sm-0">
+                        <div class="col-sm-6 mb-6 mb-sm-0">
 
                             <label class="small mb-1">Licencia</label>
                             <select name="licencia" id="licencia" class="form-control">
@@ -89,15 +81,22 @@
                                 <option value="Tipo D1">Tipo D1</option>
                                 <option value="Tipo E1">Tipo E1</option>
                             </select>
-                            <span class="text-danger error-text tipolicencia_error"></span>
+                            <span class="text-danger error-text licencia_error"></span>
                         </div>
-                        <div class="col-sm-8 mb-8 mb-sm-0">
-
+                        <div class="col-sm-6 mb-6 mb-sm-0">
+                            <label class="small mb-1">Selecione el rol</label>
+                            <select name="roles" id="roles" class="form-control">
+                               
+                            </select>
+                            <span class="text-danger error-text roles_error"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 mb-12 mb-sm-0">
                             <label class="small mb-1">Subir foto : </label>
                             <input type="file" class="form-control" name="imagen" id="imagen">
-                            <span id="mensajeFoto" name="mensajeFoto" class="text-danger error-text foto_error"></span>
-                            <div id="grupo_foto" class="text-danger error-text">
-                            </div>
+                            <span class="text-danger error-text imagen_error"></span>
+                          
                         </div>
                     </div>
 
@@ -141,9 +140,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" onclick="limpiarForm()"
+                        <button type="button" class="btn btn-outline-secondary" onclick="limpiarForm()"
                             data-bs-dismiss="modal">Cerrar</button>
-                        <input type="submit" id="btnUser" name="btnUser" class="btn btn-primary" value="Guardar">
+                        <input type="submit" id="btnUser" name="btnUser" class="btn btn-outline-primary" value="Guardar">
                     </div>
                 </form>
             </div>

@@ -1,9 +1,4 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" onclick="tituloRol()" data-bs-toggle="modal" data-bs-target="#modalRol">
-    <i class="far fa-save"></i>
-    Registrar Rol
-</button>
-
 <!-- Modal -->
 <div class="modal fade" id="modalRol" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -39,9 +34,45 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="limpiarForm()"
+                <button type="button" class="btn btn-outline-secondary" onclick="limpiarForm()"
                     data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnRol" name="btnRol" class="btn btn-primary">Guardar</button>
+                <button type="button" id="btnRol" name="btnRol" class="btn btn-outline-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="modalFuncionalidades" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tituloAsignarRol"></h5>
+                <button type="button" onclick="limpiarFormAsignar()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form name="forAsignarRol" id="forAsignarRol" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" hidden name="id_temp" id="id_temp">
+                                <div id="radio">
+
+                                    
+                                </div>
+
+                                <span class="text-danger error-text radio_error"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="limpiarFormAsignar()" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" name="asignar" id="asignar" class="btn btn-outline-primary">Guardar</button>
             </div>
         </div>
     </div>

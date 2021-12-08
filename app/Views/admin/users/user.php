@@ -1,6 +1,24 @@
 <script>
 var a = document.getElementById("tituloModal");
 let edit = false;
+
+toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-bottom-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "2000",
+    "timeOut": "2000",
+    "extendedTimeOut": "2000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
 //Cargar datos para la tabla
 let tablaUsers = $('#tablaUsers').DataTable({
     "language": {
@@ -23,25 +41,30 @@ function loadUsers() {
     tablaUsers.row().clear();
     let Url = "<?php echo base_url('users/fetch') ?>";
     $.ajax({
-        'type': 'get',
+        'type': 'post',
         url: Url,
+        data: {
+            'estado': 1
+        },
         dataType: 'json',
         success: function(res) {
             let cont = 1;
             var temp = "";
             res['users'].forEach(user => {
+
                 let edad = calcularEdad(user.fechanacimiento);
-                temp = tablaUsers.row.add([cont, `<img width='100' src="<?=base_url()?>/image/` +
+                temp = tablaUsers.row.add([cont,
+                    `<img class="rounded-circle" width='100' src="<?=base_url()?>/image/` +
                     user.foto + `">`, user.nombre, user.apellido, user.correo, user
-                    .cedula, user.telefono, user.licencia, edad + " años",
-                    "<div class='btn-group'><a class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalUser'  onclick='update(" +
+                    .cedula, user.telefono, user.licencia, edad + " años", user.rol,
+                    "<div class='btn-group'><a class='btn btn-outline-primary' data-bs-toggle='modal' data-bs-target='#modalUser'  onclick='update(" +
                     user.id_user +
-                    ")'><i class='fas fa-user-edit'></i></a> <a class='btn btn-danger'   onclick='deleteUsers(" +
+                    ")'><i class='fas fa-user-edit'></i></a> <a class='btn btn-outline-danger'   onclick='deleteUsers(" +
                     user.id_user +
-                    ")'> <i class='fas fa-trash'></i></a><a class='btn btn-success' data-bs-toggle='modal' data-bs-target='#modalRol'   onclick='asignarRol" +
-                    user.id_user + ")'> <i class='fas fa-pencil-alt'></i></a></div> "
+                    ")'> <i class='fas fa-trash'></i></a></div> "
                 ]);
                 cont++;
+
             });
             tablaUsers.draw(true);
         }
@@ -50,59 +73,51 @@ function loadUsers() {
 
 function tituloUser() {
     a.innerHTML = "<h5> Registrar Usuario</h5>";
+    Roles(0);
 }
 
-$("#forUser").on('submit', function(e) {
+$("#btnUser").click(function(e) {
     e.preventDefault();
-    let foto = $("#imagen").val();
-    if (foto) {
-        document.getElementById("grupo_foto").innerHTML ="";
-        let Url = edit === false ? '<?php echo base_url('users/save') ?>' :
-            '<?php echo base_url('users/updateUser') ?>';
-        var fd = new FormData(document.getElementById("forUser"));
-        $.ajax({
-            type: "post",
-            url: Url,
-            data: fd,
-            processData: false,
-            contentType: false,
-            dataType: "json",
-            success: function(res) {
+
+
+    let Url = edit === false ? '<?php echo base_url('users/save') ?>' :
+        '<?php echo base_url('users/updateUser') ?>';
+    var fd = new FormData(document.getElementById("forUser"));
+
+   
+    $.ajax({
+        type: "post",
+        url: Url,
+        data: fd,
+        processData: false,
+        contentType: false,
+        dataType: "json",
+        success: function(res) {
+          
+            if (res.success) {
+                edit = false;
                 limpiarForm();
-                if ($.isEmptyObject(res.error)) {
-                    edit = false;
-                    $('#forUser').trigger('reset');
-                    $('#modalUser').modal('hide');
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: res.msg,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    loadUsers();
-                } else {
-                    $.each(res.error, function(prefix, val) {
-                        $('#forUser').find('span.' + prefix + '_error').text(val);
-                    });
+              
+                toastr["success"](res.success);
+                loadUsers();
 
-
-
-
-                }
-
+            } else {
+                clearErrors();
+                $.each(res.error, function(prefix, val) {
+                    $('#forUser').find('span.' + prefix + '_error').text(val);
+                });
+             
             }
-        });
-    } else {
-        document.getElementById("grupo_foto").innerHTML =
-            '<span class="text-danger error-text">Seleccione una foto</span>';
-    }
+
+
+        }
+    });
+
 
 
 })
 
 function update(id) {
-
 
     let Url = "<?php echo base_url('users/update') ?>";
     a.innerHTML = "<h5>Actualizar Usuario</h5>";
@@ -126,6 +141,7 @@ function update(id) {
             $('#foto').val(data[0].foto);
             $('#direccion').val(data[0].direccion);
             $('#correo').val(data[0].correo);
+            Roles(data[0].id_rol);
             edit = true;
         }
     });
@@ -144,11 +160,15 @@ function calcularEdad(fecha) {
     return edad;
 }
 
-function asignarRol(id) {
-    alert(id);
-}
 //Limpiar Formulario Usuario
 function limpiarForm() {
+    clearErrors();
+    $('#forUser').trigger('reset');
+    $('#modalUser').modal('hide');
+
+}
+
+function clearErrors() {
     $('#forUser').find('span.nombre_error').text("");
     $('#forUser').find('span.apellido_error').text("");
     $('#forUser').find('span.cedula_error').text("");
@@ -159,7 +179,9 @@ function limpiarForm() {
     $('#forUser').find('span.correo_error').text("");
     $('#forUser').find('span.password_error').text("");
     $('#forUser').find('span.cpassword_error').text("");
-    document.getElementById("grupo_foto").innerHTML ="";
+    $('#forUser').find('span.imagen_error').text("");
+    $('#forUser').find('span.roles_error').text("");
+    $('#forUser').find('span.licencia_error').text(""); 
 }
 //Eliminar usuario 
 function deleteUsers(id) {
@@ -179,18 +201,15 @@ function deleteUsers(id) {
                 'type': "post",
                 url: Url,
                 data: {
-                    'id_user': id
+                    'id_user': id,
+                    'estado': 0
                 },
                 dataType: 'json',
                 success: function(res) {
                     if ($.isEmptyObject(res.error)) {
                         edit = false;
                         loadUsers();
-                        Swal.fire(
-                            'Eliminado!',
-                            'Usuario eliminado con exito.!!',
-                            'success'
-                        )
+                        toastr["error"](res.msg, "Usuario");
                     }
                 }
             });
@@ -198,5 +217,29 @@ function deleteUsers(id) {
     });
 }
 
+function Roles(aux) {
+
+    let Url = "<?php echo base_url('roles/fetch') ?>";
+    let rol = document.getElementById("roles");
+    let mensaje = " <option  value=''>Escoga el rol...</option>";
+    $.ajax({
+        'type': 'get',
+        url: Url,
+        dataType: 'json',
+        success: function(res) {
+
+            res['roles'].forEach(roles => {
+                if (aux == roles.id_rol) {
+                    mensaje += "<option  selected value='" + roles.id_rol + "'>" + roles.rol +
+                        "</option>";
+                } else {
+                    mensaje += "<option value='" + roles.id_rol + "'>" + roles.rol + "</option>";
+                }
+
+            });
+            rol.innerHTML = mensaje;
+        }
+    });
+}
 window.onload = loadUsers;
 </script>

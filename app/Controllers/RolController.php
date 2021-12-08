@@ -9,7 +9,10 @@ class RolController extends BaseController
     
     public function index()
     {
-        return view('admin/rol/index');
+        $datos=[
+            'title'=>"Roles"
+        ];
+        return view('admin/rol/index',$datos);
     }
 
     public function fetch()
@@ -36,11 +39,14 @@ class RolController extends BaseController
                 'descripcion'=>$this->request->getPost('descripcion'),
                 'estado'=>1
             ];
+            //Retorna el id del nuevo registro creado
             $query=$rolModel->insert($rol);
             if($query){
-                echo json_encode(['code'=>1,'msg'=>'Rol resgistrado']);
+                echo json_encode(['success' => 'Rol resgistrado', 'error' => '']);
+            
             }else{
-                echo json_encode(['code'=>0,'msg'=>'Rol no registrado ']);
+                echo json_encode(['success' => '', 'error' => 'Rol no resgistrado']);
+                
             }
         }
          
@@ -63,9 +69,9 @@ class RolController extends BaseController
             $query=$rolModel->updateRol($id_rol,$rol,$descripcion);
             
             if($query){
-                echo json_encode(['code'=>1,'msg'=>"Rol actualizado"]);
+                echo json_encode(['success' => 'Rol actualizado', 'error' => '']);
             }else{
-                echo json_encode(['code'=>0,'msg'=>"Rol no actualizado"]);
+                echo json_encode(['success' => 'Rol no actualizado', 'error' => '']);
             }
             
         }

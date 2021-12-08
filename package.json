@@ -1,0 +1,23 @@
+{
+  "name": "taxi-app",
+  "description": "## What is CodeIgniter?",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eltru-94/Taxi-Pugacho.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eltru-94/Taxi-Pugacho/issues"
+  },
+  "homepage": "https://github.com/Eltru-94/Taxi-Pugacho#readme"
+}

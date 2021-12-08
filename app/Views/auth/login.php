@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title><?php echo $title ?></title>
     <link rel="stylesheet" href="<?= base_url('/css/bootstrap.min.css') ?>">
 
     <link rel="shortcut icon" href="<?= base_url('/image/icono.jpg')?>">
 </head>
 
-<body class="bg-primary">
+<body class="bg-warning">
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
-                <div class="row justify-content-center">
+                <div class="row justify-content-center" >
                     <div class="col-lg-5">
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header">
@@ -52,7 +52,7 @@
                                     </div>
                                     <br>
                                     <div class="form-group">
-                                        <button class="btn btn-primary btn-block" type="submit">Sing in</button>
+                                        <button class="btn btn-dark btn-block" type="submit">Sing in</button>
                                     </div>
                                 </form>
                             </div>

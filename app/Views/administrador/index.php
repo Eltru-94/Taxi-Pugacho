@@ -1,18 +1,16 @@
 <?= $this->extend('plantilla/layout')?>
 
 <?= $this->section('titulo')?>
-Administrador
+<?php echo $title ?>
 <?= $this->endSection()?>
 
 
 
 <?= $this->section('contenido')?>
+<br>
+
+<h2 class="text-center"><?php echo $title ?></h2>
 
 
-<h1 class="mt-4">Administrativo</h1>
-<ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="index.html">Sidenav Light</a></li>
-    <li class="breadcrumb-item"><a href="index.html">Sidenav Light</a></li>
-</ol>
+<?php $a= session('funcionalidades');?>
 <?= $this->endSection()?>

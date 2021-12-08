@@ -14,9 +14,10 @@ class Users extends Model
         $db = \Config\Database::connect();  
     }
 
-    public function getUsers() {
+    public function getUsers($estado) {
         
-        $query = $this->db->query('select * from users where estado =?',[1]);
+        
+        $query = $this->db->query('SELECT * FROM users INNER JOIN userrol ON (users.id_user = userrol.id_user) INNER JOIN roles ON (userrol.id_rol = roles.id_rol) WHERE users.estado =?',[$estado]);
         $array = json_decode(json_encode($query->getResult()),true);
         $datos=[
             'users'=>$array
@@ -38,7 +39,7 @@ class Users extends Model
 
     public function getIdUser($id_user) {
 
-        $query = $this->db->query('select * from users where id_user =?',[$id_user]);
+        $query = $this->db->query('SELECT * FROM users INNER JOIN userrol ON (users.id_user = userrol.id_user) INNER JOIN roles ON (userrol.id_rol = roles.id_rol) WHERE users.id_user =?',[$id_user]);
         $array = json_decode(json_encode($query->getResult()),true);
         return $array;
     }
@@ -57,5 +58,26 @@ class Users extends Model
         }else{
             return false;
         }
+    }
+
+    public function getUserFunction($id_user){
+        $query=$this->db->query('SELECT funcionalidades.funcionalidad,funcionalidades.id_funcionalidad FROM users INNER JOIN userrol ON (users.id_user = userrol.id_user)
+        INNER JOIN roles ON (userrol.id_rol = roles.id_rol) INNER JOIN rolfuncionalidad ON (roles.id_rol = rolfuncionalidad.id_rol)
+        INNER JOIN funcionalidades ON (funcionalidades.id_funcionalidad = rolfuncionalidad.id_funcionalidad) WHERE
+        users.id_user = ? AND rolfuncionalidad.estado=1 AND funcionalidades.estado=1',[$id_user]);
+        $array = json_decode(json_encode($query->getResult()),true);
+        return $array;
+    }
+
+    public function getUserID($cedula){
+        $query=$this->db->query('SELECT * FROM users WHERE users.cedula=? AND users.estado=1',[$cedula]);
+        $array = json_decode(json_encode($query->getResult()),true);
+        return $array;
+    }
+
+    public function getUserIDVehiculos($cedula){
+        $query=$this->db->query('SELECT * FROM users INNER JOIN vehiculo ON (users.id_user = vehiculo.id_user) WHERE users.cedula=? AND users.estado=1',[$cedula]);
+        $array = json_decode(json_encode($query->getResult()),true);
+        return $array;
     }
 }

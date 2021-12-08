@@ -34,36 +34,51 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 
 
+
+
 /* Ruta de loggin */
-$routes->group('',['filter'=>'AuthCheck'],function($routes){
+$routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
 
-    $routes->get('/administrador','Administrador::index');
-    $routes->get('/auth/register','Auth::register');
+    $routes->get('/administrador', 'Administrador::index');
+    $routes->get('/auth/register', 'Auth::register');
     //Users
-    $routes->get('/users','UsersController::index');
-    $routes->get('/users/fetch','UsersController::fetch');
-    $routes->post('/users/save','UsersController::save');
-    $routes->post('/users/deleteUser','UsersController::delete');
-    $routes->post('/users/update','UsersController::update');
-    $routes->post('/users/updateUser','UsersController::updateUser');
+    $routes->get('/users', 'UsersController::index');
+    $routes->get('/users/block', 'UsersController::block');
+    $routes->post('/users/fetch', 'UsersController::fetch');
+    $routes->post('/users/save', 'UsersController::save');
+    $routes->post('/users/deleteUser', 'UsersController::delete');
+    $routes->post('/users/update', 'UsersController::update');
+    $routes->post('/users/updateUser', 'UsersController::updateUser');
+    $routes->post('/users/searchID', 'UsersController::searchID');
+
     //Roles
-    $routes->get('/roles','RolController::index');
-    $routes->post('/roles/save','RolController::save');
-    $routes->get('/roles/fetch','RolController::fetch');
-    $routes->post('/roles/update','RolController::update');
-    $routes->post('/roles/updateRol','RolController::updateRol');
-    $routes->post('/roles/deleteRol','RolController::delete');
+    $routes->get('/roles', 'RolController::index');
+    $routes->post('/roles/save', 'RolController::save');
+    $routes->get('/roles/fetch', 'RolController::fetch');
+    $routes->post('/roles/update', 'RolController::update');
+    $routes->post('/roles/updateRol', 'RolController::updateRol');
+    $routes->post('/roles/deleteRol', 'RolController::delete');
     //Funcionalidades
-    $routes->get('/funcionalidad','FuncionalidadesController::index');
-    $routes->get('/funcionalidad/fetch','FuncionalidadesController::fetch');
-   
+    $routes->get('/funcionalidad', 'FuncionalidadesController::index');
+    $routes->get('/funcionalidad/fetch', 'FuncionalidadesController::fetch');
+    $routes->post('/rolfunc', 'FuncionalidadesController::getRolFuncionalidad');
+    $routes->post('/asigarRolFuncionalidad', 'RolFuncionalidadController::index');
+    //Vehiculo
+    $routes->post('/vehiculo/fetch', 'VehiculoController::fetch');
+    $routes->get('/vehiculo', 'VehiculoController::index');
+    $routes->get('/vehiculo/details/(:num)', 'VehiculoController::vehiculoDetails/$1');
+    $routes->get('/vehiculo/activar', 'VehiculoController::activateUnidad');
+    $routes->post('/vehiculo/vehiculouser', 'VehiculoController::getVehiculoUser');
+    $routes->post('/vehiculo/create', 'VehiculoController::create');
+
+    //Geolocalizacion 
+    $routes->get('/geolocalizacion', 'GeolocalizacionController::index');
     
 });
 
-$routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes){
-    $routes->get('/auth','Auth::index');
-    
+$routes->group('', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
+    $routes->get('/auth', 'Auth::index');
 });
 
 /*

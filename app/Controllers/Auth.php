@@ -16,7 +16,10 @@ class Auth extends Controller
 
     public function index()
     {
-        return view('auth/login');
+        $datos=[
+            'title'=>"Login"
+        ];
+        return view('auth/login',$datos);
     }
 
     public function register(){
@@ -53,7 +56,7 @@ class Auth extends Controller
                 'clave'=>Hash::make($password)
             ];
 
-            $PersonaModel = new Users($db);
+            $PersonaModel = new Users();
             $query=$PersonaModel->insert($persona);
             if(!$query){
 
@@ -83,26 +86,43 @@ class Auth extends Controller
 
             $correo = $this->request->getPost('correo');
             $password= $this->request->getPost('password');
-            $PersonaModel = new Users($db);
+            $PersonaModel = new Users();
+
+            $PersonaModel->select("users.nombre,users.correo,users.clave,users.apellido,users.foto,users.id_user,users.estado,roles.rol");
+            $PersonaModel->join('userrol', 'users.id_user = userrol.id_user');
+            $PersonaModel->join('roles', 'userrol.id_rol = roles.id_rol');
             $personainfo=$PersonaModel->where('correo',$correo)->first();
-            $checkpassword=Hash::check($password, $personainfo['clave']);
-            if(!$checkpassword){
-               
-                session()->setFlashdata('fail','Password Incorrecto');
-                return redirect()->to('/auth')->withInput();
+
+
+            if($personainfo['estado']==1){
+
+                $checkpassword=Hash::check($password, $personainfo['clave']);
+                if(!$checkpassword){
+                   
+                    session()->setFlashdata('fail','Password Incorrecto');
+                    return redirect()->to('/auth')->withInput();
+                }else{
+                    $perid=$personainfo['id_user'];
+                    $nombre=$personainfo['nombre'].' '.$personainfo['apellido'];
+                    $foto=$personainfo['foto'];
+                    $rol=$personainfo['rol'];
+                    $funcionalidades=$PersonaModel->getUserFunction($perid);
+                    $data=[
+                        "loggedUser"=>$perid,
+                        "nombre"=>$nombre,
+                        "foto"=>$foto,
+                        "rol"=>$rol,
+                        "funcionalidades"=>$funcionalidades
+                    ];
+                    session()->set($data);
+                   
+                    return redirect()->to('administrador');
+                }
             }else{
-                $perid=$personainfo['id_user'];
-                $nombre=$personainfo['nombre'].' '.$personainfo['apellido'];
-                $foto=$personainfo['foto'];
-                $data=[
-                    "loggedUser"=>$perid,
-                    "nombre"=>$nombre,
-                    "foto"=>$foto,
-                ];
-                session()->set($data);
-               
-                return redirect()->to('administrador');
+                session()->setFlashdata('fail','Usuario bloqueado');
+                return redirect()->to('/auth')->withInput();
             }
+            
 
         }
     }
