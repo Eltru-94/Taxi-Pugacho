@@ -110,21 +110,18 @@ $("#forVehiculo").on('submit', function(e) {
         dataType: "json",
         success: function(res) {
 
-            if ($.isEmptyObject(res.error)) {
 
+            if(res.success){
                 $('#forVehiculo').trigger('reset');
                 $('#modalVehiculo').modal('hide');
-                toastr["success"](res.msg);
+                toastr["success"](res.success);
                 activacion(true);
                 loadVehiculo();
-            } else {
-
+            }else{
                 $.each(res.error, function(prefix, val) {
                     $('#forVehiculo').find('span.' + prefix + '_error').text(val);
                 });
             }
-
-            $('#forCedula').trigger('reset');
 
 
         }
@@ -189,6 +186,8 @@ function activacion(valor) {
         $('#imagen1').prop("disabled", valor);
         $('#imagen2').attr("disabled", valor);
         $('#imagen3').attr("disabled", valor);
+        $('#unidad').attr("disabled", valor);
+        $('#Kilometraje').attr("disabled", valor);
     }
     if (valor) {
         $('#cedula').val("");
@@ -203,6 +202,8 @@ function activacion(valor) {
         $('#imagen2').attr("disabled", aux);
         $('#imagen3').attr("disabled", aux);
         $('#forCedula').find('span.cedula_error').text("");
+        $('#unidad').attr("disabled", valor);
+        $('#Kilometraje').attr("disabled", valor);
         $('#forVehiculo').trigger('reset');
     }
 
@@ -212,7 +213,6 @@ function activacion(valor) {
 function update(id) {
 
     let Url = "<?php echo base_url('vehiculo/vehiculouser') ?>";
-    let titulo = document.getElementById("user");
     let id_vehiculo = id;
     $.ajax({
         'type': 'post',
@@ -230,10 +230,9 @@ function update(id) {
             $('#modelo').val(res[0].modelo);
             $('#placa').val(res[0].placa);
             $('#fechafabricacion').val(res[0].fechafabricacion);
-            $('#id_user').val(res['user'][0].id_user);
-            activacion(false);
-            rol.innerHTML = "<h4 class='text-center'>" + res['user'][0].nombre + " " + res['user'][0]
-                .apellido + "</h4>";
+            $('#unidad').val(res[0].unidad);
+            $('#Kilometraje').val(res[0].kilometraje);
+
             activacion(false);
         }
     });

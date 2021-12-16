@@ -34,8 +34,12 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 
 
+$routes->post('/enableUnit','UnidadEnableController::enableUnit');
+$routes->post('/enableUnit/all','UnidadEnableController::allUnitEnable');
 
-
+$routes->get('/enableUnit/delet/(:num)', 'UnidadEnableController::deletEnableUnit/$1');
+$routes->get('/enableUnit/select/(:num)', 'UnidadEnableController::id_select/$1');
+$routes->post('/enableUnit/update', 'UnidadEnableController::update_horario');
 /* Ruta de loggin */
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 

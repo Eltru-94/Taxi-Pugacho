@@ -87,10 +87,17 @@ class Validation
         'imagen1'=>'uploaded[imagen1]|max_size[imagen1,255]|is_image[imagen1]',
         'imagen2'=>'uploaded[imagen2]|max_size[imagen2,255]|is_image[imagen2]',
         'imagen3'=>'uploaded[imagen3]|max_size[imagen3,255]|is_image[imagen3]',
-        'placa'=>'required',
+        'placa'=>'required|is_unique[vehiculo.placa]',
         'marca'=>'required',
         'modelo'=>'required',
         'fechafabricacion'=>'required',
+        'unidad'=>'required|is_natural|is_unique[vehiculo.unidad]',
+        'kilometraje'=>'required|is_natural',
+    ];
+
+    public $unitEnable=[
+        'unidad'=>'is_natural',
+        'horario'=>'is_natural'
     ];
 
 

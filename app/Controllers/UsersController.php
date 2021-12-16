@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use \App\Models\Users;
 use \App\Models\UserRolModel;
-use \CodeIgniter\HTTP\Files\UploadedFile;
 use App\Libraries\Hash;
 
 class UsersController extends BaseController
@@ -93,6 +92,7 @@ class UsersController extends BaseController
                 $UserRolModel = new UserRolModel();
                 $UserRolModel->insert($userRol);
                 echo json_encode(['success' => 'Usuario registrado..!','error'=>'']);
+
             } else {
                 echo json_encode(['success' => '', 'error' => 'Usuario no registrado']);
             }

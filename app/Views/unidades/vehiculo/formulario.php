@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group row">
 
-                        <div class="col-sm-3 mb-3 mb-sm-0">
+                        <div class="col-sm-4 mb-4 mb-sm-0">
                             <label class="small mb-1">Placa</label>
                             <input type="text" class="form-control" id="placa" name="placa"
                                 placeholder="Ingrese la placa : " disabled>
@@ -63,18 +63,39 @@
                         </div>
 
 
-                        <div class="col-sm-3 mb-3 mb-sm-0">
+                        <div class="col-sm-4 mb-4 mb-sm-0">
                             <label class="small mb-1">Marca</label>
                             <input type="text" class="form-control" id="marca" name="marca"
                                 placeholder="Ingrese la marca: " disabled>
                             <span class="text-danger error-text marca_error"></span>
                         </div>
-                        <div class="col-sm-3 mb-3 mb-sm-0">
+                        <div class="col-sm-4 mb-4 mb-sm-0">
                             <label class="small mb-1">Modelo</label>
                             <input type="text" class="form-control" id="modelo" name="modelo" disabled>
                             <span class="text-danger error-text modelo_error"></span>
                         </div>
-                        <div class="col-sm-3 mb-3 mb-sm-0">
+
+
+                        
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-sm-4 mb-4 mb-sm-0">
+                            <label class="small mb-1">N.- Unidad</label>
+                            <input type="number" class="form-control" id="unidad" name="unidad"
+                                   placeholder="Ing el numero de la unidad: " disabled>
+                            <span class="text-danger error-text unidad_error"></span>
+                        </div>
+
+
+                        <div class="col-sm-4 mb-4 mb-sm-0">
+                            <label class="small mb-1">Kilometraje</label>
+                            <input type="text" class="form-control" id="Kilometraje" name="kilometraje"
+                                   placeholder="Ingrese el kilometraje: " disabled>
+                            <span class="text-danger error-text kilometraje_error"></span>
+                        </div>
+                        <div class="col-sm-4 mb-4 mb-sm-0">
                             <div>
                                 <label class="small mb-1">Año de Fabricacion</label>
                                 <select name="fechafabricacion" id="fechafabricacion" class="form-control" disabled>
@@ -85,7 +106,8 @@
 
                         </div>
 
-                        
+
+
                     </div>
 
 

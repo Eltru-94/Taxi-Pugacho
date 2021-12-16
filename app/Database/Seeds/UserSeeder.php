@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
         $data = [
             'nombre' =>'Llacta',
             'apellido'=>'Torres',
-            'cedula'=>'1003668936',
+            'cedula'=>'1003648936',
             'correo'=>'llactainn@gmail.com',
             'telefono'=>'0987654321',
             'clave'=>Hash::make('12345'),

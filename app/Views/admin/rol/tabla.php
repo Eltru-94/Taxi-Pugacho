@@ -3,7 +3,7 @@
     <div class="div">
         <button type="button" class="btn btn-outline-primary" onclick="tituloRol()" data-bs-toggle="modal"
             data-bs-target="#modalRol">
-            Registrar Roles
+            <i class="fas fa-plus-square"></i>
         </button>
         <br>
         <br>

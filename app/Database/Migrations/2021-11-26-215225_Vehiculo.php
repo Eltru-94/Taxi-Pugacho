@@ -50,6 +50,14 @@ class Vehiculo extends Migration
                 'type'=>'VARCHAR',
                 'constraint'=>3
             ],
+            'unidad'=>[
+                'type'=>'INT',
+                'constraint'=>3
+            ],
+            'kilometraje'=>[
+                'type'=>'VARCHAR',
+                'constraint'=>5
+            ],
             'created_at datetime default current_timestamp'
 
         ]);

@@ -26,11 +26,13 @@ class VehiculoController extends BaseController
         $image1 = $this->request->getFile('imagen1');
         $image2 = $this->request->getFile('imagen2');
         $image3 = $this->request->getFile('imagen3');
+        $unidad=$this->request->getPost('unidad');
+        $kilometraje=$this->request->getPost('kilometraje');
 
 
         if (!$this->validate('vehiculo')) {
             $errors = $validation->getErrors();
-            echo json_encode(['code' => 0, 'error' => $errors]);
+            echo json_encode(['success' => '', 'error' => $errors]);
         } else {
 
             $newName1 = $image1->getRandomName();
@@ -51,15 +53,17 @@ class VehiculoController extends BaseController
                 'imagen2' => $newName2,
                 'imagen3' => $newName3,
                 'id_user' => $id_user,
-                'estado' => 1
+                'estado' => 1,
+                'unidad'=>$unidad,
+                'kilometraje'=>$kilometraje,
             ];
 
             $vehiculoModel = new Vehiculo();
             $query = $vehiculoModel->insert($newVehiculo);
             if ($query) {
-                echo json_encode(['code' => 1, 'msg' => 'Vehiculo registrado..!']);
+                echo json_encode(['success' => 'vehiculo registrado exitosamente..!!', 'error' => '']);
             } else {
-                echo json_encode(['code' => 1, 'msg' => 'Vehiculo no registrado..!']);
+                echo json_encode(['success' =>'', 'error' => 'Vehiculo no registrado..!']);
             }
         }
     }

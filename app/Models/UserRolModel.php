@@ -13,7 +13,6 @@ class UserRolModel extends Model
     public function __construct() {
         parent::__construct();
         $db = \Config\Database::connect();
-       
     }
 
     public function __update($id_user,$id_rol){

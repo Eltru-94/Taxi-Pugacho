@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div><button type="button" class="btn btn-outline-primary my-2 my-sm-0" onclick="year()" data-bs-toggle="modal"
             data-bs-target="#modalVehiculo">
-            Registrar Vehiculo
+            <i class="fas fa-plus-square"></i>
         </button>
     </div>
     <br>
