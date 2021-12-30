@@ -65,8 +65,8 @@
                 </a>
                 <div class="collapse" id="cuatro" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                       
-
+                        <a class="nav-link" href="/carreras">Central</a>
+                        <a class="nav-link" href="/carreras/state">Carreras </a>
                     </nav>
                 </div>
                 <?php } ?>

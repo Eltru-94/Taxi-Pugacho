@@ -29,9 +29,10 @@ class Userrol extends Migration
             ],
             'created_at datetime default current_timestamp'
         ]);
+        $this->forge->addForeignKey('id_user','users','id_user');
 
         $this->forge->addForeignKey('id_rol','roles','id_rol');
-        //$this->forge->addForeignKey('id_user','users','id_user');
+
         $this->forge->addKey('id_userRol',TRUE);
         $this->forge->createTable('userrol');
        

@@ -27,6 +27,10 @@ class UnidadesActivas extends Migration
                 'type'=>'VARCHAR',
                 'constraint'=>3
             ],
+            'carrera'=>[
+                'type'=>'INT',
+                'constraint'=>3
+            ],
             'created_at datetime default current_timestamp'
 
         ]);

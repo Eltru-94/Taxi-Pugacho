@@ -1,12 +1,12 @@
 <div class="col-md-12">
-    <div><button type="button" class="btn btn-outline-primary my-2 my-sm-0" onclick="tituloUser()" data-bs-toggle="modal"
+    <div><button type="button" title="Resgistrar Usuario" class="btn btn-outline-primary my-2 my-sm-0" onclick="tituloUser()" data-bs-toggle="modal"
             data-bs-target="#modalUser">
             <i class="fas fa-plus-square"></i>
         </button>
     </div>
     <br>
     <div class="table-responsive-md">
-        <table class="table table-striped" id="tablaUsers" style="width:100%" name="tablaUsers">
+        <table class="table table-sm table-hover text-center" id="tablaUsers" style="width:100%" name="tablaUsers">
             <thead>
                 <th>ID</th>
                 <th>Imagen</th>

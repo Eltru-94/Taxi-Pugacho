@@ -33,13 +33,17 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->get('/carreras','CarrerasController::index');
+$routes->post('/carreras/store','CarrerasController::store');
 
-$routes->post('/enableUnit','UnidadEnableController::enableUnit');
-$routes->post('/enableUnit/all','UnidadEnableController::allUnitEnable');
+$routes->get('/carreras/activadas','CarrerasController::carreras');
+$routes->get('/carreras/allenable','CarrerasController::allCarrerasEnable');
+$routes->get('/carreras/alldisable','CarrerasController::allCarrerasDisable');
+$routes->post('/carreras/updatecarrera','CarrerasController::updateCarrera');
+$routes->get('/carreras/state','CarrerasController::stateCarreras');
 
-$routes->get('/enableUnit/delet/(:num)', 'UnidadEnableController::deletEnableUnit/$1');
-$routes->get('/enableUnit/select/(:num)', 'UnidadEnableController::id_select/$1');
-$routes->post('/enableUnit/update', 'UnidadEnableController::update_horario');
+$routes->post('/carreras/all','CarrerasController::allUnitEnableCarreras');
+$routes->get('/carreras/tipocarrera','CarrerasController::getTipoCarrera');
 /* Ruta de loggin */
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
@@ -75,6 +79,13 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('/vehiculo/activar', 'VehiculoController::activateUnidad');
     $routes->post('/vehiculo/vehiculouser', 'VehiculoController::getVehiculoUser');
     $routes->post('/vehiculo/create', 'VehiculoController::create');
+
+    $routes->post('/enableUnit','UnidadEnableController::enableUnit');
+    $routes->post('/enableUnit/all','UnidadEnableController::allUnitEnable');
+
+    $routes->get('/enableUnit/delet/(:num)', 'UnidadEnableController::deletEnableUnit/$1');
+    $routes->get('/enableUnit/select/(:num)', 'UnidadEnableController::id_select/$1');
+    $routes->post('/enableUnit/update', 'UnidadEnableController::update_horario');
 
     //Geolocalizacion 
     $routes->get('/geolocalizacion', 'GeolocalizacionController::index');

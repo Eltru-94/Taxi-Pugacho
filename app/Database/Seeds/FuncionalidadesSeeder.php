@@ -9,7 +9,7 @@ class FuncionalidadesSeeder extends Seeder
     public function run()
     {
         
-        $model = model('funcionalidades');
+
         $data = [
             ['funcionalidad' => 'Administrador','descripcion'=>'asdsadsad','estado'=>1,],
             ['funcionalidad' => 'Unidades','descripcion'=>'asdsadsad','estado'=>1],

@@ -26,7 +26,8 @@ class Rolfuncionalidad extends Migration
             'estado'=>[
                 'type'=>'INT',
                 'constraint'=>3
-            ]
+            ],
+            'created_at datetime default current_timestamp'
         ]);
         $this->forge->addForeignKey('id_funcionalidad','funcionalidades','id_funcionalidad');
         $this->forge->addForeignKey('id_rol','roles','id_rol');

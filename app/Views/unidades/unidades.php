@@ -2,7 +2,7 @@
     let scheduleTaxis=["Velada","Mañana","Tarde"];
     let tablaVehiculoEnable = $('#tablaVehiculoEnable').DataTable({
         "language": {
-            "lengthMenu": "Mostrar _MENU_ Usuarios",
+            "lengthMenu": "Mostrar _MENU_ Unidades Activas",
             "zeroRecords": "No se encontraron resultados",
             "info": "Mostrando registro de usuarios del _START_ al _END_ de un total de _TOTAL_",
             "infoEmpty": "Mostrando registro del 0 al 0 de un total de 0 registros",
@@ -36,7 +36,7 @@
     function schedule(aux) {
         loadUnitEnable();
         let schedule = document.getElementById("horario");
-        let mensaje = " <option selected value='-1'>Escoga el rol...</option>";
+        let mensaje = " <option selected value='-1'>Escoga el horario...</option>";
 
         for (var i=0;i<scheduleTaxis.length;i++){
 
@@ -67,6 +67,7 @@
         let unidad=$('#unidad').val();
         let horario=$('#horario').val();
         let Url="<?php echo base_url('enableUnit')?>";
+
         $.ajax({
             'type':'post',
             url:Url,
@@ -79,8 +80,8 @@
                 ClearErrorEnableUnit();
                 if(res.success){
 
-                    $('#forEnableUnidadEdit').trigger('reset');
-                    $('#modalUnidadesEnableEdit').modal('hide');
+                    $('#forEnableUnidad').trigger('reset');
+                    $('#modalUnidadesEnable').modal('hide');
                     toastr["success"](res.success);
                     loadUnitEnable();
                 }else{
@@ -134,13 +135,26 @@
             dataType: 'json',
             success: function(res) {
                 let cont = 1;
-
+                let horario="";
+                let auto="";
                 res.forEach(unitEnable => {
-
-                    temp = tablaVehiculoEnable.row.add([cont,unitEnable.nombre+"  "+unitEnable.apellido,
-                        unitEnable.horaTrabajo,' <span class="badge bg-success">N.- '+unitEnable.unidad+' Activada</span>',
-                        unitEnable.created_at,`<a class='btn btn-outline-danger' onclick="deletUnitEnable(`+unitEnable.id_unitActiva+`)"> <i class='fas fa-trash'></i></a> <a class='btn btn-outline-primary' data-bs-toggle="modal"
-                        data-bs-target="#modalUnidadesEnableEdit" onclick="editUnitEnable(`+unitEnable.id_unitActiva+`)"> <i class='fas fa-user'></i></a>`]);
+                    switch (unitEnable.horario){
+                        case ('3'):
+                            horario= ' <span class="badge badge-pill bg-primary">Tarde</span>'
+                            auto='<span class="badge badge-pill bg-primary">'+unitEnable.unidad+'</span> <span><i class="fas fa-car"></i></span>'
+                            break;
+                        case ('2'):
+                            horario= ' <span class="badge badge-pill bg-secondary">Mañana</span>'
+                            auto='<span class="badge badge-pill bg-secondary">'+unitEnable.unidad+'</span> <span><i class="fas fa-car"></i></span>'
+                            break;
+                        case ('1'):
+                            horario= ' <span class="badge badge-pill bg-success">Velada</span>'
+                            auto='<span class="badge badge-pill bg-success">'+unitEnable.unidad+'</span> <span><i class="fas fa-car"></i></span>'
+                            break;
+                    }
+                    temp = tablaVehiculoEnable.row.add([cont,horario,auto,
+                        unitEnable.created_at,`<a class='btn btn-outline-danger' title="Eliminar" onclick="deletUnitEnable(`+unitEnable.id_unitActiva+`)"> <i class='fas fa-trash'></i></a> <a class='btn btn-outline-primary' title="Actualizar" data-bs-toggle="modal"
+                        data-bs-target="#modalUnidadesEnableEdit" onclick="editUnitEnable(`+unitEnable.id_unitActiva+`)"> <i class='fas fa-car'></i></a>`]);
                     cont++;
 
                 });

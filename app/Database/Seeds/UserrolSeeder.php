@@ -8,7 +8,7 @@ class UserrolSeeder extends Seeder
 {
     public function run()
     {
-        $model = model('userrol');
+
         $data = [
             'id_user' => 1,
             'id_rol'=>1,

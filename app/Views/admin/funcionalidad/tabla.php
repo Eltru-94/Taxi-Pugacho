@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <table class="table table-striped" id="tablaFuncionalidades" name="tablaFuncionalidades">
+    <table class="table table-hover" id="tablaFuncionalidades" name="tablaFuncionalidades">
         <thead>
             <tr>
                 <th>ID</th>

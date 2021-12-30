@@ -56,11 +56,11 @@ function loadRoles() {
             var temp = "";
             res['roles'].forEach(roles => {
                 temp = tablaRoles.row.add([cont, roles.rol, roles.descripcion,
-                    "<div class='btn-group'><a class='btn btn-outline-primary' data-bs-toggle='modal' data-bs-target='#modalRol'  onclick='update(" +
+                    "<div class='btn-group'><a class='btn btn-outline-primary' title='Actualizar' data-bs-toggle='modal' data-bs-target='#modalRol'  onclick='update(" +
                     roles.id_rol +
-                    ")'><i class='fas fa-pencil-alt'></i></a> <a class='btn btn-outline-danger'   onclick='deleteRol(" +
+                    ")'><i class='fas fa-pencil-alt'></i></a> <a class='btn btn-outline-danger'  title='Eliminar' onclick='deleteRol(" +
                     roles.id_rol +
-                    ")'> <i class='fas fa-trash'></i></a><a class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#modalFuncionalidades'  onclick='AsignarRol(" +
+                    ")'> <i class='fas fa-trash'></i></a><a class='btn btn-outline-success' title='Asignar Modulos' data-bs-toggle='modal' data-bs-target='#modalFuncionalidades'  onclick='AsignarRol(" +
                     roles.id_rol + ")'> <i class='fas fa-edit'></i></a></div> "
                 ]);
                 cont++;

@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
     public function run()
     {
        
-        $model = model('users');
+
         $data = [
             'nombre' =>'Llacta',
             'apellido'=>'Torres',

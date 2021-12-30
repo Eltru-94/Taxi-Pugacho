@@ -57,9 +57,9 @@ function loadUsers() {
                     `<img class="rounded-circle" width='100' src="<?=base_url()?>/image/` +
                     user.foto + `">`, user.nombre, user.apellido, user.correo, user
                     .cedula, user.telefono, user.licencia, edad + " años", user.rol,
-                    "<div class='btn-group'><a class='btn btn-outline-primary' data-bs-toggle='modal' data-bs-target='#modalUser'  onclick='update(" +
+                    "<div class='btn-group'><a class='btn btn-outline-primary ' title='Actualizar' data-bs-toggle='modal' data-bs-target='#modalUser'  onclick='update(" +
                     user.id_user +
-                    ")'><i class='fas fa-user-edit'></i></a> <a class='btn btn-outline-danger'   onclick='deleteUsers(" +
+                    ")'><i class='fas fa-user-edit'></i></a> <a class='btn btn-outline-danger' title='Eliminar'  onclick='deleteUsers(" +
                     user.id_user +
                     ")'> <i class='fas fa-trash'></i></a></div> "
                 ]);

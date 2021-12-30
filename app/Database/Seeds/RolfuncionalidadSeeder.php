@@ -8,7 +8,7 @@ class RolfuncionalidadSeeder extends Seeder
 {
     public function run()
     {
-        $model = model('rolfuncionalidad');
+
         $data = [
             ['id_rol' => 1,'id_funcionalidad'=>1,'estado'=>1,],
             ['id_rol' => 1,'id_funcionalidad'=>2,'estado'=>1,],

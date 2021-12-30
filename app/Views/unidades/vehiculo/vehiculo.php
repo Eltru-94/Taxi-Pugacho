@@ -155,12 +155,12 @@ function loadVehiculo() {
                     user.imagen1 + `">`, user.placa, user
                     .fechafabricacion, user.marca,
 
-                    user.modelo, `<a href="<?=base_url()?>/vehiculo/details/` +
+                    '<span class="badge badge-pill badge-success">'+user.unidad+'</span> <span><i class="fas fa-car"></i></span>', `<a title="Detalles" href="<?=base_url()?>/vehiculo/details/` +
                     user.id_vehiculo + `">` +
                     user.nombre + ' ' + user.apellido + `</a>`,
-                    "<div class='btn-group'><a class='btn btn-outline-primary' data-bs-toggle='modal' data-bs-target='#modalVehiculo'  onclick='update(" +
+                    "<div class='btn-group'><a class='btn btn-outline-primary' title='Actulizar' data-bs-toggle='modal' data-bs-target='#modalVehiculo'  onclick='update(" +
                     user.id_user +
-                    ")'><i class='fas fa-user-edit'></i></a> <a class='btn btn-outline-danger'   onclick='deleteUsers(" +
+                    ")'><i class='fas fa-car'></i></a> <a class='btn btn-outline-danger' title='Eliminar'   onclick='deleteUsers(" +
                     user.id_user +
                     ")'> <i class='fas fa-trash'></i></a></div> "
                 ]);

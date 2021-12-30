@@ -100,6 +100,13 @@ class Validation
         'horario'=>'is_natural'
     ];
 
+    public $carrera=[
+        'origen'=>'required',
+        'destino'=>'required',
+        'telefono'=>'required',
+        'carrera'=>'required',
+    ];
+
 
     //--------------------------------------------------------------------
     // Rules

@@ -31,13 +31,14 @@ class UnidadEnableController extends BaseController
                 $ModelUnidadEnable=new UnidadActiva();
                 $dataUE=$ModelUnidadEnable->selectUnit($id_vehiculo,1);
                 $tam=count($dataUE);
-                print_r($tam);
+
                 if($tam==0){
 
                     $newUnitEnable=[
                         'id_vehiculo' => $id_vehiculo,
                         'horario'=>$this->request->getPost('horario'),
-                        'estado'=>1
+                        'estado'=>1,
+                        'carrera'=>1
                     ];
                     $ModelUnidadEnable->insert($newUnitEnable);
                     echo json_encode(['success' => 'La unidad  : '.$unidad.' fue activada..!!','error'=>'']);
@@ -70,7 +71,7 @@ class UnidadEnableController extends BaseController
     public function deletEnableUnit($id){
 
         $ModelUnitEnable=new UnidadActiva();
-        $date=$ModelUnitEnable->deletUnitEnable(0,$id);
+        $date=$ModelUnitEnable->deletUnitEnable(0,0,$id);
         if($date){
             echo json_encode(['success' => 'Unidad Eliminada','error'=>'']);
         }

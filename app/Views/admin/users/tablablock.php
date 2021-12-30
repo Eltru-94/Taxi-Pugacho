@@ -5,7 +5,7 @@
     
     <br>
     <div class="table-responsive-md">
-        <table class="table table-striped" id="tablaUsersBlock" name="tablaUsersBlock">
+        <table class="table table-hover" id="tablaUsersBlock" name="tablaUsersBlock">
             <thead>
                 <th>ID</th>
                 <th>Imagen</th>

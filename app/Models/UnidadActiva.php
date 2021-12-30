@@ -9,7 +9,7 @@ class UnidadActiva extends Model
 
     protected $table                = 'unidadesactivas';
     protected $primaryKey           = 'id_unitActiva';
-    protected $allowedFields        = ['id_vehiculo','horario','estado'];
+    protected $allowedFields        = ['id_vehiculo','horario','estado','carrera'];
 
     public function __construct() {
         parent::__construct();
@@ -25,12 +25,7 @@ class UnidadActiva extends Model
     }
 
     public function selectUnitEnable($estado){
-        $query= $this->db->query("SELECT vehiculo.unidad, users.telefono, users.apellido, users.nombre, unidadesactivas.horario,unidadesactivas.id_unitActiva, unidadesactivas.created_at,
-        CASE
-            WHEN unidadesactivas.horario=1 THEN 'Velada'
-            WHEN unidadesactivas.horario=2 THEN 'Mañana'
-            ELSE 'Tarde'
-            END AS horaTrabajo
+        $query= $this->db->query("SELECT vehiculo.unidad, users.telefono, users.apellido, users.nombre, unidadesactivas.horario,unidadesactivas.id_unitActiva, unidadesactivas.created_at
         FROM
           unidadesactivas
           INNER JOIN vehiculo ON (unidadesactivas.id_vehiculo = vehiculo.id_vehiculo)
@@ -41,9 +36,9 @@ class UnidadActiva extends Model
         return $array;
     }
 
-    public function deletUnitEnable($estado,$id_unitActiva){
+    public function deletUnitEnable($estado,$carrera,$id_unitActiva){
 
-        $query = $this->db->query('update unidadesactivas set estado=? where unidadesactivas.id_unitActiva=?',[$estado,$id_unitActiva]);
+        $query = $this->db->query('update unidadesactivas set estado=?, carrera=? where unidadesactivas.id_unitActiva=?',[$estado,$carrera,$id_unitActiva]);
 
         if($query){
             return true;
@@ -72,6 +67,7 @@ class UnidadActiva extends Model
             return false;
         }
     }
+
 
 
 

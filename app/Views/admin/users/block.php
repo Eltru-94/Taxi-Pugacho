@@ -4,8 +4,8 @@
 <?= $this->endSection()?>
 //Main User
 <?= $this->section('contenido')?>
-
-<h1 class="mt-4">Usuarios bloqueados</h1>
+<br>
+<h2 class="text-center">Usuarios bloqueados</h2>
 
 
 
