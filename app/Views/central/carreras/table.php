@@ -9,6 +9,7 @@
             <th>FECHA-HORA</th>
             <th>TIPO CARRERA</th>
             <th>UNIDAD</th>
+            <th>DESCRIPCION</th>
             <th>ACCION</th>
             </thead>
             <tbody>

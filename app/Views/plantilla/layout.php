@@ -30,3 +30,13 @@
 </body>
 
 </html>
+
+
+<script>
+  function prueba(){
+      var date = new Date();
+      //alert(date.getUTCDate());
+  }
+
+  setInterval('prueba()',6000);
+</script>

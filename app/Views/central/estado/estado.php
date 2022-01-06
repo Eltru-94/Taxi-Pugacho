@@ -2,7 +2,7 @@
 
     let tablaStateCarrera = $('#tablaCarrerasState').DataTable({
         "language": {
-            "lengthMenu": "Mostrar _MENU_ Unidades Activas",
+            "lengthMenu": "Mostrar _MENU_ Carreras",
             "zeroRecords": "No se encontraron resultados",
             "info": "Mostrando registro de usuarios del _START_ al _END_ de un total de _TOTAL_",
             "infoEmpty": "Mostrando registro del 0 al 0 de un total de 0 registros",
@@ -71,10 +71,10 @@
 
                             break;
                         case ('2'):
-                            carrera= ' <span class="badge badge-pill bg-success">Cancelada</span>'
+                            carrera= ' <span class="badge badge-pill bg-success">Realizada</span>'
                             break;
                         case ('1'):
-                            carrera= ' <span class="badge badge-pill bg-warning">Negativa</span>'
+                            carrera= ' <span class="badge badge-pill bg-warning">Cancelada</span>'
                             break;
                     }
                     temp = tablaStateCarrera.row.add([cont,unitEnable.direccion_origen,

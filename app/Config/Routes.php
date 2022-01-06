@@ -31,20 +31,9 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
 
-$routes->get('/carreras','CarrerasController::index');
-$routes->post('/carreras/store','CarrerasController::store');
-
-$routes->get('/carreras/activadas','CarrerasController::carreras');
-$routes->get('/carreras/allenable','CarrerasController::allCarrerasEnable');
-$routes->get('/carreras/alldisable','CarrerasController::allCarrerasDisable');
-$routes->post('/carreras/updatecarrera','CarrerasController::updateCarrera');
-$routes->get('/carreras/state','CarrerasController::stateCarreras');
-
-$routes->post('/carreras/all','CarrerasController::allUnitEnableCarreras');
-$routes->get('/carreras/tipocarrera','CarrerasController::getTipoCarrera');
 /* Ruta de loggin */
+$routes->get('/frecuencia','FrecuenciaController::index');
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
 
@@ -87,8 +76,22 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('/enableUnit/select/(:num)', 'UnidadEnableController::id_select/$1');
     $routes->post('/enableUnit/update', 'UnidadEnableController::update_horario');
 
+    //Carreras
+    
+    $routes->get('/', 'Home::index');
+    $routes->get('/carreras','CarrerasController::index');
+    $routes->post('/carreras/store','CarrerasController::store');
+    $routes->get('/carreras/activadas','CarrerasController::carreras');
+    $routes->get('/carreras/allenable','CarrerasController::allCarrerasEnable');
+    $routes->get('/carreras/alldisable','CarrerasController::allCarrerasDisable');
+    $routes->post('/carreras/updatecarrera','CarrerasController::updateCarrera');
+    $routes->get('/carreras/state','CarrerasController::stateCarreras');
+    $routes->post('/carreras/all','CarrerasController::allUnitEnableCarreras');
+    $routes->get('/carreras/tipocarrera','CarrerasController::getTipoCarrera');
+
     //Geolocalizacion 
     $routes->get('/geolocalizacion', 'GeolocalizacionController::index');
+
     
 });
 

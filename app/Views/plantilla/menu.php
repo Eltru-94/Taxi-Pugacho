@@ -50,7 +50,7 @@
                 </a>
                 <div class="collapse" id="tres" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-
+                        <a class="nav-link" href="/frecuencia">Cobro Frecuencia</a>
 
                     </nav>
                 </div>

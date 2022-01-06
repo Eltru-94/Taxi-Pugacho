@@ -53,7 +53,7 @@
                 res.forEach(unitEnable => {
                     switch (unitEnable.id_servicio){
                         case ('3'):
-                            horario= ' <span class="badge badge-pill bg-primary"'>+unitEnable.servicio+'</span>'
+                            horario= ' <span class="badge badge-pill bg-primary">'+unitEnable.servicio+'</span>'
                             auto='<span class="badge badge-pill bg-primary">'+unitEnable.unidad+'</span> <span><i class="fas fa-car"></i></span>'
                             break;
                         case ('2'):
@@ -68,7 +68,7 @@
                     a=unitEnable.id_unitActiva;
                     b=unitEnable.id_carrera;
                     temp = tablaVehiculoEnable.row.add([cont,unitEnable.direccion_origen,unitEnable.direccion_destino,
-                        unitEnable.telefono_persona,unitEnable.dateInicio,horario,auto,`<a class='btn btn-outline-primary' title="Crear Carrera" data-bs-toggle="modal"
+                        unitEnable.telefono_persona,unitEnable.dateInicio,horario,auto,unitEnable.descripcion,`<a class='btn btn-outline-primary' title="Crear Carrera" data-bs-toggle="modal"
                         data-bs-target="#modalCarreraState" onclick="createCarrera(`+a+`,`+b+`)"> <i class='fas fa-car'></i></a>`]);
                     cont++;
 

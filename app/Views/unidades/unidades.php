@@ -152,7 +152,7 @@
                             auto='<span class="badge badge-pill bg-success">'+unitEnable.unidad+'</span> <span><i class="fas fa-car"></i></span>'
                             break;
                     }
-                    temp = tablaVehiculoEnable.row.add([cont,horario,auto,
+                    temp = tablaVehiculoEnable.row.add([cont,horario,auto+'&nbsp <span class="badge badge-pill bg-warning">Activa</span>',
                         unitEnable.created_at,`<a class='btn btn-outline-danger' title="Eliminar" onclick="deletUnitEnable(`+unitEnable.id_unitActiva+`)"> <i class='fas fa-trash'></i></a> <a class='btn btn-outline-primary' title="Actualizar" data-bs-toggle="modal"
                         data-bs-target="#modalUnidadesEnableEdit" onclick="editUnitEnable(`+unitEnable.id_unitActiva+`)"> <i class='fas fa-car'></i></a>`]);
                     cont++;

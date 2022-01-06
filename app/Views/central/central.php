@@ -66,7 +66,7 @@
                             break;
                     }
                     temp = tablaVehiculoEnable.row.add([cont,unitEnable.placa,
-                        horario,auto,`<a class='btn btn-outline-primary' title="Crear Carrera" data-bs-toggle="modal"
+                        horario,auto+'&nbsp;<span class="badge badge-pill bg-warning">Activa</span>',`<a class='btn btn-outline-primary' title="Crear Carrera" data-bs-toggle="modal"
                         data-bs-target="#modalCarreras" onclick="createCarrera(`+unitEnable.id_unitActiva +`)"> <i class='fas fa-taxi'></i></a>`]);
                     cont++;
 

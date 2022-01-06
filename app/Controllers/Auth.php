@@ -132,6 +132,7 @@ class Auth extends Controller
 
         if (session()->has('loggedUser')){
             session()->remove('loggedUser');
+
             return redirect()->to('/auth?access=out')->with('fail','You are logged out !');
         }
     }

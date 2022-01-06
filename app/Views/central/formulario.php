@@ -42,6 +42,14 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+
+                        <div class="col-sm-12 mb-6 mb-sm-0">
+                            <label class="small mb-1">descripcion</label>
+                            <textarea id="descripcion" name="descripcion" class="form-control" rows="4" cols="50"> </textarea>
+                        </div>
+                    </div>
+
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" onclick="CloseCarrera()"
