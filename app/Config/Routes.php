@@ -81,7 +81,7 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('/', 'Home::index');
     $routes->get('/carreras','CarrerasController::index');
     $routes->post('/carreras/store','CarrerasController::store');
-    $routes->get('/carreras/activadas','CarrerasController::carreras');
+    //$routes->get('/carreras/activadas','CarrerasController::carreras');
     $routes->get('/carreras/allenable','CarrerasController::allCarrerasEnable');
     $routes->get('/carreras/alldisable','CarrerasController::allCarrerasDisable');
     $routes->post('/carreras/updatecarrera','CarrerasController::updateCarrera');
