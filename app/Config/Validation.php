@@ -46,7 +46,7 @@ class Validation
     public $user=[
         'nombre'=>'required|alpha_space',
         'apellido'=>'required|alpha_space',
-        'cedula'=>'required',
+        'cedula'=>'required|is_unique[users.cedula]|cedula',
         'telefono'=>'required',
         'fechanacimiento'=>'required',
         'genero'=>'required',
@@ -62,7 +62,7 @@ class Validation
     public $userupdate=[
         'nombre'=>'required|alpha_space',
         'apellido'=>'required|alpha_space',
-        'cedula'=>'required',
+        'cedula'=>'required|is_unique[users.cedula]|cedula',
         'telefono'=>'required',
         'fechanacimiento'=>'required',
         'genero'=>'required',

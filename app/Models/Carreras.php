@@ -17,13 +17,13 @@ class Carreras extends Model
         $db = \Config\Database::connect();
     }
 
-    public function selectUnitCarrera($carrera,$horario){
+    public function selectUnitCarrera($carrera,$horario,$estado){
 
         $query= $this->db->query("SELECT * FROM
           unidadesactivas
           INNER JOIN vehiculo ON (unidadesactivas.id_vehiculo = vehiculo.id_vehiculo)
           INNER JOIN users ON (vehiculo.id_user = users.id_user)
-        WHERE unidadesactivas.carrera = ? AND unidadesactivas.horario= ?",[$carrera,$horario]);
+        WHERE unidadesactivas.carrera = ? AND unidadesactivas.horario= ? AND vehiculo.estado=?",[$carrera,$horario,$estado]);
         $array = json_decode(json_encode($query->getResult()),true);
 
         return $array;
@@ -46,7 +46,7 @@ FROM
               INNER JOIN servicios ON (carreras.id_servicio = servicios.id_servicio)
               INNER JOIN vehiculo ON (unidadesactivas.id_vehiculo = vehiculo.id_vehiculo)
             WHERE
-            carreras.estado = ?',[$estado]);
+            carreras.estado = ? ',[$estado]);
         $array = json_decode(json_encode($query->getResult()),true);
         return $array;
     }

@@ -24,13 +24,13 @@ class UnidadActiva extends Model
         return $array;
     }
 
-    public function selectUnitEnable($estado){
+    public function selectUnitEnable($estado,$estadoVehiculo){
         $query= $this->db->query("SELECT vehiculo.unidad, users.telefono, users.apellido, users.nombre, unidadesactivas.horario,unidadesactivas.id_unitActiva, unidadesactivas.created_at
         FROM
           unidadesactivas
           INNER JOIN vehiculo ON (unidadesactivas.id_vehiculo = vehiculo.id_vehiculo)
           INNER JOIN users ON (vehiculo.id_user = users.id_user)
-        WHERE unidadesactivas.estado = ?",[$estado]);
+        WHERE unidadesactivas.estado = ? AND vehiculo.estado=? ",[$estado,$estadoVehiculo]);
         $array = json_decode(json_encode($query->getResult()),true);
 
         return $array;

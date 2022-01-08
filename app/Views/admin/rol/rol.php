@@ -118,6 +118,7 @@ $("#btnRol").click(function(e) {
         data: roles,
         dataType: 'json',
         success: function(res) {
+            clearField();
             if (res.success) {
                 edit = false;
                 loadRoles();
@@ -159,7 +160,7 @@ $("#asignar").click(function(e) {
         },
         dataType: 'json',
         success: function(res) {
-            console.log(res);
+
             if (res.success) {
                 $('#modalFuncionalidades').modal('hide');
 
@@ -247,6 +248,9 @@ function funcionalidades(id_rol) {
         }
     });
 }
-
+function  clearField(){
+    $('#forRol').find('span.rol_error').text("");
+    $('#forRol').find('span.descripcion_error').text("");
+}
 window.onload = loadRoles;
 </script>

@@ -37,6 +37,7 @@
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="/vehiculo">Vehiculo</a>
                         <a class="nav-link" href="/vehiculo/activar">Activar Unidades</a>
+                        <a class="nav-link" href="/vehiculo/alleliminar">Unidades Eliminadas</a>
                     </nav>
                 </div>
                 <?php } ?>

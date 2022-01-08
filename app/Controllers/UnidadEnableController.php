@@ -63,7 +63,7 @@ class UnidadEnableController extends BaseController
 
     public  function  allUnitEnable(){
         $ModelUnitEnable=new UnidadActiva();
-        $datos=$ModelUnitEnable->selectUnitEnable(1);
+        $datos=$ModelUnitEnable->selectUnitEnable(1,1);
 
         echo json_encode($datos);
     }

@@ -104,6 +104,7 @@
                 console.log(res);
 
                     $('#modalCarreraState').modal('hide');
+                $('#forEstadoCarrera').trigger('reset');
                     loadCarrerasEnable();
 
 

@@ -58,7 +58,7 @@ function buscarCedula() {
     let ced = $('#cedula').val();
     let rol = document.getElementById("user");
     let Url = "<?php echo base_url('users/searchID') ?>";
-
+clearFieldsCedula();
     $.ajax({
         'type': 'post',
         url: Url,
@@ -110,7 +110,7 @@ $("#forVehiculo").on('submit', function(e) {
         dataType: "json",
         success: function(res) {
 
-
+            clearFields();
             if(res.success){
                 $('#forVehiculo').trigger('reset');
                 $('#modalVehiculo').modal('hide');
@@ -138,7 +138,8 @@ function loadVehiculo() {
         'type': 'post',
         url: Url,
         data: {
-            'estado': 1
+            'estado': 1,
+            'estadoVehiculo':1
         },
         dataType: 'json',
         success: function(res) {
@@ -160,8 +161,8 @@ function loadVehiculo() {
                     user.nombre + ' ' + user.apellido + `</a>`,
                     "<div class='btn-group'><a class='btn btn-outline-primary' title='Actulizar' data-bs-toggle='modal' data-bs-target='#modalVehiculo'  onclick='update(" +
                     user.id_user +
-                    ")'><i class='fas fa-car'></i></a> <a class='btn btn-outline-danger' title='Eliminar'   onclick='deleteUsers(" +
-                    user.id_user +
+                    ")'><i class='fas fa-car'></i></a> <a class='btn btn-outline-danger' title='Eliminar'   onclick='deletVehiculo(" +
+                    user.id_vehiculo +
                     ")'> <i class='fas fa-trash'></i></a></div> "
                 ]);
                 cont++;
@@ -174,6 +175,7 @@ function loadVehiculo() {
 
 function activacion(valor) {
     let aux = true;
+    clearFields();
     let rol = document.getElementById("user");
     if (!valor) {
 
@@ -188,6 +190,7 @@ function activacion(valor) {
         $('#imagen3').attr("disabled", valor);
         $('#unidad').attr("disabled", valor);
         $('#Kilometraje').attr("disabled", valor);
+
     }
     if (valor) {
         $('#cedula').val("");
@@ -237,6 +240,61 @@ function update(id) {
         }
     });
 
+
+}
+
+function deletVehiculo(id){
+
+    let Url = `<?php echo base_url()?>/vehiculo/delet`;
+    Swal.fire({
+        title: 'Esta seguro?',
+        text: "No podra reverti esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar el vehiculo!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+
+                'type': "post",
+                url: Url,
+                data: {
+                    'estado': 0,
+                    'id_vehiculo':id
+                },
+                dataType: 'json',
+                success: function(res) {
+
+                    if (res.success) {
+
+                        toastr["info"](res.success);
+                        loadVehiculo();
+
+                    }
+                }
+            });
+
+        }
+    });
+}
+
+function clearFields(){
+    $('#forVehiculo').find('span.imagen1_error').text("");
+    $('#forVehiculo').find('span.imagen2_error').text("");
+    $('#forVehiculo').find('span.imagen3_error').text("");
+    $('#forVehiculo').find('span.placa_error').text("");
+    $('#forVehiculo').find('span.marca_error').text("");
+    $('#forVehiculo').find('span.modelo_error').text("");
+    $('#forVehiculo').find('span.unidad_error').text("");
+    $('#forVehiculo').find('span.kilometraje_error').text("");
+    $('#forVehiculo').find('span.fechafabricacion_error').text("");
+}
+
+function clearFieldsCedula(){
+    $('#forCedula').find('span.cedula_error').text("");
 
 }
 

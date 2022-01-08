@@ -15,6 +15,14 @@ class VehiculoController extends BaseController
         return view('unidades/vehiculo/index', $datos);
     }
 
+    public function indexdelet()
+    {
+        $datos = [
+            'title' => "Vehiculo Eliminado"
+        ];
+        return view('unidades/vehiculo/indexdelet', $datos);
+    }
+
     public function create()
     {
         $validation = \Config\Services::validation();
@@ -72,8 +80,9 @@ class VehiculoController extends BaseController
     public function fetch()
     {
         $estado = $this->request->getPost('estado');
+        $estadoVehiculo=$this->request->getPost('estadoVehiculo');
         $vehiculoModel = new Vehiculo();
-        $datos = $vehiculoModel->getVehiculo($estado);
+        $datos = $vehiculoModel->getVehiculo($estado,$estadoVehiculo);
         echo json_encode($datos);
     }
 
@@ -111,4 +120,27 @@ class VehiculoController extends BaseController
         return view('unidades/activateUnidad', $vehiculoUser);
 
     }
+
+    public function deletVehiculo(){
+        $estado=$this->request->getPost('estado');
+        $id_vehiculo=$this->request->getPost('id_vehiculo');
+
+        $vehiculoModel=new Vehiculo();
+        $query=$vehiculoModel->deletVehiculo($estado,$id_vehiculo);
+        if($query){
+            echo json_encode(['success' => 'vehiculo eliminado..!!', 'error' => '']);
+        }
+    }
+    public  function enableVehiculo(){
+        $estado=$this->request->getPost('estado');
+        $id_vehiculo=$this->request->getPost('id_vehiculo');
+
+        $vehiculoModel=new Vehiculo();
+        $query=$vehiculoModel->deletVehiculo($estado,$id_vehiculo);
+        if($query){
+            echo json_encode(['success' => 'vehiculo Activado..!!', 'error' => '']);
+        }
+    }
+
+
 }

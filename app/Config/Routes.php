@@ -31,9 +31,12 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-
 /* Ruta de loggin */
-$routes->get('/frecuencia','FrecuenciaController::index');
+
+
+
+
+
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
 
@@ -68,6 +71,9 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('/vehiculo/activar', 'VehiculoController::activateUnidad');
     $routes->post('/vehiculo/vehiculouser', 'VehiculoController::getVehiculoUser');
     $routes->post('/vehiculo/create', 'VehiculoController::create');
+    $routes->post('/vehiculo/delet', 'VehiculoController::deletVehiculo');
+    $routes->post('vehiculo/enable','VehiculoController::enableVehiculo');
+    $routes->get('vehiculo/alleliminar','VehiculoController::indexdelet');
 
     $routes->post('/enableUnit','UnidadEnableController::enableUnit');
     $routes->post('/enableUnit/all','UnidadEnableController::allUnitEnable');
@@ -81,14 +87,15 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('/', 'Home::index');
     $routes->get('/carreras','CarrerasController::index');
     $routes->post('/carreras/store','CarrerasController::store');
-    //$routes->get('/carreras/activadas','CarrerasController::carreras');
+    $routes->get('/carreras/activadas','CarrerasController::carreras');
     $routes->get('/carreras/allenable','CarrerasController::allCarrerasEnable');
     $routes->get('/carreras/alldisable','CarrerasController::allCarrerasDisable');
     $routes->post('/carreras/updatecarrera','CarrerasController::updateCarrera');
     $routes->get('/carreras/state','CarrerasController::stateCarreras');
     $routes->post('/carreras/all','CarrerasController::allUnitEnableCarreras');
     $routes->get('/carreras/tipocarrera','CarrerasController::getTipoCarrera');
-
+    //Frecuencia
+    $routes->get('/frecuencia','FrecuenciaController::index');
     //Geolocalizacion 
     $routes->get('/geolocalizacion', 'GeolocalizacionController::index');
 

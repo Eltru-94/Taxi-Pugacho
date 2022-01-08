@@ -34,18 +34,18 @@ class CarrerasController extends BaseController
         date_default_timezone_set('America/Bogota');
         $horario="";
         $fechaFin= date('H');
-        if($fechaFin>6 && $fechaFin<=14){
+        if($fechaFin>=6 && $fechaFin<14){
             $horario=2;
         }
-        if($fechaFin>14 && $fechaFin<22){
+        if($fechaFin>=14 && $fechaFin<22){
             $horario=3;
         }
-        if($fechaFin>=22){
+        if($fechaFin>=22 && $fechaFin<6){
             $horario=1;
         }
         $estado = $this->request->getPost('estado');
          $ModelCarreras =new Carreras();
-         $datos=$ModelCarreras->selectUnitCarrera($estado,$horario);
+         $datos=$ModelCarreras->selectUnitCarrera($estado,$horario,1);
         echo json_encode($datos);
     }
 
