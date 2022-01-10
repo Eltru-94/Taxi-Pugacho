@@ -12,9 +12,9 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Roles</th>
-                <th>Descripción</th>
-                <th>Acción</th>
+                <th>ROL</th>
+                <th>DESCRIPCIÓN</th>
+                <th>ACCIÓN</th>
 
 
             </tr>

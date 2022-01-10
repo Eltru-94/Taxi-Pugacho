@@ -12,13 +12,13 @@ class UserSeeder extends Seeder
        
 
         $data = [
-            'nombre' =>'Llacta',
-            'apellido'=>'Torres',
+            'nombre' =>'Edwin',
+            'apellido'=>'Valenzuela',
             'cedula'=>'1003648936',
-            'correo'=>'llactainn@gmail.com',
+            'correo'=>'edwin@gmail.com',
             'telefono'=>'0987654321',
             'clave'=>Hash::make('12345'),
-            'fechanacimiento'=>'27/11/2021',
+            'fechanacimiento'=>'27-11-1993',
             'estado'=>1,
             'genero'=>'MASCULINO',
             'licencia'=>'TIPO C',

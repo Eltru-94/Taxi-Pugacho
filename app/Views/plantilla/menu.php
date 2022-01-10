@@ -42,7 +42,7 @@
                 </div>
                 <?php } ?>
 
-                <?php if($row['id_funcionalidad']==3){  ?>
+                <?php if($row['id_funcionalidad']==5){  ?>
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tres" aria-expanded="false"
                     aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-donate"></i></div>
@@ -57,7 +57,7 @@
                 </div>
                 <?php } ?>
 
-                <?php if($row['id_funcionalidad']==4){  ?>
+                <?php if($row['id_funcionalidad']==3){  ?>
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#cuatro"
                     aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-dolly-flatbed"></i></div>
@@ -72,7 +72,7 @@
                 </div>
                 <?php } ?>
 
-                <?php if($row['id_funcionalidad']==5){  ?>
+                <?php if($row['id_funcionalidad']==4){  ?>
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#cinco" aria-expanded="false"
                     aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-map-marker-alt"></i></div>

@@ -3,8 +3,8 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Funcionalidad</th>
-                <th>Descripción</th>
+                <th>FUNCIONALIDAD</th>
+                <th>DESCRIPCIÓN</th>
             
             </tr>
 

@@ -29,9 +29,9 @@
                         </div>
                         <div class="col-sm-4 mb-4 mb-sm-0">
 
-                            <label class="small mb-1">Cedula : </label>
+                            <label class="small mb-1">Cédula : </label>
                             <input type="text" class="form-control" id="cedula" name="cedula"
-                                placeholder="Ingrese la cedula : ">
+                                placeholder="Ingrese la cédula : ">
                             <span class="text-danger error-text cedula_error"></span>
 
 
@@ -40,9 +40,9 @@
                     <div class="form-group row">
 
                         <div class="col-sm-4 mb-4 mb-sm-0">
-                            <label class="small mb-1">Telefono : </label>
+                            <label class="small mb-1">Teléfono : </label>
                             <input type="text" class="form-control" id="telefono" name="telefono"
-                                placeholder="Ingrese el telefono : ">
+                                placeholder="Ingrese el teléfono : ">
                             <span class="text-danger error-text telefono_error"></span>
                         </div>
 
@@ -103,7 +103,7 @@
                     <div class="form-group row">
                         <div class="col-sm-6 mb-6 mb-sm-0">
                             <div>
-                                <label class="small mb-1">Direccion : </label>
+                                <label class="small mb-1">Dirección : </label>
                                 <input type="text" class="form-control" id="direccion" name="direccion"
                                     placeholder="Ingrese la dirección : ">
                                 <span class="text-danger error-text direccion_error"></span>

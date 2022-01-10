@@ -7,17 +7,17 @@
     <div class="table-responsive-md">
         <table class="table table-hover" id="tablaUsersBlock" name="tablaUsersBlock">
             <thead>
-                <th>ID</th>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Correo</th>
-                <th>Cedula</th>
-                <th>Telefono</th>
-                <th>Licencia</th>
-                <th>Edad</th>
-                <th>Rol</th>
-                <th>Acción</th>
+            <th>ID</th>
+            <th>FOTO</th>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>CORREO</th>
+            <th>CEDULA</th>
+            <th>TÉLEFONO</th>
+            <th>LICENCIA</th>
+            <th>EDAD</th>
+            <th>ROL</th>
+            <th>ACCIÓN</th>
             </thead>
             <tbody>
 
