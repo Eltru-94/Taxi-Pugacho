@@ -44,15 +44,15 @@ class Validation
     ];
 
     public $user=[
-        'nombre'=>'required|alpha_space',
-        'apellido'=>'required|alpha_space',
+        'nombre'=>'required',
+        'apellido'=>'required',
         'cedula'=>'required|is_unique[users.cedula]|cedula',
-        'telefono'=>'required',
+        'telefono'=>'required|is_unique[users.telefono]',
         'fechanacimiento'=>'required',
         'genero'=>'required',
         'licencia'=>'required',
         'direccion'=>'required',
-        'correo'=>'required|valid_email',
+        'correo'=>'is_unique[users.correo]|required|valid_email',
         'password'=>'required|min_length[5]|max_length[12]',
         'cpassword'=>'required|min_length[5]|max_length[12]|matches[password]',
         'imagen'=>'uploaded[imagen]|max_size[imagen,255]|is_image[imagen]',
@@ -60,9 +60,9 @@ class Validation
     ];
 
     public $userupdate=[
-        'nombre'=>'required|alpha_space',
-        'apellido'=>'required|alpha_space',
-        'cedula'=>'required|is_unique[users.cedula]|cedula',
+        'nombre'=>'required',
+        'apellido'=>'required',
+        'cedula'=>'required|cedula',
         'telefono'=>'required',
         'fechanacimiento'=>'required',
         'genero'=>'required',
@@ -75,7 +75,11 @@ class Validation
     ];
 
     public $rol=[
-        'rol'=>'required|alpha_space|is_unique[roles.rol]',
+        'rol'=>'required|is_unique[roles.rol]',
+        'descripcion'=>'required',
+    ];
+    public $updaterol=[
+        'rol'=>'required',
         'descripcion'=>'required',
     ];
     public $searchID=[
@@ -92,7 +96,16 @@ class Validation
         'modelo'=>'required',
         'fechafabricacion'=>'required',
         'unidad'=>'required|is_natural|is_unique[vehiculo.unidad]',
-        'kilometraje'=>'required|is_natural',
+        'color'=>'required',
+    ];
+
+    public $updatevehiculo=[
+        'placa'=>'required',
+        'marca'=>'required',
+        'modelo'=>'required',
+        'fechafabricacion'=>'required',
+        'unidad'=>'required',
+        'color'=>'required',
     ];
 
     public $unitEnable=[
@@ -105,6 +118,7 @@ class Validation
         'destino'=>'required',
         'telefono'=>'required',
         'carrera'=>'required',
+        'descripcion'=>'required'
     ];
 
 

@@ -56,12 +56,12 @@ class RolController extends BaseController
        
         $validation=\Config\Services::validation();
 
-        if(!$this->validate('rol')){
+        if(!$this->validate('updaterol')){
             $errors=$validation->getErrors();
             echo json_encode(['code'=>0,'error'=>$errors]);
         }else{
             //Update rol
-            $rolModel = new Roles($db);
+            $rolModel = new Roles();
             $id_rol=$this->request->getPost('id_rol');
             $rol=$this->request->getPost('rol');
             $descripcion=$this->request->getPost('descripcion');

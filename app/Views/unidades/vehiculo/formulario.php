@@ -30,7 +30,7 @@
                 </form>
                 <div name="user" id="user"></div>
                 <form name="forVehiculo" id="forVehiculo" enctype="multipart/form-data">
-                    <input type="text" class="form-control" name="id_user" id="id_user" hidden disabled>
+                    <input type="text" class="form-control" name="id_vehiculo" id="id_vehiculo">
                    
                     <div class="form-group row">
                         <div class="col-sm-12 mb-12 mb-sm-0">
@@ -90,10 +90,11 @@
 
 
                         <div class="col-sm-4 mb-4 mb-sm-0">
-                            <label class="small mb-1">Kilometraje</label>
-                            <input type="text" class="form-control" id="Kilometraje" name="kilometraje"
-                                   placeholder="Ingrese el kilometraje: " disabled>
-                            <span class="text-danger error-text kilometraje_error"></span>
+                            <label class="small mb-1">Color</label>
+                            <select name="color" id="color" class="form-control" disabled>
+
+                            </select>
+                            <span class="text-danger error-text color_error"></span>
                         </div>
                         <div class="col-sm-4 mb-4 mb-sm-0">
                             <div>

@@ -9,7 +9,7 @@ class Vehiculo extends Model
 
     protected $table                = 'vehiculo';
     protected $primaryKey           = 'id_vehiculo';
-    protected $allowedFields        = ['placa','fechafabricacion','marca','modelo','imagen1','imagen2','imagen3','id_user','estado','unidad','kilometraje'];
+    protected $allowedFields        = ['placa','fechafabricacion','marca','modelo','imagen1','imagen2','imagen3','id_user','estado','unidad','color'];
 
 
 
@@ -41,6 +41,20 @@ class Vehiculo extends Model
     public function deletVehiculo($estado,$id_vehiculo){
 
         $query = $this->db->query('update vehiculo set estado=? where id_vehiculo=?',[$estado,$id_vehiculo]);
+
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function updateVehiculo($id_vehiculo,$placa,$marca,$modelo,$fechafabricacion,$unidad,$color){
+
+
+        $query = $this->db->query('update vehiculo set placa=?, marca=?, modelo=?,fechafabricacion=?,unidad=?,color=? where id_vehiculo=?',[$placa,$marca,$modelo,$fechafabricacion,$unidad,$color,$id_vehiculo]);
+
+
 
         if($query){
             return true;

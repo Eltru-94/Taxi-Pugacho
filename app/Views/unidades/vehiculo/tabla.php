@@ -15,6 +15,8 @@
                 <th>PLACA</th>
                 <th>AÑO</th>
                 <th>MARCA</th>
+                <th>COLOR</th>
+                <th>MODELO</th>
                 <th>UNIDAD</th>
                 <th>PROPIETARIO</th>
                 <th>ACCION</th>

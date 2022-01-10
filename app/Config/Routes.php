@@ -33,8 +33,9 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 /* Ruta de loggin */
 
-
-
+$routes->post('/vehiculo/update', 'VehiculoController::updatevehiculo');
+$routes->post('/carreras/selectId','CarrerasController::selectIdCarrera');
+$routes->post('/carreras/dateUpdate','CarrerasController::updateDateCarrera');
 
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {

@@ -69,7 +69,8 @@
                     b=unitEnable.id_carrera;
                     temp = tablaVehiculoEnable.row.add([cont,unitEnable.direccion_origen,unitEnable.direccion_destino,
                         unitEnable.telefono_persona,unitEnable.dateInicio,horario,auto,unitEnable.descripcion,`<a class='btn btn-outline-primary' title="Crear Carrera" data-bs-toggle="modal"
-                        data-bs-target="#modalCarreraState" onclick="createCarrera(`+a+`,`+b+`)"> <i class='fas fa-car'></i></a>`]);
+                        data-bs-target="#modalCarreraState" onclick="createCarrera(`+a+`,`+b+`)"> <i class='fas fa-car'></i></a> <a class='btn btn-outline-primary' title="Crear Carrera" data-bs-toggle="modal"
+                        data-bs-target="#modalCarreras" onclick="updateCarrera(`+unitEnable.id_carrera +`)"> <i class='fas fa-edit'></i></a>`]);
                     cont++;
 
                 });
@@ -80,6 +81,29 @@
         });
     }
 
+function  updateCarrera(id){
+    let Url = "<?php echo base_url('carreras/selectId') ?>";
+    $.ajax({
+        method: 'post',
+        url: Url,
+        data: {
+
+            'id_carrera':id,
+
+        },
+        dataType: 'json',
+        success: function(res) {
+
+           $('#origen').val(res[0].direccion_origen);
+            $('#destino').val(res[0].direccion_destino);
+            $('#telefono').val(res[0].telefono_persona);
+            $('#descripcion').val(res[0].descripcion);
+            $('#id_carrera').val(res[0].id_carrera)
+            tipoCarrera(res[0].id_servicio);
+
+        }
+    });
+}
     function createCarrera(idUnidadActiva,idCarrera){
 
         $("#idcarrera").val(idCarrera);
@@ -101,9 +125,9 @@
                 'id_unitActiva':idUnidadActiva
             },
             success: function(res) {
-                console.log(res);
 
-                    $('#modalCarreraState').modal('hide');
+
+                $('#modalCarreraState').modal('hide');
                 $('#forEstadoCarrera').trigger('reset');
                     loadCarrerasEnable();
 
@@ -114,6 +138,59 @@
 
 
     }
+
+    function tipoCarrera(aux) {
+
+        let Url = "<?php echo base_url('carreras/tipocarrera') ?>";
+        let tipocarrera = document.getElementById("carrera");
+        let mensaje = " <option  value=''>Escoga el tipo de carrera...</option>";
+        $.ajax({
+            'type': 'get',
+            url: Url,
+            dataType: 'json',
+            success: function(res) {
+
+                res.forEach(ser => {
+                    if (aux == ser.id_servicio) {
+                        mensaje += "<option  selected value='" + ser.id_servicio + "'>" + ser.servicio +
+                            "</option>";
+                    } else {
+                        mensaje += "<option value='" + ser.id_servicio + "'>" +ser.servicio + "</option>";
+                    }
+
+                });
+                tipocarrera.innerHTML = mensaje;
+            }
+        });
+    }
+
+    $("#forCarreras").on('submit',function (e) {
+        e.preventDefault();
+
+        let Url="<?php echo base_url('carreras/dateUpdate')?>";
+
+        $.ajax({
+            type: 'post',
+            url: Url,
+            data: 'action_type=view&'+$("#forCarreras").serialize(),
+            dataType: "json",
+            success:function(res){
+                //ClearErrorCarrera();
+                console.log(res);
+                if(res.success){
+                    $('#modalCarreras').modal('hide');
+                    toastr["success"](res.success);
+                    loadCarrerasEnable();
+
+                }else{
+                    $.each(res.error, function(prefix, val) {
+                        $('#forCarreras').find('span.' + prefix + '_error').text(val);
+                    });
+                }
+            }
+        });
+
+    });
 
     window.onload=loadCarrerasEnable();
 </script>

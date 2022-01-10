@@ -54,9 +54,9 @@ class Vehiculo extends Migration
                 'type'=>'INT',
                 'constraint'=>3
             ],
-            'kilometraje'=>[
+            'color'=>[
                 'type'=>'VARCHAR',
-                'constraint'=>5
+                'constraint'=>15
             ],
             'created_at datetime default current_timestamp'
 

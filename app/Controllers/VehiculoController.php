@@ -10,7 +10,7 @@ class VehiculoController extends BaseController
     public function index()
     {
         $datos = [
-            'title' => "Vehiculo"
+            'title' => "Vehículo"
         ];
         return view('unidades/vehiculo/index', $datos);
     }
@@ -35,7 +35,7 @@ class VehiculoController extends BaseController
         $image2 = $this->request->getFile('imagen2');
         $image3 = $this->request->getFile('imagen3');
         $unidad=$this->request->getPost('unidad');
-        $kilometraje=$this->request->getPost('kilometraje');
+        $color=$this->request->getPost('color');
 
 
         if (!$this->validate('vehiculo')) {
@@ -63,7 +63,7 @@ class VehiculoController extends BaseController
                 'id_user' => $id_user,
                 'estado' => 1,
                 'unidad'=>$unidad,
-                'kilometraje'=>$kilometraje,
+                'color'=>$color,
             ];
 
             $vehiculoModel = new Vehiculo();
@@ -140,6 +140,30 @@ class VehiculoController extends BaseController
         if($query){
             echo json_encode(['success' => 'vehiculo Activado..!!', 'error' => '']);
         }
+    }
+
+    public function  updatevehiculo(){
+        $validation = \Config\Services::validation();
+        if (!$this->validate('updatevehiculo')) {
+            $errors = $validation->getErrors();
+            echo json_encode(['success' => '', 'error' => $errors]);
+        } else {
+            $placa = $this->request->getPost('placa');
+            $marca = $this->request->getPost('marca');
+            $modelo = $this->request->getPost('modelo');
+            $id_vehiculo = $this->request->getPost('id_vehiculo');
+            $fechafabricacion = $this->request->getPost('fechafabricacion');
+            $unidad=$this->request->getPost('unidad');
+            $color=$this->request->getPost('color');
+
+            $vehiculoModel=new Vehiculo();
+            $query=$vehiculoModel->updateVehiculo($id_vehiculo,$placa,$marca,$modelo,$fechafabricacion,$unidad,$color);
+            if($query){
+                echo json_encode(['success' => 'Vehiculo Actualizado', 'error' => '']);
+            }
+
+        }
+
     }
 
 

@@ -52,6 +52,22 @@ function year(anio) {
     }
     rol.innerHTML = mensaje;
 }
+function color(colorSelect){
+
+    let arraycolor = ["AZUL", "VERDE", "ROJO", "AMARILLO"];
+    let color=document.getElementById("color");
+    let mensaje = " <option  value=''>Seleccionar color</option>";
+    for (var i=0;i<arraycolor.length;i++){
+        if(arraycolor[i]==colorSelect){
+            mensaje += '<option selected value="' +  arraycolor[i] + '">' + arraycolor[i] + '</option>';
+        }else{
+            mensaje += '<option value="' +  arraycolor[i] + '">' + arraycolor[i] + '</option>';
+        }
+
+
+    }
+    color.innerHTML=mensaje;
+}
 
 function buscarCedula() {
 
@@ -76,7 +92,7 @@ clearFieldsCedula();
                 rol.innerHTML = "<h4 class='text-center'>" + res.success[0].nombre + " " + res.success[0]
                     .apellido + "</h4>";
 
-
+                color();
             } else {
 
                 $.each(res.error, function(prefix, val) {
@@ -99,7 +115,8 @@ $("#forVehiculo").on('submit', function(e) {
     e.preventDefault();
 
     $('#forCedula').trigger('reset');
-    let Url = '<?php echo base_url('vehiculo/create') ?>';
+    let Url = edit === false ? '<?php echo base_url('vehiculo/create') ?>':
+        '<?php echo base_url('vehiculo/update') ?>';
     var fd = new FormData(document.getElementById("forVehiculo"));
     $.ajax({
         type: "post",
@@ -117,6 +134,7 @@ $("#forVehiculo").on('submit', function(e) {
                 toastr["success"](res.success);
                 activacion(true);
                 loadVehiculo();
+                edit=false;
             }else{
                 $.each(res.error, function(prefix, val) {
                     $('#forVehiculo').find('span.' + prefix + '_error').text(val);
@@ -154,13 +172,13 @@ function loadVehiculo() {
                     user.imagen2 + `">`,
                     `<img class="rounded float-start" width='100' src="<?=base_url()?>/vehiculos/` +
                     user.imagen1 + `">`, user.placa, user
-                    .fechafabricacion, user.marca,
+                    .fechafabricacion, user.marca,user.color,user.modelo,
 
                     '<span class="badge badge-pill badge-success">'+user.unidad+'</span> <span><i class="fas fa-car"></i></span>', `<a title="Detalles" href="<?=base_url()?>/vehiculo/details/` +
                     user.id_vehiculo + `">` +
                     user.nombre + ' ' + user.apellido + `</a>`,
                     "<div class='btn-group'><a class='btn btn-outline-primary' title='Actulizar' data-bs-toggle='modal' data-bs-target='#modalVehiculo'  onclick='update(" +
-                    user.id_user +
+                    user.id_vehiculo +
                     ")'><i class='fas fa-car'></i></a> <a class='btn btn-outline-danger' title='Eliminar'   onclick='deletVehiculo(" +
                     user.id_vehiculo +
                     ")'> <i class='fas fa-trash'></i></a></div> "
@@ -189,7 +207,7 @@ function activacion(valor) {
         $('#imagen2').attr("disabled", valor);
         $('#imagen3').attr("disabled", valor);
         $('#unidad').attr("disabled", valor);
-        $('#Kilometraje').attr("disabled", valor);
+        $('#color').attr("disabled", valor);
 
     }
     if (valor) {
@@ -206,7 +224,7 @@ function activacion(valor) {
         $('#imagen3').attr("disabled", aux);
         $('#forCedula').find('span.cedula_error').text("");
         $('#unidad').attr("disabled", valor);
-        $('#Kilometraje').attr("disabled", valor);
+        $('#color').attr("disabled", valor);
         $('#forVehiculo').trigger('reset');
     }
 
@@ -214,7 +232,7 @@ function activacion(valor) {
 
 
 function update(id) {
-
+    a.innerHTML="<h5>Actualizar Vehiculo</h5>";
     let Url = "<?php echo base_url('vehiculo/vehiculouser') ?>";
     let id_vehiculo = id;
     $.ajax({
@@ -234,8 +252,9 @@ function update(id) {
             $('#placa').val(res[0].placa);
             $('#fechafabricacion').val(res[0].fechafabricacion);
             $('#unidad').val(res[0].unidad);
-            $('#Kilometraje').val(res[0].kilometraje);
-
+            $('#id_vehiculo').val(res[0].id_vehiculo);
+            color(res[0].color);
+            edit=true;
             activacion(false);
         }
     });
@@ -289,7 +308,7 @@ function clearFields(){
     $('#forVehiculo').find('span.marca_error').text("");
     $('#forVehiculo').find('span.modelo_error').text("");
     $('#forVehiculo').find('span.unidad_error').text("");
-    $('#forVehiculo').find('span.kilometraje_error').text("");
+    $('#forVehiculo').find('span.color_error').text("");
     $('#forVehiculo').find('span.fechafabricacion_error').text("");
 }
 

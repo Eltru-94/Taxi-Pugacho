@@ -62,7 +62,23 @@ FROM
     }
 
 
+    public function selectIdCarrera($id_carrera){
+        $query = $this->db->query('select * from carreras where id_carrera =?',[$id_carrera]);
+        $array = json_decode(json_encode($query->getResult()),true);
+        return $array;
+    }
 
+    public  function  updateDateCarrera($id_carrera,$origen,$destino,$carrera,$telefono,$descripcion){
+        $query = $this->db->query('update carreras set direccion_origen=?,direccion_destino=?,telefono_persona=?,carrera=?, 
+                    descripcion=? where id_carrera=?',
+            [$origen,$destino,$telefono,$carrera,$descripcion,$id_carrera]);
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 
 
 }

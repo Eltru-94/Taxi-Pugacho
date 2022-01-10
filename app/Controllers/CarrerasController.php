@@ -36,11 +36,9 @@ class CarrerasController extends BaseController
         $fechaFin= date('H');
         if($fechaFin>=6 && $fechaFin<14){
             $horario=2;
-        }
-        if($fechaFin>=14 && $fechaFin<22){
+        }else if($fechaFin>=14 && $fechaFin<22){
             $horario=3;
-        }
-        if($fechaFin>=22 && $fechaFin<6){
+        }else {
             $horario=1;
         }
         $estado = $this->request->getPost('estado');
@@ -131,7 +129,38 @@ class CarrerasController extends BaseController
     }
 
 
+    public  function  selectIdCarrera(){
 
+        $id_carrera=$this->request->getPost('id_carrera');
+        $ModelCarrera =new Carreras();
+        $carrera=$ModelCarrera->selectIdCarrera($id_carrera);
+        echo  json_encode($carrera);
+    }
+
+    public function updateDateCarrera(){
+        $validation = \Config\Services::validation();
+        if (!$this->validate('carrera')) {
+            $errors = $validation->getErrors();
+            echo json_encode(['success' => '', 'error' =>  $errors]);
+        }else{
+
+            $direccion_origen=$this->request->getPost('origen');
+            $direccion_destino=$this->request->getPost('destino');
+            $telefono_persona=$this->request->getPost('telefono');
+            $id_servicio=$this->request->getPost('carrera');
+            $descripcion=$this->request->getPost('descripcion');
+            $id_carrera=$this->request->getPost('id_carrera');
+
+            $ModelCarrera=new Carreras();
+            $query=$ModelCarrera->updateDateCarrera($id_carrera,$direccion_origen,$direccion_destino,$id_servicio,$telefono_persona,$descripcion);
+            if ($query) {
+                echo json_encode(['success' => 'Carrera actualizada con exito..!!', 'error' => '']);
+            } else {
+                echo json_encode(['success' => '', 'error' => 'Error']);
+            }
+        }
+
+    }
 
 
 }
