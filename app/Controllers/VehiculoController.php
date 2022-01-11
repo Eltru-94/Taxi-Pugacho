@@ -66,13 +66,15 @@ class VehiculoController extends BaseController
                 'color'=>$color,
             ];
 
-            $vehiculoModel = new Vehiculo();
+           $vehiculoModel = new Vehiculo();
             $query = $vehiculoModel->insert($newVehiculo);
             if ($query) {
                 echo json_encode(['success' => 'vehiculo registrado exitosamente..!!', 'error' => '']);
             } else {
                 echo json_encode(['success' =>'', 'error' => 'Vehiculo no registrado..!']);
             }
+
+
         }
     }
 
