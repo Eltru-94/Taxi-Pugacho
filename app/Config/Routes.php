@@ -16,6 +16,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * Router Setup
  * --------------------------------------------------------------------
  */
+use App\Controllers\Api\V1\AuthController;
 $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
@@ -32,6 +33,8 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 /* Ruta de loggin */
+
+$routes->get('/api/allUser','Api\V1\AuthController::index');
 
 $routes->post('/vehiculo/update', 'VehiculoController::updatevehiculo');
 $routes->post('/carreras/selectId','CarrerasController::selectIdCarrera');
