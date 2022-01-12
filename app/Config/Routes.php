@@ -36,9 +36,8 @@ $routes->setAutoRoute(true);
 
 $routes->get('/api/allUser','Api\V1\AuthController::index');
 
-$routes->post('/vehiculo/update', 'VehiculoController::updatevehiculo');
-$routes->post('/carreras/selectId','CarrerasController::selectIdCarrera');
-$routes->post('/carreras/dateUpdate','CarrerasController::updateDateCarrera');
+
+
 
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
@@ -78,6 +77,8 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->post('/vehiculo/delet', 'VehiculoController::deletVehiculo');
     $routes->post('vehiculo/enable','VehiculoController::enableVehiculo');
     $routes->get('vehiculo/alleliminar','VehiculoController::indexdelet');
+    $routes->post('/vehiculo/update', 'VehiculoController::updatevehiculo');
+
 
     $routes->post('/enableUnit','UnidadEnableController::enableUnit');
     $routes->post('/enableUnit/all','UnidadEnableController::allUnitEnable');
@@ -98,6 +99,8 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('/carreras/state','CarrerasController::stateCarreras');
     $routes->post('/carreras/all','CarrerasController::allUnitEnableCarreras');
     $routes->get('/carreras/tipocarrera','CarrerasController::getTipoCarrera');
+    $routes->post('/carreras/selectId','CarrerasController::selectIdCarrera');
+    $routes->post('/carreras/dateUpdate','CarrerasController::updateDateCarrera');
     //Frecuencia
     $routes->get('/frecuencia','FrecuenciaController::index');
     //Geolocalizacion 

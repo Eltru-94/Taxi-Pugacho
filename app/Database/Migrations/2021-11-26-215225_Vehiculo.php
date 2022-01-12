@@ -28,7 +28,7 @@ class Vehiculo extends Migration
             ],
             'modelo'=>[
                 'type'=>'VARCHAR',
-                'constraint'=>20
+                'constraint'=>30
             ],
             'imagen1'=>[
                 'type'=>'VARCHAR',
@@ -48,11 +48,11 @@ class Vehiculo extends Migration
             ],
             'estado'=>[
                 'type'=>'VARCHAR',
-                'constraint'=>3
+                'constraint'=>11
             ],
             'unidad'=>[
                 'type'=>'INT',
-                'constraint'=>3
+                'constraint'=>11
             ],
             'color'=>[
                 'type'=>'VARCHAR',

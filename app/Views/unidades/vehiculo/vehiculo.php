@@ -128,6 +128,7 @@ $("#forVehiculo").on('submit', function(e) {
         success: function(res) {
 
             clearFields();
+            console.log(res);
             if(res.success){
                 $('#forVehiculo').trigger('reset');
                 $('#modalVehiculo').modal('hide');

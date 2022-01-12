@@ -71,7 +71,7 @@ class VehiculoController extends BaseController
             if ($query) {
                 echo json_encode(['success' => 'vehiculo registrado exitosamente..!!', 'error' => '']);
             } else {
-                echo json_encode(['success' =>'', 'error' => 'Vehiculo no registrado..!']);
+                echo json_encode(['success' =>'', 'error' => $newVehiculo]);
             }
 
 

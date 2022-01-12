@@ -40,7 +40,8 @@ class UnidadEnableController extends BaseController
                         'estado'=>1,
                         'carrera'=>1
                     ];
-                    $ModelUnidadEnable->insert($newUnitEnable);
+                    //$ModelUnidadEnable->insert($newUnitEnable);
+                    //echo json_encode(['success' => 'La unidad  : '.$unidad.' fue activada..!!','error'=>'']);
                     echo json_encode(['success' => 'La unidad  : '.$unidad.' fue activada..!!','error'=>'']);
                 }else{
                     $errors = [

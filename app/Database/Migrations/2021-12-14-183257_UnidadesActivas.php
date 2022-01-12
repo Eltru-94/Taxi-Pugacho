@@ -36,11 +36,11 @@ class UnidadesActivas extends Migration
         ]);
         $this->forge->addForeignKey('id_vehiculo','vehiculo','id_vehiculo');
         $this->forge->addKey('id_unitActiva',TRUE);
-        $this->forge->createTable('UnidadesActivas');
+        $this->forge->createTable('unidadesactivas');
     }
 
     public function down()
     {
-        $this->forge->dropTable('UnidadesActivas');
+        $this->forge->dropTable('unidadesactivas');
     }
 }
