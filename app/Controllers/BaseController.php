@@ -7,6 +7,8 @@ use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Validation\Exceptions\ValidationException;
+use Config\Services;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -48,5 +50,30 @@ class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+    }
+/*Creador por at metodo convertir json*/
+    public  function  getRespose(array $responseBody,int $code=ResponseInterface::HTTP_OK){
+        return $this->response->setStatusCode($code)->setJSON($responseBody);
+    }
+    public  function  getRequestInput(IncomingRequest $request){
+       $input=$request->getPost();
+       if(empty($input)){
+           $input=json_encode($request->getBody(),true);
+       }
+       return $input;
+    }
+    public  function  validateRequest($input, array $rules,array $mensaje=[]){
+       $this->validator=Services::validation()->setRule($rules);
+       if(is_string($rules)){
+           $validation=config('validation');
+           if(!isset($validation->$rules)){
+               throw  ValidationException::forRuleNotFound($rules);
+           }
+           if(!$mensaje){
+               $errorName=$rules.'_errors';
+               $messages=$validation->$errorName ?? [];
+           }
+       }
+       return $this->validator->setRule($rules,$mensaje)->run($input);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Filters\JTWAuthenticationFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -21,6 +22,7 @@ class Filters extends BaseConfig
         'honeypot' => Honeypot::class,
         'AuthCheck' => \App\Filters\AuthCheckFilter::class,
         'AlreadyLoggedIn' => \App\Filters\AlreadyLoggedInFilter::class,
+        'auth'=> JTWAuthenticationFilter::class
     ];
 
     /**
@@ -60,5 +62,11 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = [
+        'auth'=>[
+            'before'=>[
+                'api'
+            ]
+        ]
+    ];
 }

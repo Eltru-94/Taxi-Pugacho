@@ -80,4 +80,11 @@ class Users extends Model
         $array = json_decode(json_encode($query->getResult()),true);
         return $array;
     }
+    public  function  findUserByEmailAddress(string $emailAddress){
+        $user=$this->asArray()->where(['correo'=>$emailAddress])->first();
+        if(!$user){
+            throw  new \Exception('User does not exist for specified email address');
+        }
+        return $user;
+    }
 }

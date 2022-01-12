@@ -121,6 +121,17 @@ class Validation
         'descripcion'=>'required'
     ];
 
+    public  $apiuser=[
+        'nombre'=>'required',
+        'apellido'=>'required',
+        'correo'=>'required|valid_email',
+        'clave'=>'required|min_length[5]|max_length[12]'
+    ];
+    public $login=[
+        'correo'=>'required|valid_email',
+        'clave'=>'required|min_length[5]|max_length[12]'
+    ];
+
 
     //--------------------------------------------------------------------
     // Rules

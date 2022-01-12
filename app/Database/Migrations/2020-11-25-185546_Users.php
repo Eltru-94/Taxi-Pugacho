@@ -25,7 +25,8 @@ class Users extends Migration
             ],
             'cedula' => [
                 'type' => 'VARCHAR',
-                'constraint' => 15
+                'constraint' => 15,
+                'null'=>true
             ],
             'correo' => [
                 'type' => 'VARCHAR',
@@ -33,7 +34,8 @@ class Users extends Migration
             ],
             'telefono' => [
                 'type' => 'VARCHAR',
-                'constraint' => 11
+                'constraint' => 11,
+                'null'=>true
             ],
             'clave' => [
                 'type' => 'VARCHAR',
@@ -44,23 +46,28 @@ class Users extends Migration
                 'constraint' => 2
             ],
             'fechanacimiento' => [
-                'type' => 'DATE'
+                'type' => 'DATE',
+                'null'=>true
             ],
             'genero' => [
                 'type' => 'VARCHAR',
-                'constraint' => 10
+                'constraint' => 10,
+                'null'=>true
             ],
             'licencia' => [
                 'type' => 'VARCHAR',
-                'constraint' => 20
+                'constraint' => 20,
+                'null'=>true
             ],
             'foto' => [
                 'type' => 'VARCHAR',
-                'constraint' => 50
+                'constraint' => 50,
+                'null'=>true
             ],
             'direccion' => [
                 'type' => 'VARCHAR',
-                'constraint' => 60
+                'constraint' => 60,
+                'null'=>true
             ],
             'created_at datetime default current_timestamp'
         ]);

@@ -12,7 +12,7 @@ class Hash{
         if(password_verify($entere_password,$db_password)){
             return true;
         } else{
-         return false;
+            throw  new \Exception('Clave incorrecta');
         }
      }
      
