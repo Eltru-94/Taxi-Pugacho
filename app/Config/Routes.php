@@ -34,7 +34,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 /* Ruta de loggin */
 
-$routes->get('/datos','Api\V1\AuthController::index');
+$routes->get('/datos','LoginController::index');
 $routes->post('/api/user/register','Api\V1\AuthController::register');
 
 $routes->post('/api/login','Api\V1\AuthController::login');
