@@ -30,8 +30,8 @@
                 </form>
                 <div name="user" id="user"></div>
                 <form name="forVehiculo" id="forVehiculo" enctype="multipart/form-data">
-                    <input type="text" class="form-control" name="id_user" id="id_user">
-                    <input type="text" class="form-control" name="id_vehiculo" id="id_vehiculo">
+                    <input type="hidden" class="form-control" name="id_user" id="id_user">
+                    <input type="hidden" class="form-control" name="id_vehiculo" id="id_vehiculo">
                    
                     <div class="form-group row">
                         <div class="col-sm-12 mb-12 mb-sm-0">
