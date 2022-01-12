@@ -10,10 +10,10 @@ class Carreras extends Migration
     {
         $this->forge->addField([
             'id_carrera' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'unsigned' => false,
-                'auto_increment' => true
+                'type'=>'INT',
+                'constraint'=>11,
+                'unsigned'=>false,
+                'auto_increment'=>true
             ],
             'descripcion' => [
                 'type' => 'VARCHAR',
@@ -57,7 +57,7 @@ class Carreras extends Migration
             ],
         ]);
         $this->forge->addForeignKey('id_servicio','servicios','id_servicio');
-        $this->forge->addForeignKey('id_unitActiva','UnidadesActivas','id_unitActiva');
+        $this->forge->addForeignKey('id_unitActiva','unidadesactivas','id_unitActiva');
         $this->forge->addKey('id_carrera', TRUE);
         $this->forge->createTable('carreras');
     }
