@@ -40,7 +40,7 @@ $routes->post('/api/user/register','Api\V1\AuthController::register');
 $routes->post('/api/login','Api\V1\AuthController::login');
 
 
-
+$routes->get('/apiall','LoginController::index');
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
 
