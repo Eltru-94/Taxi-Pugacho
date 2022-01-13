@@ -34,13 +34,12 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 /* Ruta de loggin */
 
-$routes->get('/apiPrueba','Api\V1\AuthController::index');
-$routes->post('/api/user/register','Api\V1\AuthController::register');
 
-$routes->post('/api/login','Api\V1\AuthController::login');
+$routes->post('/api/user/register','LoginController::register');
 
-
+$routes->post('/api/login','LoginController::login');
 $routes->get('/apiall','LoginController::index');
+
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
 
