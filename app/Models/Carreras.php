@@ -17,6 +17,7 @@ class Carreras extends Model
         $db = \Config\Database::connect();
     }
 
+
     public function selectUnitCarrera($carrera,$horario,$estado){
 
         $query= $this->db->query("SELECT * FROM
