@@ -34,7 +34,7 @@ class Database extends Config
         'DSN'      => '',
         'hostname' => 'mysql-llacta.alwaysdata.net',
         'username' => 'llacta',
-        'password' => '',
+        'password' => '1003648936',
         'database' => 'llacta_taxi_app',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
