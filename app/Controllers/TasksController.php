@@ -29,9 +29,9 @@ class TasksController extends BaseController
         ]);
     }
 
-    public  function  allTaskid(){
+    public  function  allTaskid($id_user=null){
 
-        $id_user=$this->request->getPost('id_user');
+
         $modelTask=new Tasks();
         echo  json_encode($modelTask->getAllTaskUser($id_user));
 
