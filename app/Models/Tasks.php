@@ -21,7 +21,7 @@ class Tasks extends Model
     }
 
     public function getAllTaskUser($id_user){
-        $query=$this->db->query('SELECT * FROM tasks INNER JOIN users ON (users.id_user = tasks.id_user) WHERE tasks.id_user=? AND tasks.estado=1',[$id_user]);
+        $query=$this->db->query('SELECT tasks.id_task,tasks.task,tasks.descripcion,tasks.created_at FROM tasks INNER JOIN users ON (users.id_user = tasks.id_user) WHERE tasks.id_user=? AND tasks.estado=1',[$id_user]);
         $array = json_decode(json_encode($query->getResult()),true);
         return $array;
     }
