@@ -38,7 +38,10 @@ $routes->setAutoRoute(true);
 $routes->post('/api/user/register','LoginController::register');
 $routes->post('/api/login','LoginController::login');
 $routes->post('/api/task/store','TasksController::storeTask');
+$routes->post('/api/task/allUser','TasksController::allTaskid');
 $routes->get('/apiall','LoginController::index');
+
+
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 

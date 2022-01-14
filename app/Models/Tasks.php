@@ -15,6 +15,14 @@ class Tasks extends Model
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
     protected $allowedFields        = ['task','descripcion','estado','id_user'];
+    public function __construct() {
+        parent::__construct();
+        $db = \Config\Database::connect();
+    }
 
-
+    public function getAllTaskUser($id_user){
+        $query=$this->db->query('SELECT * FROM tasks INNER JOIN users ON (users.id_user = tasks.id_user) WHERE tasks.id_user=? AND tasks.estado=1',[$id_user]);
+        $array = json_decode(json_encode($query->getResult()),true);
+        return $array;
+    }
 }

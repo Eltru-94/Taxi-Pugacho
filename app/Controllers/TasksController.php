@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\Tasks;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class TasksController extends BaseController
 {
@@ -18,16 +19,21 @@ class TasksController extends BaseController
         $validation = \Config\Services::validation();
         if (!$this->validate('task')) {
 
-            $errors = $validation->getErrors();
-            echo json_encode(['success' => '', 'error' => $errors]);
+            return $this->getRespose($validation->getErrors(),ResponseInterface::HTTP_BAD_REQUEST);
         }
+        $input['estado']=1;
         $tasksModel=new Tasks();
-        $query=$tasksModel->insert($input);
-        if ($query) {
-            echo json_encode(['success' => 'Tarea registrada..!!', 'error' => '']);
-        } else {
-            echo json_encode(['success' =>'', 'error' => 'Tareas no registrada']);
-        }
+        $tasksModel->insert($input);
+        return $this->getRespose([
+            'message'=>'Tareas Regristrada',
+        ]);
+    }
+
+    public  function  allTaskid(){
+
+        $id_user=$this->request->getPost('id_user');
+        $modelTask=new Tasks();
+        echo  json_encode($modelTask->getAllTaskUser($id_user));
 
     }
 

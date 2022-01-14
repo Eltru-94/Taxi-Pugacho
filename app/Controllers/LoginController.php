@@ -76,7 +76,7 @@ class LoginController extends BaseController
             unset($user['clave']);
             helper('jwt');
             return $this->getRespose([
-                'message'=>'User authenticated successfully',
+                'message'=>'User authenticated successfullyg',
                 'user'=>$user,
                 'access_token'=>getSignedJWTFormUser($email)
             ]);
