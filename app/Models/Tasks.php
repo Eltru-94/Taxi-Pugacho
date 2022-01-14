@@ -25,4 +25,15 @@ class Tasks extends Model
         $array = json_decode(json_encode($query->getResult()),true);
         return $array;
     }
+
+    public function deletTask($id_task){
+
+        $query = $this->db->query('update tasks set estado=? where id_task=?',[0,$id_task]);
+
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

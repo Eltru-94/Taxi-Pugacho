@@ -37,4 +37,22 @@ class TasksController extends BaseController
 
     }
 
+    public  function  deletTask($id_task=null){
+
+
+        $modelTask=new Tasks();
+        $query=$modelTask->deletTask($id_task);
+        if($query){
+            return $this->getRespose([
+                'message'=>'Tareas Eliminada',
+            ]);
+        }
+
+        return $this->getRespose([
+            'error'=>'Tarea no eliminada',
+        ]);
+
+    }
+
+
 }

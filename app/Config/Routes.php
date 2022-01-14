@@ -39,6 +39,7 @@ $routes->post('/api/user/register','LoginController::register');
 $routes->post('/api/login','LoginController::login');
 $routes->post('/api/task/store','TasksController::storeTask');
 $routes->get('/api/task/allUser/(:num)','TasksController::allTaskid/$1');
+$routes->get('/api/task/deletTask/(:num)','TasksController::deletTask/$1');
 $routes->get('/apiall','LoginController::index');
 
 
