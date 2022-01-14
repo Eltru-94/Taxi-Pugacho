@@ -131,6 +131,10 @@ class Validation
         'correo'=>'required|valid_email',
         'clave'=>'required|min_length[5]|max_length[12]'
     ];
+    public $task=[
+      'task'=>'required',
+        'descripcion'=>'required'
+    ];
 
 
     //--------------------------------------------------------------------
