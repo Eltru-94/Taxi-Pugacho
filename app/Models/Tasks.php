@@ -36,4 +36,12 @@ class Tasks extends Model
             return false;
         }
     }
+    public  function  findTaskyId($id_task){
+        $user=$this->asArray()->where(['id_task'=>$id_task])->first();
+        if(!$user){
+            throw  new \Exception('Task does not exist');
+        }
+        return $user;
+    }
+
 }

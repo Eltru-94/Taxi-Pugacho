@@ -38,8 +38,6 @@ class TasksController extends BaseController
     }
 
     public  function  deletTask($id_task=null){
-
-
         $modelTask=new Tasks();
         $query=$modelTask->deletTask($id_task);
         if($query){
@@ -50,6 +48,37 @@ class TasksController extends BaseController
 
         return $this->getRespose([
             'error'=>'Tarea no eliminada',
+        ]);
+
+    }
+
+    public  function selectTaskId($id_task=null){
+        $modelTask=new Tasks();
+        $task=$modelTask->findTaskyId($id_task);
+        return $this->getRespose([
+            'task'=>$task
+        ]);
+    }
+    public  function  updateTask(){
+
+        $input=$this->getRequestInput($this->request);
+        $id_task=$input['id_task'];
+        unset($input['id_task']);
+        $validation = \Config\Services::validation();
+        if (!$this->validate('task')) {
+
+            return $this->getRespose($validation->getErrors(),ResponseInterface::HTTP_BAD_REQUEST);
+        }
+        $modelTask=new Tasks();
+        $modelTask->where('id_task',$id_task);
+        $query=$modelTask->update($input);
+        if($query){
+            return $this->getRespose([
+                'message'=>'Tarea Actualizada',
+            ]);
+        }
+        return $this->getRespose([
+            'message'=>'Tarea no Actualizada',
         ]);
 
     }

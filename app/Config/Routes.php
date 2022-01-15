@@ -42,7 +42,8 @@ $routes->get('/api/task/allUser/(:num)','TasksController::allTaskid/$1');
 $routes->get('/api/task/deletTask/(:num)','TasksController::deletTask/$1');
 $routes->get('/apiall','LoginController::index');
 
-
+$routes->get('/api/task/selectIdTask/(:num)','TasksController::selectTaskId/$1');
+$routes->post('/api/task/update','TasksController::updateTask');
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
