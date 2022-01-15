@@ -65,7 +65,7 @@ class TasksController extends BaseController
         $id_task=$input['id_task'];
         unset($input['id_task']);
         $validation = \Config\Services::validation();
-        if (!$this->validate('task')) {
+        if (!$this->validate('taskUpdate')) {
 
             return $this->getRespose($validation->getErrors(),ResponseInterface::HTTP_BAD_REQUEST);
         }

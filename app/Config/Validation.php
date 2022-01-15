@@ -124,7 +124,7 @@ class Validation
     public  $apiuser=[
         'nombre'=>'required',
         'apellido'=>'required',
-        'correo'=>'required|valid_email',
+        'correo'=>'is_unique[users.correo]|required|valid_email',
         'clave'=>'required|min_length[5]|max_length[12]'
     ];
     public $login=[
@@ -132,7 +132,12 @@ class Validation
         'clave'=>'required|min_length[5]|max_length[12]'
     ];
     public $task=[
-      'task'=>'required',
+      'task'=>'is_unique[tasks.task]|required',
+        'descripcion'=>'required'
+    ];
+
+    public $taskUpdate=[
+        'task'=>'required',
         'descripcion'=>'required'
     ];
 
