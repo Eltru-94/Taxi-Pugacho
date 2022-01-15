@@ -44,4 +44,15 @@ class Tasks extends Model
         return $user;
     }
 
+    public function updateTask($id_task,$task,$descripcion){
+
+        $query = $this->db->query('update tasks set task=?, descripcion=? where id_task=?',[$task,$descripcion,$id_task]);
+
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

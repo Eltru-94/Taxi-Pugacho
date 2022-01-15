@@ -70,8 +70,10 @@ class TasksController extends BaseController
             return $this->getRespose($validation->getErrors(),ResponseInterface::HTTP_BAD_REQUEST);
         }
         $modelTask=new Tasks();
-        $modelTask->where('id_task',$id_task);
-        $query=$modelTask->update($input);
+        $id_task=$this->request->getPost('id_task');
+        $task=$this->request->getPost('task');
+        $descripcion=$this->request->getPost('descripcion');
+        $query=$modelTask->updateTask($id_task,$task,$descripcion);
         if($query){
             return $this->getRespose([
                 'message'=>'Tarea Actualizada',
