@@ -124,7 +124,7 @@ class Validation
     public  $apiuser=[
         'nombre'=>'required',
         'apellido'=>'required',
-        'correo'=>'required|is_unique[users.correo]|valid_email',
+        'correo'=>'required|valid_email|is_unique[users.correo]',
         'clave'=>'required|min_length[5]|max_length[12]'
     ];
     public $login=[
