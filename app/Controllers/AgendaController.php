@@ -45,8 +45,8 @@ class AgendaController extends BaseController
 
         $validation = \Config\Services::validation();
         if (!$this->validate('agenda')) {
-            $errors = $validation->getErrors();
-            echo json_encode(['success' => '', 'error' =>$errors]);
+
+            return $this->getRespose($validation->getErrors(),ResponseInterface::HTTP_BAD_REQUEST);
         }else{
             $modelAgenda=new Agenda();
             $id_agenda = $this->request->getPost('id_agenda');
@@ -58,7 +58,6 @@ class AgendaController extends BaseController
                 'message'=>'Agenda Actualizada',
             ]);
         }
-
     }
 
     public  function  deletAgenda($id_agenda=null){
@@ -69,11 +68,5 @@ class AgendaController extends BaseController
                 'message'=>'Agenda Eliminada',
             ]);
         }
-
-
-
     }
-
-
-
 }
