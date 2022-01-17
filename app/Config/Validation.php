@@ -127,7 +127,7 @@ class Validation
         'correo'=>'is_unique[users.correo]|required|valid_email',
         'clave'=>'required|min_length[5]|max_length[12]',
         'cclave'=>'required|min_length[5]|max_length[12]|matches[clave]',
-        'cedula'=>'required|cedula',
+        'cedula'=>'required|cedula|is_unique[users.cedula]',
     ];
     public  $apiuserupdate=[
         'nombre'=>'required',
