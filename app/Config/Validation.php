@@ -149,6 +149,15 @@ class Validation
         'descripcion'=>'required'
     ];
 
+    public $agenda=[
+        'nombre'=>'required',
+        'telefono'=>'required',
+        'direccion'=>'required'
+
+    ];
+
+
+
 
     //--------------------------------------------------------------------
     // Rules

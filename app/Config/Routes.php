@@ -45,7 +45,10 @@ $routes->get('/api/task/allUser/(:num)','TasksController::allTaskid/$1');
 $routes->get('/api/task/deletTask/(:num)','TasksController::deletTask/$1');
 $routes->get('/api/task/selectIdTask/(:num)','TasksController::selectTaskId/$1');
 $routes->post('/api/task/update','TasksController::updateTask');
+// Agenda
 
+$routes->post('/api/agenda/store','AgendaController::store');
+$routes->get('/api/agenda/allUser/(:num)','AgendaController::allAgendaId/$1');
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
