@@ -86,18 +86,14 @@ class LoginController extends BaseController
             }
 
             $UserModel = new Users();
-            $UserModel->apiUpdateUser($id_user,$nombre,$apellido,$cedula,$correo,$clave);
-
-            return $this->getRespose([
+            $query=$UserModel->apiUpdateUser($id_user,$nombre,$apellido,$cedula,$correo,$clave);
+            if($query){
+                return $this->getRespose([
                     'message'=>'User Actualizado',
                 ]);
 
-
+            }
         }
-
-
-
-
     }
 
     private function getJWTForUser(string $email,int $responseCode=ResponseInterface::HTTP_OK)
