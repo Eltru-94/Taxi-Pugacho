@@ -71,8 +71,7 @@ class LoginController extends BaseController
 
         $validation = \Config\Services::validation();
         if (!$this->validate('apiuserupdate')) {
-            $errors = $validation->getErrors();
-            echo json_encode(['success' => '', 'error' =>$errors]);
+            return $this->getRespose($validation->getErrors(),ResponseInterface::HTTP_BAD_REQUEST);
         }else{
             $id_user = $this->request->getPost('id_user');
             $nombre = $this->request->getPost('nombre');
