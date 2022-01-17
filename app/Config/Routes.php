@@ -34,16 +34,18 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 /* Ruta de loggin */
 
-
+$routes->get('/apiall','LoginController::index');
+//Api User
 $routes->post('/api/user/register','LoginController::register');
 $routes->post('/api/login','LoginController::login');
+$routes->post('/api/user/update','LoginController::updateUser');
+//Api task
 $routes->post('/api/task/store','TasksController::storeTask');
 $routes->get('/api/task/allUser/(:num)','TasksController::allTaskid/$1');
 $routes->get('/api/task/deletTask/(:num)','TasksController::deletTask/$1');
-$routes->get('/apiall','LoginController::index');
-
 $routes->get('/api/task/selectIdTask/(:num)','TasksController::selectTaskId/$1');
 $routes->post('/api/task/update','TasksController::updateTask');
+
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 

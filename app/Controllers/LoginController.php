@@ -67,6 +67,38 @@ class LoginController extends BaseController
 
 
     }
+    public function updateUser(){
+
+        $validation = \Config\Services::validation();
+        if (!$this->validate('apiuserupdate')) {
+            $errors = $validation->getErrors();
+            echo json_encode(['success' => '', 'error' =>$errors]);
+        }
+        $id_user = $this->request->getPost('id_user');
+        $nombre = $this->request->getPost('nombre');
+        $apellido = $this->request->getPost('apellido');
+        $cedula = $this->request->getPost('cedula');
+        $correo = $this->request->getPost('correo');
+        $clave = $this->request->getPost('clave');
+
+        if (!empty($clave)) {
+            $clave = Hash::make($clave);
+        }
+
+        $UserModel = new Users();
+        $query=$UserModel->apiUpdateUser($id_user,$nombre,$apellido,$cedula,$correo,$clave);
+        if($query){
+            return $this->getRespose([
+                'message'=>'User Actualizado',
+            ]);
+
+        }
+        return $this->getRespose([
+            'message'=>'User no Actualizado',
+        ]);
+
+
+    }
 
     private function getJWTForUser(string $email,int $responseCode=ResponseInterface::HTTP_OK)
     {
@@ -87,4 +119,5 @@ class LoginController extends BaseController
             ],$responseCode);
         }
     }
+
 }

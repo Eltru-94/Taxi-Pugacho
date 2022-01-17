@@ -87,4 +87,20 @@ class Users extends Model
         }
         return $user;
     }
+
+    public function apiUpdateUser($id_user,$nombre,$apellido,$cedula,$correo,$clave){
+
+        if(empty($clave)){
+            $query = $this->db->query('update users set nombre=?, apellido=?, cedula=?,correo=? where id_user=?',[$nombre,$apellido,$cedula,$correo,$id_user]);
+        }else{
+            $query = $this->db->query('update users set nombre=?, apellido=?, cedula=?,correo=?,clave=? where id_user=?',[$nombre,$apellido,$cedula,$correo,$clave,$id_user]);
+        }
+
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
