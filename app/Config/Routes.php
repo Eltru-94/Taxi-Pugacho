@@ -53,6 +53,9 @@ $routes->get('/api/agenda/agendaID/(:num)','AgendaController::agendaId/$1');
 $routes->get('/api/agenda/delete/(:num)','AgendaController::deletAgenda/$1');
 $routes->post('/api/agenda/update','AgendaController::updateAgenda');
 
+//Prueba
+
+$routes->post('/users/updateUser', 'UsersController::updateUser');
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
@@ -66,7 +69,7 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->post('/users/save', 'UsersController::save');
     $routes->post('/users/deleteUser', 'UsersController::delete');
     $routes->post('/users/update', 'UsersController::update');
-    $routes->post('/users/updateUser', 'UsersController::updateUser');
+    //$routes->post('/users/updateUser', 'UsersController::updateUser');
     $routes->post('/users/searchID', 'UsersController::searchID');
 
     //Roles

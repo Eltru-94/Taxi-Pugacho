@@ -60,6 +60,22 @@ class Users extends Model
         }
     }
 
+    public function updateUserImagen($id_user,$nombre,$apellido,$cedula,$correo,$telefono,$clave,$fechanacimiento,$genero,$licencia,$direccion){
+
+        if(empty($clave)){
+            $query = $this->db->query('update users set nombre=?, apellido=?, cedula=?,correo=?,telefono=?,fechanacimiento=?,genero=?,licencia=?,direccion=? where id_user=?',[$nombre,$apellido,$cedula,$correo,$telefono,$fechanacimiento,$genero,$licencia,$direccion,$id_user]);
+        }else{
+            $query = $this->db->query('update users set nombre=?, apellido=?, cedula=?,correo=?,telefono=?,fechanacimiento=?,genero=?,licencia=?,direccion=?,clave=? where id_user=?',[$nombre,$apellido,$cedula,$correo,$telefono,$fechanacimiento,$genero,$licencia,$direccion,$clave,$id_user]);
+        }
+
+
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function getUserFunction($id_user){
         $query=$this->db->query('SELECT funcionalidades.funcionalidad,funcionalidades.id_funcionalidad FROM users INNER JOIN userrol ON (users.id_user = userrol.id_user)
         INNER JOIN roles ON (userrol.id_rol = roles.id_rol) INNER JOIN rolfuncionalidad ON (roles.id_rol = rolfuncionalidad.id_rol)

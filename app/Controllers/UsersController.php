@@ -133,46 +133,60 @@ class UsersController extends BaseController
 
     public function updateUser()
     {
-
         $validation = \Config\Services::validation();
 
-        if (!$this->validate('userupdate')) {
+
+       if (!$this->validate('userupdate')) {
+
             $errors = $validation->getErrors();
             echo json_encode(['success' => '', 'error' =>$errors]);
+
         } else {
-           
 
-                $imagefile = $this->request->getFile('imagen');
-                $newName = $imagefile->getRandomName();
-                $imagefile->move(ROOTPATH . '/public/image', $newName);
-                //Datos
-                $id_user = $this->request->getPost('id_user');
-                $nombre = $this->request->getPost('nombre');
-                $apellido = $this->request->getPost('apellido');
-                $cedula = $this->request->getPost('cedula');
-                $correo = $this->request->getPost('correo');
-                $telefono = $this->request->getPost('telefono');
-                $fechanacimiento = $this->request->getPost('fechanacimiento');
-                $genero = $this->request->getPost('genero');
-                $licencia = $this->request->getPost('licencia');
-                $direccion = $this->request->getPost('direccion');
-                $clave = $this->request->getPost('password');
-                $id_rol = $this->request->getPOst('roles');
-                if (!empty($clave)) {
-                    $clave = Hash::make($clave);
-                }
+           $UserModel = new Users();
+           $UserRolModel = new UserRolModel();
 
-                $UserModel = new Users();
-                $UserRolModel = new UserRolModel();
+           $imagefile = $this->request->getFile('imagen');
+           $id_user = $this->request->getPost('id_user');
+           $nombre = $this->request->getPost('nombre');
+           $apellido = $this->request->getPost('apellido');
+           $cedula = $this->request->getPost('cedula');
+           $correo = $this->request->getPost('correo');
+           $telefono = $this->request->getPost('telefono');
+           $fechanacimiento = $this->request->getPost('fechanacimiento');
+           $genero = $this->request->getPost('genero');
+           $licencia = $this->request->getPost('licencia');
+           $direccion = $this->request->getPost('direccion');
+           $clave = $this->request->getPost('password');
+           $id_rol = $this->request->getPOst('roles');
 
-                $query = $UserModel->updateUser($id_user, $nombre, $apellido, $cedula, $correo, $telefono, $clave, $fechanacimiento, $genero, $licencia, $newName, $direccion);
-                if ($query) {
-                    $UserRolModel->__update($id_user, $id_rol);
-                    echo json_encode(['success' => 'Usuario Actualizado con exito..!!', 'error' => '']);
-                } else {
-                    echo json_encode(['success' => '', 'error' => 'Usuario no actualizacion']);
-                }
-           
+           if (!empty($clave)) {
+               $clave = Hash::make($clave);
+           }
+
+           if(!empty($imagefile->getClientName())){
+
+               if (!$this->validate('updateImagen')) {
+                   $errors = $validation->getErrors();
+                   echo json_encode(['success' => '', 'error' =>$errors]);
+               }else{
+                   $newName = $imagefile->getRandomName();
+                   $imagefile->move(ROOTPATH . '/public/image', $newName);
+
+                   $query = $UserModel->updateUser($id_user, $nombre, $apellido, $cedula, $correo, $telefono, $clave, $fechanacimiento, $genero, $licencia, $newName, $direccion);
+                   if ($query) {
+                       $UserRolModel->__update($id_user, $id_rol);
+                       echo json_encode(['success' => 'Usuario Actualizado con exito..!!', 'error' => '']);
+                   }
+               }
+           }else {
+               $query = $UserModel->updateUserImagen($id_user, $nombre, $apellido, $cedula, $correo, $telefono, $clave, $fechanacimiento, $genero, $licencia, $direccion);
+               if ($query) {
+                   $UserRolModel->__update($id_user, $id_rol);
+                   echo json_encode(['success' => 'Usuario Actualizado con exito..!!', 'error' => '']);
+               }
+           }
+
         }
     }
 
@@ -204,4 +218,5 @@ class UsersController extends BaseController
             
         }
     }
+
 }

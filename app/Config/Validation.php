@@ -70,8 +70,6 @@ class Validation
         'licencia'=>'required',
         'direccion'=>'required',
         'correo'=>'required|valid_email',
-        'imagen'=>'uploaded[imagen]|max_size[imagen,255]|is_image[imagen]',
-        'roles'=>'required',
     ];
 
     public $rol=[
@@ -153,8 +151,11 @@ class Validation
         'nombre'=>'required',
         'telefono'=>'required',
         'direccion'=>'required'
-
     ];
+
+    public $updateImagen=[
+         'imagen'=>'uploaded[imagen]|max_size[imagen,255]|is_image[imagen]'
+        ];
 
 
 
