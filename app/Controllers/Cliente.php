@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\Clientes;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class Cliente extends BaseController
 {
@@ -17,10 +18,7 @@ class Cliente extends BaseController
 
         $validation = \Config\Services::validation();
         if (!$this->validate('cliente')) {
-            $errors = $validation->getErrors();
-            return $this->getRespose([
-                'error'=>$errors,
-            ]);
+            return $this->getRespose($validation->getErrors(),ResponseInterface::HTTP_BAD_REQUEST);
         }
         $input=$this->getRequestInput($this->request);
         $altura=$input['altura'];
