@@ -38,7 +38,8 @@ class UnidadEnableController extends BaseController
                         'id_vehiculo' => $id_vehiculo,
                         'horario'=>$this->request->getPost('horario'),
                         'estado'=>1,
-                        'carrera'=>1
+                        'carrera'=>1,
+                        'reporte'=>0
                     ];
                     $ModelUnidadEnable->insert($newUnitEnable);
                     echo json_encode(['success' => 'La unidad  : '.$unidad.' fue activada..!!','error'=>'']);
@@ -94,5 +95,52 @@ class UnidadEnableController extends BaseController
             echo json_encode(['success' => 'Horario actualizado','error'=>'']);
         }
 
+    }
+    public  function reporteUnidad(){
+
+        $input=$this->getRequestInput($this->request);
+
+        $idUnitActiva=$input['id_unitActiva'];
+
+
+        if($input['reporte']==1){
+            $modelUnidadEnable=new UnidadActiva();
+            $modelUnidadEnable->updateReporte($input,$idUnitActiva);
+            return $this->getRespose([
+                'success'=>'Reporte Registrado',
+            ]);
+        }else{
+            if(!empty($input['descripcion'])){
+                $modelUnidadEnable=new UnidadActiva();
+                $modelUnidadEnable->updateReporte($input,$idUnitActiva);
+                return $this->getRespose([
+                    'success'=>'Reporte Registrado',
+                ]);
+            }else{
+                $error=[
+                    'descripcion'=>'El campo descripción es obligatorio'
+                ];
+                echo json_encode(['success' => '','error'=>$error]);
+            }
+
+        }
+
+
+    }
+
+    public  function  sellectAllUnitEnable(){
+        date_default_timezone_set('America/Bogota');
+        $horario="";
+        $fechaFin= date('H');
+        if($fechaFin>=6 && $fechaFin<14){
+            $horario=2;
+        }else if($fechaFin>=14 && $fechaFin<22){
+            $horario=3;
+        }else {
+            $horario=1;
+        }
+        $modelUnidadEnable=new UnidadActiva();
+        $unitEnable=$modelUnidadEnable->selectAllUnitEnable($horario);
+        echo json_encode($unitEnable);
     }
 }

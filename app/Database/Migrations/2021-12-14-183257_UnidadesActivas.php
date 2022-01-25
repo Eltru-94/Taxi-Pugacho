@@ -21,15 +21,27 @@ class UnidadesActivas extends Migration
             ],
             'horario'=>[
                 'type'=>'INT',
-                'constraint'=>3
+                'constraint'=>3,
+                'null'=>true
+            ],
+            'reporte'=>[
+                'type'=>'INT',
+                'constraint'=>3,
+                'null'=>true
             ],
             'estado'=>[
-                'type'=>'VARCHAR',
+                'type'=>'INT',
                 'constraint'=>3
+            ],
+            'descripcion'=>[
+                'type'=>'VARCHAR',
+                'constraint'=>60,
+                'null'=>true
             ],
             'carrera'=>[
                 'type'=>'INT',
-                'constraint'=>3
+                'constraint'=>3,
+                'null'=>true
             ],
             'created_at datetime default current_timestamp'
 

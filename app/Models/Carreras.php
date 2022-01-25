@@ -9,7 +9,7 @@ class Carreras extends Model
 
     protected $table                = 'carreras';
     protected $primaryKey           = 'id';
-    protected $allowedFields        = ['direccion_origen','direccion_destino','telefono_persona','id_servicio','id_unitActiva','estado',
+    protected $allowedFields        = ['direccion_origen','qualify','id_telefono','direccion_destino','telefono_cliente','id_servicio','id_unitActiva','estado',
         'carrera','dateInicio','dateFin','descripcion'];
 
     public function __construct() {
@@ -37,17 +37,27 @@ class Carreras extends Model
         return $array;
     }
 
-    public function getCarrerasEnables($estado){
-        $query = $this->db->query('SELECT id_carrera,  carreras.descripcion,carreras.direccion_origen, carreras.dateInicio, carreras.dateFin,carreras.carrera,  carreras.direccion_destino, servicios.servicio, carreras.telefono_persona, vehiculo.unidad, vehiculo.placa,unidadesactivas.horario,
-       servicios.id_servicio,unidadesactivas.id_unitActiva
-            
-FROM
+    public function getCarrerasActivadas(){
+        $query = $this->db->query('SELECT  
+          carreras.direccion_origen,
+          carreras.telefono_cliente,
+          carreras.id_carrera,
+          carreras.carrera,
+          carreras.descripcion,
+          vehiculo.unidad,
+          unidadesactivas.id_unitActiva,
+          carreras.dateInicio,
+            unidadesactivas.horario,
+        carreras.direccion_destino,
+        servicios.servicio,
+  servicios.id_servicio
+        FROM
               unidadesactivas
               INNER JOIN carreras ON (unidadesactivas.id_unitActiva = carreras.id_unitActiva)
               INNER JOIN servicios ON (carreras.id_servicio = servicios.id_servicio)
               INNER JOIN vehiculo ON (unidadesactivas.id_vehiculo = vehiculo.id_vehiculo)
             WHERE
-            carreras.estado = ? ',[$estado]);
+            carreras.carrera = 2 ');
         $array = json_decode(json_encode($query->getResult()),true);
         return $array;
     }
@@ -69,16 +79,65 @@ FROM
         return $array;
     }
 
-    public  function  updateDateCarrera($id_carrera,$origen,$destino,$carrera,$telefono,$descripcion){
-        $query = $this->db->query('update carreras set direccion_origen=?,direccion_destino=?,telefono_persona=?,carrera=?, 
-                    descripcion=? where id_carrera=?',
-            [$origen,$destino,$telefono,$carrera,$descripcion,$id_carrera]);
+
+
+    public function  allCarrerasOrigen(){
+        $query = $this->db->query('SELECT telefonos.telefono, carreras.carrera,carreras.id_carrera,telefonos.nombre,telefonos.id_telefono,carreras.direccion_origen,carreras.telefono_cliente FROM
+        carreras
+          INNER JOIN telefonos ON (carreras.id_telefono = telefonos.id_telefono)
+          WHERE
+          carreras.carrera=1 AND carreras.estado=1');
+        $array = json_decode(json_encode($query->getResult()),true);
+        return $array;
+    }
+
+    public function delet($id_carrera){
+
+        $query = $this->db->query('update carreras set estado=0 where carreras.id_carrera=?',[$id_carrera]);
+
         if($query){
             return true;
         }else{
             return false;
         }
 
+    }
+
+    public function updateDestino($data,$id_carrera){
+
+            $builder= $this->db->table('carreras');
+            $builder->where('id_carrera',$id_carrera);
+            $builder->update($data);
+
+    }
+
+    public function getRaceMade(){
+        $query = $this->db->query('SELECT 
+                  telefonos.telefono,
+                  carreras.direccion_origen,
+                  carreras.telefono_cliente,
+                  telefonos.nombre,
+                  carreras.id_carrera,
+                  carreras.carrera,
+                  carreras.descripcion,
+                  carreras.dateInicio,
+                  carreras.direccion_destino,
+                  servicios.servicio,
+                  servicios.id_servicio,
+                  carreras.qualify,
+                  carreras.dateFin,
+                  unidadesactivas.horario,
+                  vehiculo.unidad
+                FROM
+                  carreras
+                  INNER JOIN telefonos ON (carreras.id_telefono = telefonos.id_telefono)
+                  INNER JOIN servicios ON (carreras.id_servicio = servicios.id_servicio)
+                  INNER JOIN unidadesactivas ON (carreras.id_unitActiva = unidadesactivas.id_unitActiva)
+                  INNER JOIN vehiculo ON (unidadesactivas.id_vehiculo = vehiculo.id_vehiculo)
+                WHERE
+                  carreras.carrera = 3');
+        $array = json_decode(json_encode($query->getResult()),true);
+        return $array;
     }
 
 

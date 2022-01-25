@@ -39,6 +39,8 @@ $routes->get('/apiall','LoginController::index');
 $routes->post('/api/user/register','LoginController::register');
 $routes->post('/api/login','LoginController::login');
 $routes->post('/api/user/update','LoginController::updateUser');
+$routes->post('/users/updateUser', 'UsersController::updateUser');
+
 //Api task
 $routes->post('/api/task/store','TasksController::storeTask');
 $routes->get('/api/task/allUser/(:num)','TasksController::allTaskid/$1');
@@ -53,9 +55,13 @@ $routes->get('/api/agenda/agendaID/(:num)','AgendaController::agendaId/$1');
 $routes->get('/api/agenda/delete/(:num)','AgendaController::deletAgenda/$1');
 $routes->post('/api/agenda/update','AgendaController::updateAgenda');
 
-//Prueba
+//Calculos
+$routes->post('/user/store', 'Cliente::store');
 
-$routes->post('/users/updateUser', 'UsersController::updateUser');
+
+
+
+$routes->post('/carreras/storeOrigen','CarrerasController::storeOrigen');
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
@@ -103,28 +109,44 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('/enableUnit/delet/(:num)', 'UnidadEnableController::deletEnableUnit/$1');
     $routes->get('/enableUnit/select/(:num)', 'UnidadEnableController::id_select/$1');
     $routes->post('/enableUnit/update', 'UnidadEnableController::update_horario');
+    $routes->post('/enableUnit/reporte','UnidadEnableController::reporteUnidad');
+
 
     //Carreras
     
     $routes->get('/', 'Home::index');
     $routes->get('/carreras','CarrerasController::index');
-    $routes->post('/carreras/store','CarrerasController::store');
+
     $routes->get('/carreras/activadas','CarrerasController::carreras');
-    $routes->get('/carreras/allenable','CarrerasController::allCarrerasEnable');
     $routes->get('/carreras/alldisable','CarrerasController::allCarrerasDisable');
-    $routes->post('/carreras/updatecarrera','CarrerasController::updateCarrera');
+
     $routes->get('/carreras/state','CarrerasController::stateCarreras');
-    $routes->post('/carreras/all','CarrerasController::allUnitEnableCarreras');
     $routes->get('/carreras/tipocarrera','CarrerasController::getTipoCarrera');
     $routes->post('/carreras/selectId','CarrerasController::selectIdCarrera');
-    $routes->post('/carreras/dateUpdate','CarrerasController::updateDateCarrera');
+
     //Frecuencia
     $routes->get('/frecuencia','FrecuenciaController::index');
     //Geolocalizacion 
     $routes->get('/geolocalizacion', 'GeolocalizacionController::index');
 
+    //Telefonos
+
+
+
     
 });
+$routes->get('/telefonos/getAll','TelefonosController::index');
+$routes->get('/carreras/allenable','CarrerasController::allCarrerasEnable');
+$routes->get('/carreras/allActivadas','CarrerasController::allCarrerasActivadas');
+
+$routes->get('/carreras/allRaceMade','CarrerasController::allRaceMade');
+$routes->get('/carreras/delet/(:num)', 'CarrerasController::deletCarrera/$1');
+$routes->post('/carreras/updateDestino','CarrerasController::updateDestino');
+$routes->post('/carreras/qualify','CarrerasController::qualifyCarrera');
+$routes->post('/carreras/update','CarrerasController::update');
+
+
+$routes->get('/enableUnit/selectAllUnitEnable','UnidadEnableController::sellectAllUnitEnable');
 
 $routes->group('', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
     $routes->get('/auth', 'Auth::index');

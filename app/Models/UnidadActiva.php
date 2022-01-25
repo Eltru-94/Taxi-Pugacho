@@ -9,7 +9,8 @@ class UnidadActiva extends Model
 
     protected $table                = 'unidadesactivas';
     protected $primaryKey           = 'id_unitActiva';
-    protected $allowedFields        = ['id_vehiculo','horario','estado','carrera'];
+    protected $allowedFields        = ['id_vehiculo','horario','estado','carrera','reporte','descripcion'];
+
 
     public function __construct() {
         parent::__construct();
@@ -25,7 +26,7 @@ class UnidadActiva extends Model
     }
 
     public function selectUnitEnable($estado,$estadoVehiculo){
-        $query= $this->db->query("SELECT vehiculo.unidad, users.telefono, users.apellido, users.nombre, unidadesactivas.horario,unidadesactivas.id_unitActiva, unidadesactivas.created_at
+        $query= $this->db->query("SELECT vehiculo.unidad, users.telefono, users.apellido, users.nombre,unidadesactivas.reporte, unidadesactivas.horario,unidadesactivas.descripcion,unidadesactivas.id_unitActiva, unidadesactivas.created_at
         FROM
           unidadesactivas
           INNER JOIN vehiculo ON (unidadesactivas.id_vehiculo = vehiculo.id_vehiculo)
@@ -68,6 +69,36 @@ class UnidadActiva extends Model
         }
     }
 
+    public function updateReporte($data,$id_unitActiva){
+
+       $builder= $this->db->table('unidadesactivas');
+       $builder->where('id_unitActiva',$id_unitActiva);
+       $builder->update($data);
+
+    }
+
+    public function selectAllUnitEnable($horario){
+
+        $query=$this->db->query('SELECT vehiculo.unidad,vehiculo.id_vehiculo,unidadesactivas.id_unitActiva FROM vehiculo
+        INNER JOIN unidadesactivas ON (vehiculo.id_vehiculo = unidadesactivas.id_vehiculo)
+        WHERE
+        unidadesactivas.carrera=1 AND unidadesactivas.reporte=1 AND unidadesactivas.horario=? ',[$horario]);
+        $array = json_decode(json_encode($query->getResult()),true);
+        return $array;
+
+    }
+
+    public function stateCarrera($carrera,$id_unitActiva){
+
+        $query = $this->db->query('update unidadesactivas set carrera=? where unidadesactivas.id_unitActiva=?',[$carrera,$id_unitActiva]);
+
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 
 
 

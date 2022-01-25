@@ -89,6 +89,7 @@
                         $('#forEnableUnidad').find('span.' + prefix + '_error').text(val);
                     });
                 }
+
             }
         });
     });
@@ -137,7 +138,13 @@
                 let cont = 1;
                 let horario="";
                 let auto="";
+                let reporte="";
+                let reporteCarrera="";
                 res.forEach(unitEnable => {
+
+                    reporte=reporteColor(unitEnable.reporte);
+                    reporteCarrera=reporteButtonColor(unitEnable.reporte,unitEnable.id_unitActiva);
+                    console.log(unitEnable)
                     switch (unitEnable.horario){
                         case ('3'):
                             horario= ' <span class="badge badge-pill bg-primary">Tarde</span>'
@@ -153,8 +160,8 @@
                             break;
                     }
                     temp = tablaVehiculoEnable.row.add([cont,horario,auto+'&nbsp <span class="badge badge-pill bg-warning">Activa</span>',
-                        unitEnable.created_at,`<a class='btn btn-outline-danger' title="Eliminar" onclick="deletUnitEnable(`+unitEnable.id_unitActiva+`)"> <i class='fas fa-trash'></i></a> <a class='btn btn-outline-primary' title="Actualizar" data-bs-toggle="modal"
-                        data-bs-target="#modalUnidadesEnableEdit" onclick="editUnitEnable(`+unitEnable.id_unitActiva+`)"> <i class='fas fa-car'></i></a>`]);
+                        reporte,unitEnable.created_at,unitEnable.descripcion,`<a class='btn btn-outline-danger' title="Eliminar" onclick="deletUnitEnable(`+unitEnable.id_unitActiva+`)"> <i class='fas fa-trash'></i></a> <a class='btn btn-outline-primary' title="Actualizar" data-bs-toggle="modal"
+                        data-bs-target="#modalUnidadesEnableEdit" onclick="editUnitEnable(`+unitEnable.id_unitActiva+`)"> <i class='fas fa-car'></i></a>&nbsp;`+reporteCarrera]);
                     cont++;
 
                 });
@@ -162,6 +169,33 @@
             }
         });
     }
+
+    $("#forEnableUnidadReporte").on('submit',function (e) {
+        e.preventDefault();
+
+        let Url="<?php echo base_url('enableUnit/reporte')?>";
+        $.ajax({
+            type: 'post',
+            url: Url,
+            data: {
+                'reporte':$('#reporte').val(),
+                'descripcion':$('#descripcionReporte').val(),
+                'id_unitActiva':$('#idUnitEnableCarrera').val(),
+            },
+            dataType: "json",
+            success:function(res){
+                console.log(res);
+                if(res.success){
+                    $('#modalUnidadReport').modal('hide');
+                    loadUnitEnable();
+                }else{
+                    $.each(res.error, function(prefix, val) {
+                        $('#forEnableUnidadReporte').find('span.' + prefix + '_error').text(val);
+                    });
+                }
+            }
+        });
+    });
 
 function  ClearErrorEnableUnit()
 {
@@ -173,6 +207,39 @@ function ClearFieldsEnableUnit(){
     $('#forEnableUnidad').trigger('reset');
     ClearErrorEnableUnit();
 }
+
+
+function reporteColor(id){
+    var reporte="";
+    switch (id){
+        case '1':
+            reporte=' <span class="badge badge-pill bg-success">Reportado</span>';
+            break;
+        case '2':
+            reporte=' <span class="badge badge-pill bg-danger">No reportado</span>';
+            break;
+        default:
+            reporte=' <span class="badge badge-pill bg-info">Sin Verificar</span>';
+            break;
+    }
+    return reporte;
+}
+
+function reporteButtonColor(repor,id_unitActiva){
+        var reporte="";
+
+        switch (repor){
+            case '0':
+                reporte=`<a class='btn btn-outline-success' title="Actualizar" data-bs-toggle="modal"
+                        data-bs-target="#modalUnidadReport" onclick="carreraReporte(`+id_unitActiva+`)"> <i class='fas fa-clipboard'></i></a>`;
+                break
+            case '1':
+                reporte="";
+                break;
+        }
+        return reporte;
+}
+
 function deletUnitEnable(id){
 
     let Url = `<?php echo base_url()?>/enableUnit/delet/`+id;
@@ -207,6 +274,10 @@ function deletUnitEnable(id){
     });
 }
 
+function carreraReporte(id){
+    $('#idUnitEnableCarrera').val(id);
+}
+
 function editUnitEnable(id){
     let Url = `<?php echo base_url()?>/enableUnit/select/`+id;
     $.ajax({
@@ -220,9 +291,7 @@ function editUnitEnable(id){
     });
 
 }
-function detailUnitEnable(id){
-    alert('Detail '+id);
-}
+
 
 window.onload=schedule(0);
 

@@ -14,5 +14,6 @@ class TestSeeder extends Seeder
         $this->call('UserrolSeeder');
         $this->call('RolfuncionalidadSeeder');
         $this->call('ServicioSeeder');
+        $this->call('TelefonosSeeder');
     }
 }

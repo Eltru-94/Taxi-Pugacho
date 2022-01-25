@@ -6,7 +6,6 @@
 
 <?= $this->section('contenido')?>
 <br>
-<h3 class="text-center">Funcionalidades</h3>
 
 
 

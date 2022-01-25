@@ -19,7 +19,7 @@ class CobroFrecuencia extends Migration
                 'type'=>'INT',
                 'constraint'=>11
             ],
-            'id_cobrador'=>[
+            'id_unitActiva'=>[
                 'type'=>'INT',
                 'constraint'=>3
             ],
@@ -27,17 +27,19 @@ class CobroFrecuencia extends Migration
                 'type'=>'VARCHAR',
                 'constraint'=>6
             ],
-            'fecha_emision'=>[
-                'type'=>'DATETIME',
-                'null'=>true
-            ],
-            'fecha_pago'=>[
-                'type'=>'DATETIME',
-                'null'=>true
-            ],
-            'estado_cobro'=>[
+            'mes'=>[
                 'type'=>'INT',
-                'constraint'=>3,
+                'constraint'=>11,
+                'null'=>true
+            ],
+            'anio'=>[
+                'type'=>'INT',
+                'constraint'=>11,
+                'null'=>true
+            ],
+            'dia'=>[
+                'type'=>'INT',
+                'constraint'=>11,
                 'null'=>true
             ],
             'estado'=>[
@@ -46,12 +48,13 @@ class CobroFrecuencia extends Migration
             ],
             ]);
         $this->forge->addForeignKey('id_user','users','id_user');
+        $this->forge->addForeignKey('id_unitActiva','unidadesactivas','id_unitActiva');
         $this->forge->addKey('id_frecuencia',TRUE);
-        $this->forge->createTable('cobro_frecuencia');
+        $this->forge->createTable('frecuencia');
     }
 
     public function down()
     {
-        $this->forge->dropTable('cobro_frecuencia');
+        $this->forge->dropTable('frecuencia');
     }
 }

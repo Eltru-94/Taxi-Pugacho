@@ -11,7 +11,9 @@
             <th>ID</th>
             <th>HORARIO</th>
             <th>UNIDAD</th>
+            <th>REPORTE</th>
             <th>CREADO</th>
+            <th>DESCRIPCIÓN</th>
             <th>ACCION</th>
             </thead>
             <tbody>

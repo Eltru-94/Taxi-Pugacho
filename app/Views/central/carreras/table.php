@@ -3,12 +3,12 @@
         <table class="table table-hover table-sm" style="width:100%" id="tablaCarrerasEnable" name="tablaCarrerasEnable">
             <thead>
             <th>ID</th>
-            <th>ORIGEN</th>
+            <th>UNIDAD </th>
+            <th>TELEFONO &nbsp;<i class="fas fa-phone"></i></th>
+            <th>HORA INICIO&nbsp;<i class="far fa-clock"></i></th>
+            <th>TIPO</th>
+            <th>ORIGEN&nbsp;<i class="fas fa-map-marked"></i></th>
             <th>DESTINO</th>
-            <th>TELEFONO</th>
-            <th>FECHA-HORA</th>
-            <th>TIPO CARRERA</th>
-            <th>UNIDAD</th>
             <th>DESCRIPCION</th>
             <th>ACCION</th>
             </thead>

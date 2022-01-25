@@ -25,7 +25,9 @@
         </div>
 
     </div>
+    <?=$this->include('js/metodos')?>
     <?= $this->renderSection('scripts')?>
+
     <?=$this->include('plantilla/links')?>
 </body>
 

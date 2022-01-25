@@ -111,12 +111,19 @@ class Validation
         'horario'=>'is_natural'
     ];
 
-    public $carrera=[
-        'origen'=>'required',
-        'destino'=>'required',
-        'telefono'=>'required',
-        'carrera'=>'required',
-        'descripcion'=>'required'
+    public $carreraOrigen=[
+        'direccion_origen'=>'required',
+        'telefono_cliente'=>'required'
+
+    ];
+    public $carreraDestino=[
+        'direccion_destino'=>'required',
+        'id_unitActiva'=>'required'
+    ];
+    public $carreraUpdate=[
+        'direccion_destino'=>'required',
+        'direccion_origen'=>'required',
+        'telefono_cliente'=>'required'
     ];
 
     public  $apiuser=[
@@ -156,6 +163,14 @@ class Validation
     public $updateImagen=[
          'imagen'=>'uploaded[imagen]|max_size[imagen,255]|is_image[imagen]'
         ];
+
+    public $cliente=[
+        'nombre'=>'required',
+        'apellido'=>'required',
+        'altura'=>'required',
+        'peso'=>'required'
+    ];
+
 
 
 

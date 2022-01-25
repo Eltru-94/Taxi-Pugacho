@@ -30,68 +30,58 @@ class CarrerasController extends BaseController
         return view('central/estado/index',$datos);
     }
 
-    public  function  allUnitEnableCarreras(){
-        date_default_timezone_set('America/Bogota');
-        $horario="";
-        $fechaFin= date('H');
-        if($fechaFin>=6 && $fechaFin<14){
-            $horario=2;
-        }else if($fechaFin>=14 && $fechaFin<22){
-            $horario=3;
-        }else {
-            $horario=1;
-        }
-        $estado = $this->request->getPost('estado');
-         $ModelCarreras =new Carreras();
-         $datos=$ModelCarreras->selectUnitCarrera($estado,$horario,1);
-        echo json_encode($datos);
+//Type race service
+    public function allRaceMade()
+    {
+        $ModelCarreras =new Carreras();
+        $datos=$ModelCarreras->getRaceMade();
+        return $this->getRespose([
+           'carreras'=>$datos
+        ]);
     }
 
-
+//Type race service
     public function getTipoCarrera()
     {
         $ModelCarreras =new Carreras();
         $datos=$ModelCarreras->getServicios(1);
         echo json_encode($datos);
     }
-
-    public  function  store(){
+ // new create Store carrerra  origen
+    public  function  storeOrigen(){
 
         $validation = \Config\Services::validation();
-        if (!$this->validate('carrera')) {
+        if (!$this->validate('carreraOrigen')) {
             $errors = $validation->getErrors();
-            echo json_encode(['success' => '', 'error' =>  $errors]);
-        }else{
-            $fecha= date('Y-m-d H:i:s');
-            $id_unitActiva=$this->request->getPost('id_unitActiva');
-
-
-            $new_carrera=[
-              'direccion_origen'=>$this->request->getPost('origen'),
-              'direccion_destino'=>$this->request->getPost('destino'),
-              'telefono_persona'=>$this->request->getPost('telefono'),
-              'id_servicio'=>$this->request->getPost('carrera'),
-                'descripcion'=>$this->request->getPost('descripcion'),
-              'id_unitActiva'=>$id_unitActiva,
-                'carrera'=>0,
-                'dateInicio'=>$fecha,
-                'dateFin'=>$fecha,
-              'estado'=>1
-            ];
-
-            $ModelCarreras =new Carreras();
-            $query = $ModelCarreras->insert($new_carrera);
-            $ModelUnitEnable=new UnidadActiva();
-            $ModelUnitEnable->deletUnitEnable(1,2,$id_unitActiva);
-            echo json_encode(['success' =>'Carrera asignada', 'error' => '']);
+            return $this->getRespose([
+                'error'=>$errors,
+            ]);
         }
-    }
+            $input=$this->getRequestInput($this->request);
+            $input['estado']=1;
+            $input['carrera']=1;
+            $modelCarrera=new Carreras();
+            $query=$modelCarrera->insert($input);
+            return $this->getRespose([
+                'success'=>'Esperando vehiculo',
+            ]);
 
+
+    }
+// delete race by id race
+    public function deletCarrera($id){
+
+        $modelCarrera=new Carreras();
+        $modelCarrera->delet($id);
+        return $this->getRespose([
+            'success'=>'Carrera Eliminada..!!',
+        ]);
+    }
 
     public function carreras()
     {
         $datos=[
-            'title'=>'Estado Carreras'
+            'title'=>'Carreras en Ejecución'
         ];
 
         return view('central/carreras/index',$datos);
@@ -99,32 +89,44 @@ class CarrerasController extends BaseController
 
     public function allCarrerasEnable(){
 
-        $ModelCarreras =new Carreras();
-        $query=$ModelCarreras->getCarrerasEnables(1);
-        echo json_encode($query);
+        $modelCarreras =new Carreras();
+        $datos=$modelCarreras->allCarrerasOrigen();
+        return $this->getRespose([
+            'carrera'=>$datos,
+        ]);
+    }
+
+    public function allCarrerasActivadas(){
+
+        $modelCarreras =new Carreras();
+        $datos=$modelCarreras->getCarrerasActivadas();
+        return $this->getRespose([
+            'carrera'=>$datos,
+        ]);
     }
 
     public function allCarrerasDisable(){
 
         $ModelCarreras =new Carreras();
-        $query=$ModelCarreras->getCarrerasEnables(0);
+        $query=$ModelCarreras->getCarrerasEnables(1);
         echo json_encode($query);
     }
 
-    public  function  updateCarrera(){
-        $id_unitActiva=$this->request->getPost('id_unitActiva');
-        $fechaFin= date('Y-m-d H:i:s');
-        $carrera=$this->request->getPost('carrera');
-        $id_carrera=$this->request->getPost('id_carrera');
-        $ModelCarreras =new Carreras();
-        $query=$ModelCarreras->updateCarrera($id_carrera,$carrera,0,$fechaFin);
-        $ModelUnitEnable=new UnidadActiva();
-        $ModelUnitEnable->deletUnitEnable(1,1,$id_unitActiva);
-        if ($query) {
-            echo json_encode(['success' => 'Carrera creada con exito..!!', 'error' => '']);
-        } else {
-            echo json_encode(['success' => '', 'error' => 'Error']);
-        }
+    public  function  qualifyCarrera(){
+
+        $input=$this->getRequestInput($this->request);
+        $id_carrera=$input['id_carrera'];
+        $id_unitActiva=$input['id_unitActiva'];
+        $input['dateFin']=date('Y-m-d H:i:s');
+        $input['carrera']=3;
+        $modelCarreras=new Carreras();
+        $modelActiva=new UnidadActiva();
+        $modelCarreras->updateDestino($input,$id_carrera);
+        $modelActiva->stateCarrera(1,$id_unitActiva);
+        $modelCarreras->updateDestino($input,$id_carrera);
+        return $this->getRespose([
+            'success'=>"Carrera calificada"
+        ]);
 
     }
 
@@ -137,29 +139,48 @@ class CarrerasController extends BaseController
         echo  json_encode($carrera);
     }
 
-    public function updateDateCarrera(){
+    public function updateDestino(){
+
         $validation = \Config\Services::validation();
-        if (!$this->validate('carrera')) {
+        if (!$this->validate('carreraDestino')) {
             $errors = $validation->getErrors();
-            echo json_encode(['success' => '', 'error' =>  $errors]);
-        }else{
-
-            $direccion_origen=$this->request->getPost('origen');
-            $direccion_destino=$this->request->getPost('destino');
-            $telefono_persona=$this->request->getPost('telefono');
-            $id_servicio=$this->request->getPost('carrera');
-            $descripcion=$this->request->getPost('descripcion');
-            $id_carrera=$this->request->getPost('id_carrera');
-
-            $ModelCarrera=new Carreras();
-            $query=$ModelCarrera->updateDateCarrera($id_carrera,$direccion_origen,$direccion_destino,$id_servicio,$telefono_persona,$descripcion);
-            if ($query) {
-                echo json_encode(['success' => 'Carrera actualizada con exito..!!', 'error' => '']);
-            } else {
-                echo json_encode(['success' => '', 'error' => 'Error']);
-            }
+            return $this->getRespose([
+               'error'=>$errors
+            ]);
         }
+        $input=$this->getRequestInput($this->request);
+        $input['dateInicio']= date('Y-m-d H:i:s');
+        $id_carrera=$input['id_carrera'];
+        $id_unitActiva=$input['id_unitActiva'];
+        $input['carrera']=2;
+        unset($input['id_carrera']);
+        $modelCarreras=new Carreras();
+        $modelActiva=new UnidadActiva();
+        $modelCarreras->updateDestino($input,$id_carrera);
+        $modelActiva->stateCarrera(2,$id_unitActiva);
 
+        return  $this->getRespose([
+           'success'=>'Vehiculo asignado a la carrera'
+        ]);
+    }
+    public function update(){
+
+        $validation = \Config\Services::validation();
+        if (!$this->validate('carreraUpdate')) {
+            $errors = $validation->getErrors();
+            return $this->getRespose([
+                'error'=>$errors
+            ]);
+        }
+        $input=$this->getRequestInput($this->request);
+        $id_carrera=$input['id_carreraUpdate'];
+        unset($input['id_carreraUpdate']);
+        $modelCarreras=new Carreras();
+        $modelCarreras->updateDestino($input,$id_carrera);
+
+        return  $this->getRespose([
+            'success'=>"Carrera Actualizada con exito..!!"
+        ]);
     }
 
 
