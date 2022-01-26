@@ -8,7 +8,7 @@ class Agenda extends Migration
 {
     public function up()
     {
-        $this->forge->addField([
+        /*$this->forge->addField([
             'id_agenda'=>[
                 'type'=>'INT',
                 'constraint'=>11,
@@ -39,11 +39,11 @@ class Agenda extends Migration
         ]);
         $this->forge->addForeignKey('id_user','users','id_user');
         $this->forge->addKey('id_agenda',TRUE);
-        $this->forge->createTable('agenda');
+        $this->forge->createTable('agenda');*/
     }
 
     public function down()
     {
-        $this->forge->dropTable('agenda');
+        //$this->forge->dropTable('agenda');
     }
 }

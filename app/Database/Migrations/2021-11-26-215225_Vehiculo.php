@@ -8,7 +8,7 @@ class Vehiculo extends Migration
 {
     public function up()
     {
-        $this->forge->addField([
+       /* $this->forge->addField([
             'id_vehiculo'=>[
                 'type'=>'INT',
                 'constraint'=>11,
@@ -63,11 +63,11 @@ class Vehiculo extends Migration
         ]);
         $this->forge->addForeignKey('id_user','users','id_user');
         $this->forge->addKey('id_vehiculo',TRUE);
-        $this->forge->createTable('vehiculo');
+        $this->forge->createTable('vehiculo');*/
     }
 
     public function down()
     {
-        $this->forge->dropTable('vehiculo');
+       // $this->forge->dropTable('vehiculo');
     }
 }

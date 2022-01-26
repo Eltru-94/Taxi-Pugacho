@@ -8,7 +8,7 @@ class Funcionalidades extends Migration
 {
     public function up()
     {
-        $this->forge->addField([
+       /* $this->forge->addField([
             'id_funcionalidad'=>[
                 'type'=>'INT',
                 'constraint'=>11,
@@ -30,11 +30,11 @@ class Funcionalidades extends Migration
             'created_at datetime default current_timestamp'
         ]);
         $this->forge->addKey('id_funcionalidad',TRUE);
-        $this->forge->createTable('funcionalidades');
+        $this->forge->createTable('funcionalidades');*/
     }
 
     public function down()
     {
-        $this->forge->dropTable('funcionalidades');
+       // $this->forge->dropTable('funcionalidades');
     }
 }

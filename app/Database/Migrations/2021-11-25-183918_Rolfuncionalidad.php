@@ -8,7 +8,7 @@ class Rolfuncionalidad extends Migration
 {
     public function up()
     {
-        $this->forge->addField([
+       /* $this->forge->addField([
             'id_rolfuncional'=>[
                 'type'=>'INT',
                 'constraint'=>11,
@@ -32,11 +32,11 @@ class Rolfuncionalidad extends Migration
         $this->forge->addForeignKey('id_funcionalidad','funcionalidades','id_funcionalidad');
         $this->forge->addForeignKey('id_rol','roles','id_rol');
         $this->forge->addKey('id_rolfuncional',TRUE);
-        $this->forge->createTable('rolfuncionalidad');
+        $this->forge->createTable('rolfuncionalidad');*/
     }
 
     public function down()
     {
-        $this->forge->dropTable('rolfuncionalidad');
+       // $this->forge->dropTable('rolfuncionalidad');
     }
 }

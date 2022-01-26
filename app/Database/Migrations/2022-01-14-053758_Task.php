@@ -8,7 +8,7 @@ class Task extends Migration
 {
     public function up()
     {
-        $this->forge->addField([
+       /* $this->forge->addField([
             'id_task'=>[
                 'type'=>'INT',
                 'constraint'=>11,
@@ -35,11 +35,11 @@ class Task extends Migration
         ]);
         $this->forge->addForeignKey('id_user','users','id_user');
         $this->forge->addKey('id_task',TRUE);
-        $this->forge->createTable('tasks');
+        $this->forge->createTable('tasks');*/
     }
 
     public function down()
     {
-        $this->forge->dropTable('tasks');
+        //$this->forge->dropTable('tasks');
     }
 }

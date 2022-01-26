@@ -8,7 +8,7 @@ class UnidadesActivas extends Migration
 {
     public function up()
     {
-        $this->forge->addField([
+        /*$this->forge->addField([
             'id_unitActiva'=>[
                 'type'=>'INT',
                 'constraint'=>11,
@@ -48,11 +48,11 @@ class UnidadesActivas extends Migration
         ]);
         $this->forge->addForeignKey('id_vehiculo','vehiculo','id_vehiculo');
         $this->forge->addKey('id_unitActiva',TRUE);
-        $this->forge->createTable('unidadesactivas');
+        $this->forge->createTable('unidadesactivas');*/
     }
 
     public function down()
     {
-        $this->forge->dropTable('unidadesactivas');
+        //$this->forge->dropTable('unidadesactivas');
     }
 }

@@ -8,7 +8,7 @@ class Roles extends Migration
 {
     public function up()
     {
-        $this->forge->addField([
+       /* $this->forge->addField([
             'id_rol'=>[
                 'type'=>'INT',
                 'constraint'=>11,
@@ -30,11 +30,11 @@ class Roles extends Migration
             'created_at datetime default current_timestamp'
         ]);
         $this->forge->addKey('id_rol',TRUE);
-        $this->forge->createTable('roles');
+        $this->forge->createTable('roles');*/
     }
 
     public function down()
     {
-        $this->forge->dropTable('roles');
+       // $this->forge->dropTable('roles');
     }
 }

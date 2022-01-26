@@ -8,7 +8,7 @@ class Carreras extends Migration
 {
     public function up()
     {
-        $this->forge->addField([
+      /*  $this->forge->addField([
             'id_carrera' => [
                 'type'=>'INT',
                 'constraint'=>11,
@@ -77,11 +77,11 @@ class Carreras extends Migration
         $this->forge->addForeignKey('id_telefono','telefonos','id_telefono');
         $this->forge->addForeignKey('id_unitActiva','unidadesactivas','id_unitActiva');
         $this->forge->addKey('id_carrera', TRUE);
-        $this->forge->createTable('carreras');
+        $this->forge->createTable('carreras');*/
     }
 
     public function down()
     {
-        $this->forge->dropTable('carreras');
+      //  $this->forge->dropTable('carreras');
     }
 }
