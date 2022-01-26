@@ -10,7 +10,8 @@ class Cliente extends BaseController
 {
     public function index()
     {
-        //
+        $modelCliente=new Clientes();
+        echo  json_encode($modelCliente->find());
     }
 
     public function store(){

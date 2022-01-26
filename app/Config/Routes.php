@@ -57,7 +57,7 @@ $routes->post('/api/agenda/update','AgendaController::updateAgenda');
 
 //Calculos
 $routes->post('/user/store', 'Cliente::store');
-
+$routes->get('/allUser', 'Cliente::index');
 
 
 
