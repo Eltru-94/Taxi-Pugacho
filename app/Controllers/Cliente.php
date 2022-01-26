@@ -21,10 +21,7 @@ class Cliente extends BaseController
             return $this->getRespose($validation->getErrors(),ResponseInterface::HTTP_BAD_REQUEST);
         }
         $input=$this->getRequestInput($this->request);
-        $altura=$input['altura'];
-        $peso=$input['peso'];
         $input['estado']=1;
-        $input['IMC']=($peso/($altura*$altura));
         $modelUser=new Clientes();
         $modelUser->insert($input);
         return $this->getRespose([
