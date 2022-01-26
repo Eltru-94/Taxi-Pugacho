@@ -167,8 +167,8 @@ class Validation
     public $cliente=[
         'nombre'=>'required',
         'apellido'=>'required',
-        'altura'=>'required',
-        'peso'=>'required'
+        'altura'=>'required|integer',
+        'peso'=>'required|integer'
     ];
 
 
