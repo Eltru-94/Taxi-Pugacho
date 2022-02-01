@@ -112,8 +112,7 @@ class Validation
     ];
 
     public $carreraOrigen=[
-        'direccion_origen'=>'required',
-        'telefono_cliente'=>'required'
+        'direccion_origen'=>'required'
 
     ];
     public $carreraDestino=[
@@ -171,6 +170,10 @@ class Validation
         'peso'=>'required'
     ];
 
+
+    public $searchIdetification=[
+        'cedula'=>'required|numeric|min_length[10]|max_length[10]|cedula'
+    ];
 
 
 

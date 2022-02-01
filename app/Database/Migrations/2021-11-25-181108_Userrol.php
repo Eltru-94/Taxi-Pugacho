@@ -8,7 +8,7 @@ class Userrol extends Migration
 {
     public function up()
     {
-        /*$this->forge->addField([
+        $this->forge->addField([
             'id_userRol'=>[
                 'type'=>'INT',
                 'constraint'=>11,
@@ -34,12 +34,12 @@ class Userrol extends Migration
         $this->forge->addForeignKey('id_rol','roles','id_rol');
 
         $this->forge->addKey('id_userRol',TRUE);
-        $this->forge->createTable('userrol');*/
+        $this->forge->createTable('userrol');
        
     }
 
     public function down()
     {
-        //$this->forge->dropTable('userrol');
+        $this->forge->dropTable('userrol');
     }
 }

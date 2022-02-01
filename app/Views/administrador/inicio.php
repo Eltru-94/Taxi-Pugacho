@@ -37,16 +37,13 @@
     }
 
     function totalIngresos(){
-        let Url = "<?php echo base_url('vehiculo/fetch') ?>";
+        let Url = "<?php echo base_url('frecuencia/total') ?>";
         $.ajax({
-            'type': 'post',
+            'type': 'get',
             url: Url,
-            data: {
-                'estado': 1
-            },
             dataType: 'json',
             success: function(res) {
-                let mensaje='<h2>'+res.length+'&nbsp; <i class="fas fa-dollar-sign"></i><h2><h5>Total ingresos</h5>';
+                let mensaje='<h2>'+res[0].Total+'&nbsp; <i class="fas fa-dollar-sign"></i><h2><h5>Total ingresos</h5>';
                 var a = document.getElementById("car_ingresos");
                 a.innerHTML=mensaje;
             }

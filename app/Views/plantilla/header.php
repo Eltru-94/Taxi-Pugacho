@@ -5,6 +5,9 @@
 <meta name="author" content="" />
 <link rel="shortcut icon" href="<?= base_url('/image/icono.jpg')?>">
 <title> <?= $this->renderSection('titulo')?></title>
+
+
+
 <link rel="stylesheet" href="<?= base_url('/css/styles.css') ?>">
 
 <link href="<?= base_url('/css/bootstrap.min.css')?>" rel="stylesheet"
@@ -26,3 +29,4 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
+

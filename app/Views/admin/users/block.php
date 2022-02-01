@@ -5,9 +5,6 @@
 //Main User
 <?= $this->section('contenido')?>
 <br>
-<h2 class="text-center">Usuarios bloqueados</h2>
-
-
 
 <?=$this->include('/admin/users/tablaBlock') ?>
 

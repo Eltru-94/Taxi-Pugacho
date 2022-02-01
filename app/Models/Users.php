@@ -119,4 +119,20 @@ class Users extends Model
         }
     }
 
+
+    public function getReportUser()
+    {
+        $builder = $this->db->table('users');
+        $builder->select('users.nombre,users.apellido,roles.rol,users.created_at,
+        users.direccion,users.foto,users.licencia,users.genero,users.fechanacimiento,
+        users.estado,users.telefono,users.cedula,users.correo');
+        $builder->join('userrol', 'users.id_user = userrol.id_user');
+        $builder->join('roles', 'userrol.id_rol = roles.id_rol');
+        $query = $builder->get();
+        return $query->getResultArray();
+
+    }
+
+
+
 }

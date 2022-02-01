@@ -4,13 +4,17 @@ namespace App\Controllers;
 
 
 
+use App\Models\Reportes;
 use App\Models\UnidadActiva;
 use App\Models\Vehiculo;
 class UnidadEnableController extends BaseController
 {
     public function index()
     {
-        //
+        $datos = [
+            'title' => "Reporte Vehiculo"
+        ];
+        return view('unidades/reporte/index', $datos);
     }
 
     public function enableUnit(){
@@ -64,19 +68,24 @@ class UnidadEnableController extends BaseController
     }
 
     public  function  allUnitEnable(){
-        $ModelUnitEnable=new UnidadActiva();
-        $datos=$ModelUnitEnable->selectUnitEnable(1,1);
-
+       $ModelUnitEnable=new UnidadActiva();
+       $datos=$ModelUnitEnable->selectUnitEnable(1,1);
         echo json_encode($datos);
     }
 
-    public function deletEnableUnit($id){
+    public function deletEnableUnit(){
+        $input=$this->getRequestInput($this->request);
+        $id_unitActiva=$input['id_unitActiva'];
+        $id_vehiculo=$input['id_vehiculo'];
 
-        $ModelUnitEnable=new UnidadActiva();
-        $date=$ModelUnitEnable->deletUnitEnable(0,0,$id);
-        if($date){
-            echo json_encode(['success' => 'Unidad Eliminada','error'=>'']);
-        }
+       $modelUnitEnable=new UnidadActiva();
+       $modelVehiculo=new Vehiculo();
+        $modelUnitEnable->deletUnitEnable(0,0,$id_unitActiva);
+        $modelVehiculo->statePayVehicleOnOff(0,$id_vehiculo);
+        return $this->getRespose([
+            'success'=>"Eliminado el vehiculo activado"
+        ]);
+
     }
 
     public function id_select($id){
@@ -101,20 +110,45 @@ class UnidadEnableController extends BaseController
         $input=$this->getRequestInput($this->request);
 
         $idUnitActiva=$input['id_unitActiva'];
-
+        $modelUnidadEnable=new UnidadActiva();
+        $modelReporte=new Reportes();
 
         if($input['reporte']==1){
-            $modelUnidadEnable=new UnidadActiva();
+
+
+            $newReport=[
+                'id_unitActiva'=>$idUnitActiva,
+                'estado'=>1,
+                'descripcion'=>$input['descripcion'],
+                'id_operador'=>session()->get('loggedUser'),
+                'reporte'=>$input['reporte']
+            ];
+            unset($input['descripcion']);
+
+            $modelReporte->insert($newReport);
             $modelUnidadEnable->updateReporte($input,$idUnitActiva);
             return $this->getRespose([
-                'success'=>'Reporte Registrado',
+                'success'=>$input,
+                'datos'=>$newReport
             ]);
         }else{
             if(!empty($input['descripcion'])){
-                $modelUnidadEnable=new UnidadActiva();
+
+
+                $newReport=[
+                    'id_unitActiva'=>$idUnitActiva,
+                    'estado'=>1,
+                    'descripcion'=>$input['descripcion'],
+                    'id_operador'=>session()->get('loggedUser'),
+                    'reporte'=>$input['reporte']
+                ];
+                unset($input['descripcion']);
+
+                $modelReporte->insert($newReport);
                 $modelUnidadEnable->updateReporte($input,$idUnitActiva);
                 return $this->getRespose([
-                    'success'=>'Reporte Registrado',
+                    'success'=>$input,
+                    'datos'=>$newReport
                 ]);
             }else{
                 $error=[
@@ -143,4 +177,14 @@ class UnidadEnableController extends BaseController
         $unitEnable=$modelUnidadEnable->selectAllUnitEnable($horario);
         echo json_encode($unitEnable);
     }
+
+    public  function  getVehicleEnableReport(){
+        $modelUnidadActiva=new UnidadActiva();
+        $query=$modelUnidadActiva->selectVehicleReporte();
+        return $this->getRespose([
+            'reporte'=>$query
+        ]);
+    }
+
+
 }

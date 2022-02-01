@@ -86,7 +86,7 @@
             data: $("#forCarreras").serialize(),
             dataType: "json",
             success:function(res){
-                clearForm();
+                clearFieldAsignar();
                 if(res.success){
                     $('#modalCarreras').modal('hide');
                     toastr["success"](res.success);
@@ -239,8 +239,15 @@
 
        $('#direccion_origen').val("");
        $('#telefono_cliente').val("");
-       $('#direccion_destino').val("");
-       $('#descripcion').val("");
+
+
+    }
+
+
+    function clearFieldAsignar(){
+
+        $('#direccion_destino').val("");
+        $('#descripcion').val("");
 
     }
     //Clear the labels error from race

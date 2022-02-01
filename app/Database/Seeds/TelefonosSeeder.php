@@ -10,7 +10,7 @@ class TelefonosSeeder extends Seeder
     {
 
         $data = [
-            ['nombre' => 'Telefono Oficina','telefono'=>'0266872541','estado'=>1,],
+            ['nombre' => 'Telefono Oficina','telefono'=>'0266872541','estado'=>1],
             ['nombre' => 'Telefono 1','telefono'=>'0987321456','estado'=>1],
             ['nombre' => 'Telefono 2','telefono'=>'0987654321','estado'=>1],
         ];

@@ -4,9 +4,8 @@
 <?= $this->endSection()?>
 //Main User
 <?= $this->section('contenido')?>
-<br>
-<h2 class="text-center">Usuarios</h2>
 
+<br>
 <?=$this->include('/admin/users/formulario') ?>
 
 <?=$this->include('/admin/users/tabla') ?>

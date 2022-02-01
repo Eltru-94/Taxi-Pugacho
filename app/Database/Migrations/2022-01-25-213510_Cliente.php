@@ -8,7 +8,7 @@ class Cliente extends Migration
 {
     public function up()
     {
-        $this->forge->addField([
+       /* $this->forge->addField([
             'id_cliente' => [
                 'type' => 'INT',
                 'constraint' => 11,
@@ -46,11 +46,11 @@ class Cliente extends Migration
         ]);
 
         $this->forge->addKey('id_cliente', TRUE);
-        $this->forge->createTable('clientes');
+        $this->forge->createTable('clientes');*/
     }
 
     public function down()
     {
-        $this->forge->dropTable('clientes');
+        //$this->forge->dropTable('clientes');
     }
 }

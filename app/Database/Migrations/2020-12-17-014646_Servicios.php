@@ -8,7 +8,7 @@ class Servicios extends Migration
 {
     public function up()
     {
-       /* $this->forge->addField([
+        $this->forge->addField([
             'id_servicio'=>[
                 'type'=>'INT',
                 'constraint'=>11,
@@ -31,11 +31,11 @@ class Servicios extends Migration
             'created_at datetime default current_timestamp'
         ]);
         $this->forge->addKey('id_servicio',TRUE);
-        $this->forge->createTable('servicios');*/
+        $this->forge->createTable('servicios');
     }
 
     public function down()
     {
-       // $this->forge->dropTable('servicios');
+        $this->forge->dropTable('servicios');
     }
 }

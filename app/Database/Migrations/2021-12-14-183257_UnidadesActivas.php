@@ -8,12 +8,17 @@ class UnidadesActivas extends Migration
 {
     public function up()
     {
-        /*$this->forge->addField([
+        $this->forge->addField([
             'id_unitActiva'=>[
                 'type'=>'INT',
                 'constraint'=>11,
                 'unsigned'=>false,
                 'auto_increment'=>true
+            ],
+            'id_operador'=>[
+                'type'=>'INT',
+                'constraint'=>11,
+                'null'=>true
             ],
             'id_vehiculo'=>[
                 'type'=>'INT',
@@ -33,9 +38,14 @@ class UnidadesActivas extends Migration
                 'type'=>'INT',
                 'constraint'=>3
             ],
-            'descripcion'=>[
+            'logitud'=>[
                 'type'=>'VARCHAR',
-                'constraint'=>60,
+                'constraint'=>20,
+                'null'=>true
+            ],
+            'latitud'=>[
+                'type'=>'VARCHAR',
+                'constraint'=>20,
                 'null'=>true
             ],
             'carrera'=>[
@@ -43,16 +53,35 @@ class UnidadesActivas extends Migration
                 'constraint'=>3,
                 'null'=>true
             ],
+            'valor'=>[
+                'type'=>'VARCHAR',
+                'constraint'=>11,
+                'null'=>true
+            ],
+            'mes'=>[
+                'type'=>'VARCHAR',
+                'constraint'=>3,
+                'null'=>true
+            ],
+            'year'=>[
+                'type'=>'VARCHAR',
+                'constraint'=>3,
+                'null'=>true
+            ],
+            'day'=>[
+                'type'=>'VARCHAR',
+                'constraint'=>11,
+                'null'=>true
+            ],
             'created_at datetime default current_timestamp'
-
         ]);
         $this->forge->addForeignKey('id_vehiculo','vehiculo','id_vehiculo');
         $this->forge->addKey('id_unitActiva',TRUE);
-        $this->forge->createTable('unidadesactivas');*/
+        $this->forge->createTable('unidadesactivas');
     }
 
     public function down()
     {
-        //$this->forge->dropTable('unidadesactivas');
+        $this->forge->dropTable('unidadesactivas');
     }
 }

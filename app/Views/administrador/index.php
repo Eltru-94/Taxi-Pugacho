@@ -8,10 +8,12 @@
 
 <?= $this->section('contenido')?>
 <br>
-    <h2 class="text-center"><?php echo $title ?></h2>
-
+<br>
+<?php  if( session()->get('id_rol')!=3){?>
 <?=$this->include('plantilla/cards') ?>
-
+<?php }else{?>
+<?=$this->include('plantilla/profile') ?>
+<?php }?>
 <?= $this->endSection()?>
 
 /*Scripts Inicio*/

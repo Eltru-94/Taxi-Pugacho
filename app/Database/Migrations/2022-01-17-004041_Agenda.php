@@ -8,7 +8,7 @@ class Agenda extends Migration
 {
     public function up()
     {
-        /*$this->forge->addField([
+       /* $this->forge->addField([
             'id_agenda'=>[
                 'type'=>'INT',
                 'constraint'=>11,
@@ -44,6 +44,6 @@ class Agenda extends Migration
 
     public function down()
     {
-        //$this->forge->dropTable('agenda');
+       // $this->forge->dropTable('agenda');
     }
 }

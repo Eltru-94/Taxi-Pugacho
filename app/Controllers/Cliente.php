@@ -15,7 +15,7 @@ class Cliente extends BaseController
         return $this->getRespose([
             'clientes'=>$modelCliente->find()
         ]);
-       
+
     }
 
     public function store(){

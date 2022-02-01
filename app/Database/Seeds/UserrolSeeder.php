@@ -10,13 +10,28 @@ class UserrolSeeder extends Seeder
     {
 
         $data = [
-            'id_user' => 1,
-            'id_rol'=>1,
-            'estado'=>1,
-           
+            [
+                'id_user' => 1,
+                'id_rol'=>1,
+                'estado'=>1,
+             ],
+            [
+                'id_user' => 2,
+                'id_rol'=>2,
+                'estado'=>1,
+            ],
+            [
+                'id_user' => 3,
+                'id_rol'=>3,
+                'estado'=>1,
+            ]
         ];
-        
-        $this->db->table('userrol')->insert($data);
+        foreach($data as $dt){
+
+            $this->db->table('userrol')->insert($dt);
+        }
+
+
         
     }
 }

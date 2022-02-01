@@ -8,8 +8,8 @@
 
 <?= $this->section('contenido')?>
     <br>
-    <h2 class="text-center"><?php echo $title;?></h2>
-<?=$this->include('./central/navegacion') ?>
+
+
 <?=$this->include('./central/carreras/formulario') ?>
 <?=$this->include('./central/carreras/table') ?>
 <?= $this->endSection()?>

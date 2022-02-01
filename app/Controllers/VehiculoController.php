@@ -34,8 +34,8 @@ class VehiculoController extends BaseController
         $image1 = $this->request->getFile('imagen1');
         $image2 = $this->request->getFile('imagen2');
         $image3 = $this->request->getFile('imagen3');
-        $unidad=$this->request->getPost('unidad');
-        $color=$this->request->getPost('color');
+        $unidad = $this->request->getPost('unidad');
+        $color = $this->request->getPost('color');
 
 
         if (!$this->validate('vehiculo')) {
@@ -62,16 +62,17 @@ class VehiculoController extends BaseController
                 'imagen3' => $newName3,
                 'id_user' => $id_user,
                 'estado' => 1,
-                'unidad'=>$unidad,
-                'color'=>$color,
+                'unidad' => $unidad,
+                'color' => $color,
+                'pago' => 0
             ];
 
-           $vehiculoModel = new Vehiculo();
+            $vehiculoModel = new Vehiculo();
             $query = $vehiculoModel->insert($newVehiculo);
             if ($query) {
                 echo json_encode(['success' => 'vehiculo registrado exitosamente..!!', 'error' => '']);
             } else {
-                echo json_encode(['success' =>'', 'error' => $newVehiculo]);
+                echo json_encode(['success' => '', 'error' => $newVehiculo]);
             }
 
 
@@ -82,9 +83,9 @@ class VehiculoController extends BaseController
     public function fetch()
     {
         $estado = $this->request->getPost('estado');
-        $estadoVehiculo=$this->request->getPost('estadoVehiculo');
+        $estadoVehiculo = $this->request->getPost('estadoVehiculo');
         $vehiculoModel = new Vehiculo();
-        $datos = $vehiculoModel->getVehiculo($estado,$estadoVehiculo);
+        $datos = $vehiculoModel->getVehiculo($estado, $estadoVehiculo);
         echo json_encode($datos);
     }
 
@@ -97,54 +98,60 @@ class VehiculoController extends BaseController
         echo json_encode($datos);
     }
 
-    public function vehiculoDetails($id_vehiculo=null){
+    public function vehiculoDetails($id_vehiculo = null)
+    {
 
-        $vehiculoModel=new Vehiculo();
-        $datos=$vehiculoModel->getVehiculoUSer(1,$id_vehiculo);
+        $vehiculoModel = new Vehiculo();
+        $datos = $vehiculoModel->getVehiculoUSer(1, $id_vehiculo);
 
         $vehiculoUser = [
             'title' => "Vehiculo",
-            'vehiculoUser'=>$datos
+            'vehiculoUser' => $datos
         ];
-        
+
         return view('unidades/detailsVehiculo', $vehiculoUser);
-        
+
 
     }
 
 
-    public function activateUnidad(){
+    public function activateUnidad()
+    {
 
         $vehiculoUser = [
             'title' => "Unidades activas"
         ];
-        
+
         return view('unidades/activateUnidad', $vehiculoUser);
 
     }
 
-    public function deletVehiculo(){
-        $estado=$this->request->getPost('estado');
-        $id_vehiculo=$this->request->getPost('id_vehiculo');
+    public function deletVehiculo()
+    {
+        $estado = $this->request->getPost('estado');
+        $id_vehiculo = $this->request->getPost('id_vehiculo');
 
-        $vehiculoModel=new Vehiculo();
-        $query=$vehiculoModel->deletVehiculo($estado,$id_vehiculo);
-        if($query){
+        $vehiculoModel = new Vehiculo();
+        $query = $vehiculoModel->deletVehiculo($estado, $id_vehiculo);
+        if ($query) {
             echo json_encode(['success' => 'vehiculo eliminado..!!', 'error' => '']);
         }
     }
-    public  function enableVehiculo(){
-        $estado=$this->request->getPost('estado');
-        $id_vehiculo=$this->request->getPost('id_vehiculo');
 
-        $vehiculoModel=new Vehiculo();
-        $query=$vehiculoModel->deletVehiculo($estado,$id_vehiculo);
-        if($query){
+    public function enableVehiculo()
+    {
+        $estado = $this->request->getPost('estado');
+        $id_vehiculo = $this->request->getPost('id_vehiculo');
+
+        $vehiculoModel = new Vehiculo();
+        $query = $vehiculoModel->deletVehiculo($estado, $id_vehiculo);
+        if ($query) {
             echo json_encode(['success' => 'vehiculo Activado..!!', 'error' => '']);
         }
     }
 
-    public function  updatevehiculo(){
+    public function updatevehiculo()
+    {
         $validation = \Config\Services::validation();
         if (!$this->validate('updatevehiculo')) {
             $errors = $validation->getErrors();
@@ -155,12 +162,12 @@ class VehiculoController extends BaseController
             $modelo = $this->request->getPost('modelo');
             $id_vehiculo = $this->request->getPost('id_vehiculo');
             $fechafabricacion = $this->request->getPost('fechafabricacion');
-            $unidad=$this->request->getPost('unidad');
-            $color=$this->request->getPost('color');
+            $unidad = $this->request->getPost('unidad');
+            $color = $this->request->getPost('color');
 
-            $vehiculoModel=new Vehiculo();
-            $query=$vehiculoModel->updateVehiculo($id_vehiculo,$placa,$marca,$modelo,$fechafabricacion,$unidad,$color);
-            if($query){
+            $vehiculoModel = new Vehiculo();
+            $query = $vehiculoModel->updateVehiculo($id_vehiculo, $placa, $marca, $modelo, $fechafabricacion, $unidad, $color);
+            if ($query) {
                 echo json_encode(['success' => 'Vehiculo Actualizado', 'error' => '']);
             }
 

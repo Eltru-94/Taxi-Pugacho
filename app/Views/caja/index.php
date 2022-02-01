@@ -11,7 +11,7 @@
 
 <?=$this->include('/caja/table') ?>
 
-
+<?=$this->include('/caja/formulario') ?>
 <?= $this->endSection()?>
 
 <?= $this->section('scripts')?>

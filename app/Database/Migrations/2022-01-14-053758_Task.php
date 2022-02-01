@@ -40,6 +40,6 @@ class Task extends Migration
 
     public function down()
     {
-        //$this->forge->dropTable('tasks');
+       // $this->forge->dropTable('tasks');
     }
 }

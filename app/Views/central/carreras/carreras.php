@@ -41,29 +41,29 @@
             'type': 'get',
             url: Url,
             dataType: 'json',
-            success: function(res) {
-                let cont=1;
-                let auto="";
+            success: function (res) {
+                let cont = 1;
+                let auto = "";
 
                 res['carrera'].forEach(carrera => {
 
-                    switch (carrera.horario){
+                    switch (carrera.horario) {
                         case ('3'):
-                            auto='<span class="badge badge-pill bg-primary">'+carrera.unidad+'</span> <span><i class="fas fa-car"></i></span>'
+                            auto = '<span class="badge badge-pill bg-primary">' + carrera.unidad + '</span> <span><i class="fas fa-car"></i></span>'
                             break;
                         case ('2'):
-                            auto='<span class="badge badge-pill bg-secondary">'+carrera.unidad+'</span> <span><i class="fas fa-car"></i></span>'
+                            auto = '<span class="badge badge-pill bg-secondary">' + carrera.unidad + '</span> <span><i class="fas fa-car"></i></span>'
                             break;
                         case ('1'):
-                            auto='<span class="badge badge-pill bg-success">'+carrera.unidad+'</span> <span><i class="fas fa-car"></i></span>'
+                            auto = '<span class="badge badge-pill bg-success">' + carrera.unidad + '</span> <span><i class="fas fa-car"></i></span>'
                             break;
                     }
 
-                    tablaCarrerasEnable.row.add([cont,auto,carrera.telefono_cliente,carrera.dateInicio,carrera.servicio,
-                        carrera.direccion_origen,carrera.direccion_destino,carrera.descripcion,
-                    `<a class='btn btn-outline-success' title="Calificar Carrera" data-bs-toggle="modal"
-                        data-bs-target="#modalCarreraState" onclick="qualifyRace(`+carrera.id_unitActiva+`,`+carrera.id_carrera+`)"> <i class='fas fa-check-circle'></i></a>&nbsp;<a class='btn btn-outline-primary' title="Editar destino Carrera" data-bs-toggle="modal"
-                        data-bs-target="#modalCarreras" onclick="editRace(`+carrera.id_carrera+`)"> <i class='fas fa-edit'></i></a>`]);
+                    tablaCarrerasEnable.row.add([cont, auto, carrera.telefono_cliente, carrera.dateInicio, carrera.servicio,
+                        carrera.direccion_origen, carrera.direccion_destino, carrera.descripcion,
+                        `<a class='btn btn-outline-success' title="Calificar Carrera" data-bs-toggle="modal"
+                        data-bs-target="#modalCarreraState" onclick="qualifyRace(` + carrera.id_unitActiva + `,` + carrera.id_carrera + `)"> <i class='fas fa-check-circle'></i></a>&nbsp;<a class='btn btn-outline-primary' title="Editar destino Carrera" data-bs-toggle="modal"
+                        data-bs-target="#modalCarreras" onclick="editRace(` + carrera.id_carrera + `)"> <i class='fas fa-edit'></i></a>`]);
                     cont++;
                 });
                 tablaCarrerasEnable.draw(true);
@@ -71,24 +71,24 @@
         });
     }
 
-    function qualifyRace(id_unitActiva,id_carrera){
+    function qualifyRace(id_unitActiva, id_carrera) {
         $("#id_carrera").val(id_carrera);
         $("#id_unitActiva").val(id_unitActiva);
 
     }
 
 
-    function  editRace(id_carrera){
+    function editRace(id_carrera) {
 
         let Url = "<?php echo base_url('carreras/selectId') ?>";
         $.ajax({
             method: 'post',
             url: Url,
             data: {
-                'id_carrera':id_carrera,
+                'id_carrera': id_carrera,
             },
             dataType: 'json',
-            success: function(res) {
+            success: function (res) {
 
                 $('#direccion_origen').val(res[0].direccion_origen);
                 $('#direccion_destino').val(res[0].direccion_destino);
@@ -100,29 +100,30 @@
             }
         });
     }
-  function  estadoCarrera(qualify){
 
-      let Url = "<?php echo base_url('carreras/qualify') ?>";
-      $.ajax({
-          method: 'post',
-          url: Url,
-          data: {
-              'qualify': qualify,
-              'id_carrera':$('#id_carrera').val(),
-              'id_unitActiva': $("#id_unitActiva").val()
-          },
-          success: function(res) {
+    function estadoCarrera(qualify) {
 
-              if (res.success) {
-                  toastr["success"](res.success);
-                  $('#modalCarreraState').modal('hide');
-                  $('#forEstadoCarrera').trigger('reset');
-                  loadCarrerasEnable();
-              }
-          }
-      });
+        let Url = "<?php echo base_url('carreras/qualify') ?>";
+        $.ajax({
+            method: 'post',
+            url: Url,
+            data: {
+                'qualify': qualify,
+                'id_carrera': $('#id_carrera').val(),
+                'id_unitActiva': $("#id_unitActiva").val()
+            },
+            success: function (res) {
 
-  }
+                if (res.success) {
+                    toastr["success"](res.success);
+                    $('#modalCarreraState').modal('hide');
+                    $('#forEstadoCarrera').trigger('reset');
+                    loadCarrerasEnable();
+                }
+            }
+        });
+
+    }
 
     function tipoCarrera(aux) {
 
@@ -133,14 +134,14 @@
             'type': 'get',
             url: Url,
             dataType: 'json',
-            success: function(res) {
+            success: function (res) {
 
                 res.forEach(ser => {
                     if (aux == ser.id_servicio) {
                         mensaje += "<option  selected value='" + ser.id_servicio + "'>" + ser.servicio +
                             "</option>";
                     } else {
-                        mensaje += "<option value='" + ser.id_servicio + "'>" +ser.servicio + "</option>";
+                        mensaje += "<option value='" + ser.id_servicio + "'>" + ser.servicio + "</option>";
                     }
 
                 });
@@ -148,25 +149,25 @@
             }
         });
     }
-    $("#forCarreras").on('submit',function (e) {
+
+    $("#forCarreras").on('submit', function (e) {
         e.preventDefault();
 
-        let Url="<?php echo base_url('carreras/update')?>";
+        let Url = "<?php echo base_url('carreras/update')?>";
         $.ajax({
             type: 'post',
             url: Url,
             data: $("#forCarreras").serialize(),
             dataType: "json",
-            success:function(res){
-                //ClearErrorCarrera();
-                console.log(res);
-                if(res.success){
+            success: function (res) {
+
+                if (res.success) {
                     $('#modalCarreras').modal('hide');
                     toastr["success"](res.success);
                     loadCarrerasEnable();
 
-                }else{
-                    $.each(res.error, function(prefix, val) {
+                } else {
+                    $.each(res.error, function (prefix, val) {
                         $('#forCarreras').find('span.' + prefix + '_error').text(val);
                     });
                 }
@@ -174,7 +175,8 @@
         });
 
     });
-    function clearLableError(){
+
+    function clearLableError() {
         $('#forCarreras').find('span.direccion_origen_error').text("");
         $('#forCarreras').find('span.direccion_destino_error').text("");
         $('#forCarreras').find('span.telefono_cliente_error').text("");
@@ -182,5 +184,5 @@
     }
 
 
-    window.onload=loadCarrerasEnable();
+    window.onload = loadCarrerasEnable();
 </script>

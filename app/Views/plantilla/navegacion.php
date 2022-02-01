@@ -14,7 +14,8 @@
                 aria-haspopup="true" aria-expanded="false"><?php echo session('nombre'); ?></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<?=site_url('auth/logout') ?>">Logout</a>
+                <a class="dropdown-item" href="<?=site_url('profile/editUser') ?>"><i class="fas fa-user-edit"></i>&nbsp;Editar</a>
+                <a class="dropdown-item" href="<?=site_url('auth/logout') ?>"><i class="fas fa-sign-in-alt"></i>&nbsp;Logout</a>
             </div>
         </li>
     </ul>

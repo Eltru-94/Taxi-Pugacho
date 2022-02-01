@@ -1,5 +1,5 @@
 
-<!--Inicio Tabla lista Usuario -->
+<!--Inicio Tabla lista funcionalidad -->
 <div class="card shadow mb-4">
     <div class="card-header py-3 centro">
         <h4 class="m-0 font-weight-bold text-dark text-center"><?php echo $title;?></h4>

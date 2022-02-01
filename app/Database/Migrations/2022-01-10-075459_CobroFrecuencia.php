@@ -8,7 +8,7 @@ class CobroFrecuencia extends Migration
 {
     public function up()
     {
-      /*  $this->forge->addField([
+        /*$this->forge->addField([
             'id_frecuencia'=>[
                 'type'=>'INT',
                 'constraint'=>11,
@@ -46,6 +46,7 @@ class CobroFrecuencia extends Migration
                 'type'=>'INT',
                 'constraint'=>3
             ],
+            'created_at datetime default current_timestamp'
             ]);
         $this->forge->addForeignKey('id_user','users','id_user');
         $this->forge->addForeignKey('id_unitActiva','unidadesactivas','id_unitActiva');
@@ -55,6 +56,6 @@ class CobroFrecuencia extends Migration
 
     public function down()
     {
-      //  $this->forge->dropTable('frecuencia');
+        //$this->forge->dropTable('frecuencia');
     }
 }

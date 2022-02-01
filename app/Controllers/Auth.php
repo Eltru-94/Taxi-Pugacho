@@ -88,7 +88,7 @@ class Auth extends Controller
             $password= $this->request->getPost('password');
             $PersonaModel = new Users();
 
-            $PersonaModel->select("users.nombre,users.correo,users.clave,users.apellido,users.foto,users.id_user,users.estado,roles.rol");
+            $PersonaModel->select("users.nombre,users.correo,users.clave,users.apellido,users.foto,users.id_user,users.estado,roles.rol,roles.id_rol");
             $PersonaModel->join('userrol', 'users.id_user = userrol.id_user');
             $PersonaModel->join('roles', 'userrol.id_rol = roles.id_rol');
             $personainfo=$PersonaModel->where('correo',$correo)->first();
@@ -112,6 +112,7 @@ class Auth extends Controller
                         "nombre"=>$nombre,
                         "foto"=>$foto,
                         "rol"=>$rol,
+                        "id_rol"=>$personainfo['id_rol'],
                         "funcionalidades"=>$funcionalidades
                     ];
                     session()->set($data);
