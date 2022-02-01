@@ -13,14 +13,14 @@
    <div class="row">
        <div class="col-md-12">
 
-
+<!--
            <button type="button" title="Registrar Rol" class="btn btn-outline-primary" onclick="tituloRol()" data-bs-toggle="modal"
                    data-bs-target="#modalRol">
                <i class="fas fa-plus-square"></i>
            </button>
            <br>
            <br>
-
+-->
 
        </div>
    </div>

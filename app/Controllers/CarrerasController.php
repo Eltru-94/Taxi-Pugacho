@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Carreras;
 use App\Models\UnidadActiva;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class CarrerasController extends BaseController
 {
@@ -38,6 +40,53 @@ class CarrerasController extends BaseController
         return $this->getRespose([
            'carreras'=>$datos
         ]);
+    }
+    public function allRaceMadeImportExcel()
+    {
+        $ModelCarreras =new Carreras();
+        $query=$ModelCarreras->getRaceMade();
+        $fileName = 'allCarreras.xlsx';
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'Unidad');
+        $sheet->setCellValue('B1', 'Carrera');
+        $sheet->setCellValue('C1', 'Tipo');
+        $sheet->setCellValue('D1', 'Telefono officina');
+        $sheet->setCellValue('E1', 'Telefono cliente');
+        $sheet->setCellValue('F1', 'Horara Inicio');
+        $sheet->setCellValue('G1', 'Fecha Fin');
+        $sheet->setCellValue('H1', 'Dirección Origen');
+        $sheet->setCellValue('I1', 'Dirección Destino');
+        $sheet->setCellValue('J1', 'Descripción');
+        $count = 2;
+        foreach ($query as $row) {
+            $sheet->setCellValue('A' . $count, $row['unidad']);
+            $sheet->setCellValue('B' . $count, $row['qualify']);
+            $sheet->setCellValue('C' . $count, $row['servicio']);
+            $sheet->setCellValue('D' . $count, $row['telefono']);
+            $sheet->setCellValue('E' . $count, $row['telefono_cliente']);
+            $sheet->setCellValue('F' . $count, $row['dateInicio']);
+            $sheet->setCellValue('G' . $count, $row['dateFin']);
+            $sheet->setCellValue('H' . $count, $row['direccion_origen']);
+            $sheet->setCellValue('I' . $count, $row['direccion_destino']);
+            $sheet->setCellValue('J' . $count, $row['descripcion']);
+
+
+            $count++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($fileName);
+        header("Content-Type: application/vnd.ms-excel");
+        header('Content-Disposition: attachment; filename="' . basename($fileName) . '"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length:' . filesize($fileName));
+        flush();
+
+        readfile($fileName);
+
     }
 
 //Type race service

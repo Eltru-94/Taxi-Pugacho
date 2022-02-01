@@ -35,7 +35,7 @@
 
         let Url = "<?php echo base_url('roles/fetch') ?>";
         let rol = document.getElementById("roles");
-        let mensaje = " <option  value=''>Escoga el rol...</option>";
+        let mensaje = "";
         $.ajax({
             'type': 'get',
             url: Url,
@@ -46,8 +46,6 @@
                     if (aux == roles.id_rol) {
                         mensaje += "<option  selected value='" + roles.id_rol + "'>" + roles.rol +
                             "</option>";
-                    } else {
-                        mensaje += "<option value='" + roles.id_rol + "'>" + roles.rol + "</option>";
                     }
 
                 });

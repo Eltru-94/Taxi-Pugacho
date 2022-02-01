@@ -66,7 +66,7 @@
                 res[0].forEach(assistance => {
                     let colorReport = reporteColor(assistance.reporte);
                     let colorUnidad = `<span class="badge badge-pill bg-primary">` + assistance.unidad + `</span> <span><i class="fas fa-car"></i></span>`;
-                    tablaReportAssistance.row.add([contador, assistance.nombre + "" + assistance.apellido, colorUnidad, colorReport, assistance.descripcion, assistance.created_at]);
+                    tablaReportAssistance.row.add([contador, assistance.nombre + " " + assistance.apellido, colorUnidad, colorReport, assistance.descripcion, assistance.created_at]);
                     contador++;
                 });
 
@@ -88,7 +88,7 @@
             success: function (res) {
 
                 let contador = 1;
-
+                console.log(res)
                 res[0].forEach(users => {
                     let state = colorUsersStates(users.estado);
                     tablaReportUsers.row.add([contador, users.nombre, users.apellido, users.cedula, users.correo, users.direccion, users.rol, users.telefono, users.licencia, users.fechanacimiento, state]);
@@ -112,9 +112,10 @@
             success: function (res) {
                 console.log(res);
                 let contador = 1;
+
                 res[0].forEach(users => {
                     let unidad = colorUnidad(0, users.unidad);
-                    let fecha = users.day + "/" + users.mes + "/" + users.day;
+                    let fecha = users.dia + "/" + users.mesId + "/20" + users.anio;
                     tablaReportFrequency.row.add([contador, users.nombre, users.apellido, users.cedula, users.correo, users.placa, unidad, `<i class="fas fa-dollar-sign"></i>` + users.valor, fecha]);
                     contador++;
                 });

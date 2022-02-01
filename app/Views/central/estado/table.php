@@ -12,7 +12,9 @@
         <div class="table-responsive">
             <div class="row">
                 <div class="col-md-12">
-
+                    <a title="Import Excel" href="/carreras/allRaceMadeImportExcel" class="btn btn-success" >
+                        <i class="fas fa-file-excel"></i>&nbsp;Import Excel
+                    </a>
 
                 </div>
             </div>

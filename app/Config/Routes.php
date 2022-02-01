@@ -35,14 +35,14 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 /* Ruta de loggin */
-/*
+
 $routes->get('/apiall','LoginController::index');
 //Api User
 $routes->post('/api/user/register','LoginController::register');
 $routes->post('/api/login','LoginController::login');
 $routes->post('/api/user/update','LoginController::updateUser');
 $routes->post('/users/updateUser', 'UsersController::updateUser');
-
+/*
 //Api task
 $routes->post('/api/task/store','TasksController::storeTask');
 $routes->get('/api/task/allUser/(:num)','TasksController::allTaskid/$1');
@@ -65,6 +65,12 @@ $routes->post('/api/agenda/update','AgendaController::updateAgenda');*/
 $routes->get('/profile/editUser', 'Profile::index');
 
 $routes->get('/reports/frequencyExcel', 'Reporte::importExcelReportFrequency');
+$routes->get('/reports/usersExcel', 'Reporte::importExcelReportUsers');
+$routes->get('/reports/assistanceExcel', 'Reporte::importExcelReportAssistance');
+
+
+$routes->get('/carreras/allRaceMadeImportExcel', 'CarrerasController::allRaceMadeImportExcel');
+$routes->post('/frecuencia/storeVehicleEnable', 'FrecuenciaController::storeVehicleEnable');
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
@@ -146,7 +152,7 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     //Frecuencia
     $routes->get('/frecuencia', 'FrecuenciaController::index');
     $routes->post('/frecuencia/getVehicleUser', 'FrecuenciaController::getVehicleUser');
-    $routes->post('/frecuencia/storeVehicleEnable', 'FrecuenciaController::storeVehicleEnable');
+
     $routes->get('/frecuencia/selectIdVehicle/(:num)', 'FrecuenciaController::getIdVehicle/$1');
     $routes->get('/frecuencia/printFactura/(:num)', 'FrecuenciaController::printBill/$1');
     //Geolocalizacion 

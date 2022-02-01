@@ -164,6 +164,9 @@ class VehiculoController extends BaseController
             $fechafabricacion = $this->request->getPost('fechafabricacion');
             $unidad = $this->request->getPost('unidad');
             $color = $this->request->getPost('color');
+            $image1 = $this->request->getFile('imagen1');
+            $image2 = $this->request->getFile('imagen2');
+            $image3 = $this->request->getFile('imagen3');
 
             $vehiculoModel = new Vehiculo();
             $query = $vehiculoModel->updateVehiculo($id_vehiculo, $placa, $marca, $modelo, $fechafabricacion, $unidad, $color);

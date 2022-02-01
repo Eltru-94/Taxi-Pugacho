@@ -9,7 +9,7 @@ class UnidadActiva extends Model
 
     protected $table = 'unidadesactivas';
     protected $primaryKey = 'id_unitActiva';
-    protected $allowedFields = ['id_vehiculo', 'horario', 'id_operador', 'valor', 'estado', 'carrera', 'reporte', 'day', 'mes', 'year'];
+    protected $allowedFields = ['id_vehiculo', 'horario', 'id_operador', 'valor', 'estado', 'carrera', 'reporte', 'dia', 'mesname','mesId', 'anio','latitud','logitud'];
 
 
     public function __construct()
@@ -134,7 +134,7 @@ class UnidadActiva extends Model
     {
         $builder = $this->db->table('unidadesactivas');
         $builder->select('users.nombre, users.apellido, users.cedula, users.correo, vehiculo.unidad,vehiculo.placa,
-        unidadesactivas.mes,unidadesactivas.valor,unidadesactivas.`year`, unidadesactivas.`day`');
+        unidadesactivas.mesId,unidadesactivas.valor,unidadesactivas.anio, unidadesactivas.dia');
         $builder->join('vehiculo', 'unidadesactivas.id_vehiculo = vehiculo.id_vehiculo');
         $builder->join('users', 'vehiculo.id_user = users.id_user');
         $query = $builder->get();

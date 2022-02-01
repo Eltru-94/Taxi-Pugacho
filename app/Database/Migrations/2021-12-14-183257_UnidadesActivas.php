@@ -58,17 +58,22 @@ class UnidadesActivas extends Migration
                 'constraint'=>11,
                 'null'=>true
             ],
-            'mes'=>[
+            'mesId'=>[
                 'type'=>'VARCHAR',
                 'constraint'=>3,
                 'null'=>true
             ],
-            'year'=>[
+            'mesname'=>[
                 'type'=>'VARCHAR',
-                'constraint'=>3,
+                'constraint'=>20,
                 'null'=>true
             ],
-            'day'=>[
+            'anio'=>[
+                'type'=>'VARCHAR',
+                'constraint'=>11,
+                'null'=>true
+            ],
+            'dia'=>[
                 'type'=>'VARCHAR',
                 'constraint'=>11,
                 'null'=>true

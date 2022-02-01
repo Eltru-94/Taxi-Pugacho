@@ -114,10 +114,10 @@ $("#forVehicleState").on("submit",function (e){
         dataType: "json",
         data: $("#forVehicleState").serialize(),
         success: function (res) {
-
-            $('#modalPayFrequency').modal('hide');
-            toastr["success"](res.success);
-            Buscar();
+            console.log(res)
+           $('#modalPayFrequency').modal('hide');
+           toastr["success"](res.success);
+           Buscar();
         }
 
     })

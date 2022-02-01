@@ -11,11 +11,10 @@
         <div class="table-responsive">
             <div class="row">
                 <div class="col-md-12">
-                    <button type="button" id="carreraCreate" name="carreraCreate" title="Activar Unidad"
-                            class="btn btn-outline-primary my-2 my-sm-0" data-bs-toggle="modal"
-                            data-bs-target="#modalCarrerasAsignar">
-                        <i class="fas fa-plus-square"></i>
-                    </button>
+                    <a type="button" href="/reports/usersExcel" title="Import Excel"
+                            class="btn btn-success" >
+                        <i class="fas fa-file-excel"></i>&nbsp;Import Excel
+                    </a>
 
                 </div>
             </div>

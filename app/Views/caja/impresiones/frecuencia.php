@@ -8,7 +8,7 @@
 <hr>
 <?php
 
-$mensaje = "<h4>Fecha : " . $vehicle[0]['day'] . "/" . $vehicle[0]['mes'] . "/20" . $vehicle[0]['year'] . "</h4>";
+$mensaje = "<h4>Fecha : " . $vehicle[0]['dia'] . "/" . $vehicle[0]['mesId'] . "/20" . $vehicle[0]['anio'] . "</h4>";
 print_r($mensaje);
 
 ?>

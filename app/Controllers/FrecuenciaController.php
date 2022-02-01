@@ -18,22 +18,23 @@ class FrecuenciaController extends BaseController
         return view('caja/index', $datos);
     }
 
-    public  function printBill($id=null){
+    public function printBill($id = null)
+    {
 
-        $modelVehiculo=new Vehiculo();
-        $vehicle=$modelVehiculo->getVehicleEnable($id);
+        $modelVehiculo = new Vehiculo();
+        $vehicle = $modelVehiculo->getVehicleEnable($id);
         $a = date('m');
         $datos = [
             'title' => 'Factura',
-            'vehicle'=>$vehicle,
-            'mes'=>nameMonth($a)
+            'vehicle' => $vehicle,
+            'mes' => nameMonth($a)
         ];
 
         $dompdf = new \Dompdf\Dompdf();
         $dompdf->loadHtml(view('caja/impresiones/frecuencia', $datos));
         $dompdf->setPaper('A5', 'landscape');
         $dompdf->render();
-        $dompdf->stream("archivo_.pdf",array("Attachment"=>false));
+        $dompdf->stream("archivo_.pdf", array("Attachment" => false));
         //return view('caja/impresiones/frecuencia', $datos);
 
     }
@@ -71,38 +72,45 @@ class FrecuenciaController extends BaseController
 
     }
 
-    public function  storeVehicleEnable(){
-        $input=$this->getRequestInput($this->request);
-        $id_vehiculo=$input['id_vehiculo'];
+    public function storeVehicleEnable()
+    {
+        $input = $this->getRequestInput($this->request);
+        $mes=date('m');
+        $id_vehiculo = $input['id_vehiculo'];
         $input['id_operador'] = session()->get('loggedUser');
-        $input['estado']=1;
-        $input['horario']=$input['id_servicio'];
-        $input['carrera']=1;
-        $input['reporte']=0;
-        $input['mes']= date('m');
-        $input['year']= date('y');
-        $input['day']= date('d');
+        $input['estado'] = 1;
+        $input['horario'] = $input['id_servicio'];
+        $input['carrera'] = 1;
+        $input['reporte'] = 0;
+        $input['mesId'] = $mes;
+        $input['mesname'] = nameMonth($mes);
+        $input['anio'] = date('y');
+        $input['dia'] = date('d');
+        $input['logitud'] ='0.23457';
+        $input['latitud'] = '-78.26248';
         unset($input['id_servicio']);
 
-        $modelUnitEnable=new UnidadActiva();
-        $modelVehiculo=new Vehiculo();
+        $modelUnitEnable = new UnidadActiva();
+        $modelVehiculo = new Vehiculo();
         $modelUnitEnable->insert($input);
-        $modelVehiculo->statePayVehicleOnOff(1,$id_vehiculo);
+        $modelVehiculo->statePayVehicleOnOff(1, $id_vehiculo);
 
         return $this->getRespose(
-          [
-              'success'=>"Unidad Pagada"
-          ]
+            [
+                'success' => "Unidad Pagada",
+                'a' => $input
+            ]
         );
     }
 
-    function total(){
-        $modelUnidadesActivas=new UnidadActiva();
-        $query=$modelUnidadesActivas->frequencyTotal();
+    function total()
+    {
+        $modelUnidadesActivas = new UnidadActiva();
+        $query = $modelUnidadesActivas->frequencyTotal();
         /*return $this->getRespose([
             $query
         ]);*/
-        echo  json_encode($query);
+        echo json_encode($query);
 
     }
 
