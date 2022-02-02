@@ -175,6 +175,11 @@ class Validation
         'cedula'=>'required|numeric|min_length[10]|max_length[10]|cedula'
     ];
 
+    public  $loginUser=[
+        'correo'=>'required|valid_email',
+        'contrasenia'=> 'required|min_length[5]|max_length[12]'
+    ];
+
 
 
 

@@ -47,13 +47,13 @@ $routes->post('/users/updateUser', 'UsersController::updateUser');
 
 
 
-
+$routes->get('/auth/register', 'Auth::register');
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
 
     $routes->get('/administrador', 'Administrador::index');
-    $routes->get('/auth/register', 'Auth::register');
+
 
     //Users
     $routes->post('/user/store', 'Cliente::store');
@@ -162,6 +162,7 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
 
 $routes->group('', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
+
     $routes->get('/auth', 'Auth::index');
 });
 
