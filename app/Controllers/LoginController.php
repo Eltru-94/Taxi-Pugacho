@@ -55,8 +55,14 @@ class LoginController extends BaseController
             }
             $modelUser=new Users();
             $user=$modelUser->findUserByEmailAddress($input['correo']);
-            Hash::check($input['clave'], $user['clave']);
-            return $this->getJWTForUser($input['correo']);
+            $aux=Hash::check($input['clave'], $user['clave']);
+            if($aux){
+                return $this->getJWTForUser($input['correo']);
+            }
+            return $this->getRespose([
+                'error'=>'Contraseña Incorrecta',
+
+            ]);
 
         }catch (\Exception $e){
             return $this->getRespose([
