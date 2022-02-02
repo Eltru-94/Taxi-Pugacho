@@ -36,6 +36,7 @@ class Database extends Config
         'username' => 'llacta',
         'password' => '1003648936llacta',
         'database' => 'llacta_taxi_app',
+        'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
         'DBDebug'  => (ENVIRONMENT !== 'production'),
