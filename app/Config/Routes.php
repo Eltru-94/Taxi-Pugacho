@@ -42,12 +42,14 @@ $routes->post('/api/user/register','LoginController::register');
 $routes->post('/api/login','LoginController::login');
 $routes->post('/api/user/update','LoginController::updateUser');
 $routes->post('/users/updateUser', 'UsersController::updateUser');
-
+$routes->get('/api/user/vehicles/(:num)', 'LoginController::vehiclesUser/$1');
+$routes->post('/api/updateVehicleEnable', 'GeolocalizacionController::updateLocationVehicleEnable');
 
 
 
 
 $routes->get('/auth/register', 'Auth::register');
+
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
@@ -134,6 +136,8 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
     //Geolocalizacion 
     $routes->get('/geolocalizacion', 'GeolocalizacionController::index');
+    $routes->get('/geolocalizacion/vehicleEnable', 'GeolocalizacionController::locationVehicleEnable');
+    $routes->post('/geolocalizacion/updateVehicleEnable', 'GeolocalizacionController::updateLocationVehicleEnable');
 
     //Telefonos
     $routes->get('/telefonos/getAll', 'TelefonosController::index');

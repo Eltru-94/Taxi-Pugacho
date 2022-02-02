@@ -121,4 +121,12 @@ class LoginController extends BaseController
         }
     }
 
+    public function vehiclesUser($id=0)
+    {
+       $modelUser=new Users();
+       $query=$modelUser->selectVehicleForIdUser($id);
+       return $this->getRespose([
+            'vehicleUser'=>$query
+       ]);
+    }
 }

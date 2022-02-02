@@ -1,5 +1,6 @@
 <script>
 
+    let arraycolor = ["AZUL", "VERDE", "ROJO", "AMARILLO","BLANCO","NEGRO","PLOMO"];
     let scheduleTaxis = ["Velada", "Mañana", "Tarde"];
     toastr.options = {
         "closeButton": false,

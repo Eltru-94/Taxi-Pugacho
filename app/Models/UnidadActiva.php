@@ -146,7 +146,7 @@ class UnidadActiva extends Model
     public function getVehicleEnableForId($id)
     {
         $builder = $this->db->table('unidadesactivas');
-        $builder->select(' unidadesactivas.horario,vehiculo.unidad,vehiculo.placa,unidadesactivas.estado,unidadesactivas.mes,unidadesactivas.`year`,unidadesactivas.`day`');
+        $builder->select(' unidadesactivas.horario,vehiculo.unidad,vehiculo.placa,unidadesactivas.estado,unidadesactivas.mesId,unidadesactivas.anio,unidadesactivas.dia');
         $builder->join('vehiculo', 'unidadesactivas.id_vehiculo = vehiculo.id_vehiculo');
         $builder->join('users', 'vehiculo.id_user = users.id_user');
         $builder->where(' unidadesactivas.estado', 1);
@@ -178,5 +178,16 @@ class UnidadActiva extends Model
         return $query->getResultArray();
 
     }
+
+
+    public function updateLocation($data,$id_unitActiva){
+
+        $builder= $this->db->table('unidadesactivas');
+        $builder->where('id_unitActiva',$id_unitActiva);
+        $builder->update($data);
+
+    }
+
+
 
 }

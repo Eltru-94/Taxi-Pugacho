@@ -1,30 +1,37 @@
-<?= $this->extend('plantilla/layout')?>
+<?= $this->extend('plantilla/layout') ?>
 
-<?= $this->section('titulo')?>
-<?php echo $title;?>
-<?= $this->endSection()?>
+<?= $this->section('titulo') ?>
+<?php echo $title; ?>
+<?= $this->endSection() ?>
 
 
 
-<?= $this->section('contenido')?>
-<br>
-<h2 class="text-center"><?php echo $title;?></h2>
+<?= $this->section('contenido') ?>
+    <br>
 
-<div class="container">
-    <div class="row justify-content-center">
-        
-        <div class="col-12 col-sm-12">
+    <div class="card">
 
-            <div id="map" class="text-center" style="height: 500px; width: 100%">
+        <div class="card-header py-3 centro">
+            <h4 class="m-0 font-weight-bold text-dark text-center"><?php echo $title; ?></h4>
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <div id="map" class="text-center" style="height: 500px; width: 100%">
+            </div>
+
 
             </div>
         </div>
+
+
     </div>
 
-    <?= $this->endSection()?>
+
+<?= $this->endSection() ?>
 
 
 
-    <?= $this->section('scripts')?>
-    <?=$this->include('/geolocalizacion/geolocalizacion') ?>
-    <?= $this->endSection()?>
+<?= $this->section('scripts') ?>
+<?= $this->include('/geolocalizacion/geolocalizacion') ?>
+<?= $this->endSection() ?>

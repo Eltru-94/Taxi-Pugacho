@@ -54,7 +54,7 @@ function year(anio) {
 }
 function color(colorSelect){
 
-    let arraycolor = ["AZUL", "VERDE", "ROJO", "AMARILLO"];
+
     let color=document.getElementById("color");
     let mensaje = " <option  value=''>Seleccionar color</option>";
     for (var i=0;i<arraycolor.length;i++){
@@ -164,8 +164,7 @@ function loadVehiculo() {
         success: function(res) {
             let cont = 1;
             res.forEach(user => {
-
-
+                let pago=colorFrecuencia(user.pago);
                 temp = tablaVehiculo.row.add([cont,
                     `<img class="rounded float-start" width='100' src="<?=base_url()?>/vehiculos/` +
                     user.imagen1 + `">`,
@@ -175,7 +174,7 @@ function loadVehiculo() {
                     user.imagen1 + `">`, user.placa, user
                     .fechafabricacion, user.marca,user.color,user.modelo,
 
-                    '<span class="badge badge-pill badge-success">'+user.unidad+'</span> <span><i class="fas fa-car"></i></span>', `<a title="Detalles" href="<?=base_url()?>/vehiculo/details/` +
+                    '<span class="badge badge-pill badge-success">'+user.unidad+'</span> <span><i class="fas fa-car"></i></span>',pago, `<a title="Detalles" href="<?=base_url()?>/vehiculo/details/` +
                     user.id_vehiculo + `">` +
                     user.nombre + ' ' + user.apellido + `</a>`,
                     "<div class='btn-group'><a class='btn btn-outline-primary' title='Actulizar' data-bs-toggle='modal' data-bs-target='#modalVehiculo'  onclick='update(" +

@@ -72,7 +72,7 @@ class Vehiculo extends Model
         $builder->select('*');
         $builder->join('users', 'users.id_user=vehiculo.id_user');
         $builder->where('users.cedula', $identification);
-        $builder->where('vehiculo.estado',1);
+        $builder->where('vehiculo.estado', 1);
         $query = $builder->get();
         return $query;
     }
@@ -84,7 +84,7 @@ class Vehiculo extends Model
         $builder->select('*');
         $builder->join('users', 'users.id_user=vehiculo.id_user');
         $builder->where('vehiculo.id_vehiculo', $id_vehiculo);
-        $builder->where('vehiculo.estado',1);
+        $builder->where('vehiculo.estado', 1);
         $query = $builder->get();
         return $query->getResultArray();
     }
@@ -97,13 +97,13 @@ class Vehiculo extends Model
         $builder->join('unidadesactivas', 'unidadesactivas.id_vehiculo=vehiculo.id_vehiculo');
         $builder->join('users', 'users.id_user=vehiculo.id_user');
         $builder->where('vehiculo.id_vehiculo', $id_vehiculo);
-        $builder->where('unidadesactivas.estado',1);
+        $builder->where('unidadesactivas.estado', 1);
         $query = $builder->get();
         return $query->getResultArray();
     }
 
 
-    public function statePayVehicleOnOff($estado,$id_vehiculo)
+    public function statePayVehicleOnOff($estado, $id_vehiculo)
     {
 
         $query = $this->db->query('update vehiculo set pago=? where id_vehiculo=?', [$estado, $id_vehiculo]);
@@ -114,5 +114,31 @@ class Vehiculo extends Model
             return false;
         }
     }
+
+    public function selectLocation()
+    {
+        $builder = $this->db->table('vehiculo');
+        $builder->select('vehiculo.unidad,unidadesactivas.logitud,unidadesactivas.latitud,users.apellido,users.nombre');
+        $builder->join('unidadesactivas', 'vehiculo.id_vehiculo = unidadesactivas.id_vehiculo');
+        $builder->join('users', 'vehiculo.id_user = users.id_user');
+        $builder->where('unidadesactivas.estado', 1);
+        $builder->where('unidadesactivas.reporte', 1);
+        $query = $builder->get();
+        return $query->getResultArray();
+
+    }
+    public function selectLocationForId($id_user)
+    {
+        $builder = $this->db->table('vehiculo');
+        $builder->select('unidadesactivas.id_unitActiva');
+        $builder->join('unidadesactivas', 'vehiculo.id_vehiculo = unidadesactivas.id_vehiculo');
+        $builder->join('users', 'vehiculo.id_user = users.id_user');
+        $builder->where('unidadesactivas.estado', 1);
+        $builder->where('users.id_user', $id_user);
+        $query = $builder->get();
+        return $query->getResultArray();
+
+    }
+
 
 }

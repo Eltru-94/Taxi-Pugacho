@@ -34,8 +34,8 @@ class FrecuenciaController extends BaseController
         $dompdf->loadHtml(view('caja/impresiones/frecuencia', $datos));
         $dompdf->setPaper('A5', 'landscape');
         $dompdf->render();
-        $dompdf->stream("archivo_.pdf", array("Attachment" => false));
-        //return view('caja/impresiones/frecuencia', $datos);
+        $dompdf->stream("archivo_.pdf", array("Attachment" => 1));
+
 
     }
 

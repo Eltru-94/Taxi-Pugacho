@@ -32,7 +32,7 @@
 
                 res[0].forEach(vehicle => {
                     let horario=colorSechendulle(vehicle.horario);
-                    let fecha = vehicle.day + "/" + vehicle.mes + "/" + vehicle.year;
+                    let fecha = vehicle.dia + "/" + vehicle.mesId + "/" + vehicle.anio;
                     let colorUnidad = `<span class="badge badge-pill bg-primary">` + vehicle.unidad + `</span> <span><i class="fas fa-car"></i></span><span class="badge badge-pill bg-warning">&nbsp;Activada</span>`;
                     tablaVehiculoEnable.row.add([contador, colorUnidad,horario, vehicle.placa, fecha]);
                     contador++;

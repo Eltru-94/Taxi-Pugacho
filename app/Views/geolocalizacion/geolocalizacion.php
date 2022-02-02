@@ -1,27 +1,29 @@
 <script>
-var map = L.map('map').setView([0.35171, -78.12233], 10);
+    var map = L.map('map').setView([0.35171, -78.12233], 10);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {
+        foo: 'bar',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    map.locate({setView: true, maxZoom:10 });
+    //var littleton = L.marker([0.35171, -78.12233]).bindPopup('This is Littleton, CO.');
+    //littleton.addTo(map);
+    function locationVehicleEnable() {
+        let Url = "<?php echo base_url('geolocalizacion/vehicleEnable')?>";
 
+        $.ajax({
+            'type': 'get',
+            url: Url,
+            dataType: "json",
+            success: function (res) {
+                res['location'].forEach(vehicleEnable => {
+                    let mesnaje="<strong>Chofer : </strong>"+vehicleEnable.nombre+" "+vehicleEnable.apellido+"<br><strong>Unidad:</strong> "+vehicleEnable.unidad;
+                    let littleton = L.marker([vehicleEnable.logitud, vehicleEnable.latitud]).bindPopup(mesnaje).openPopup();
+                    littleton.addTo(map);
+                })
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {
-    foo: 'bar',
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+            }
+        });
+    }
 
-map.locate({setView: true, maxZoom: 16});
-
-var littleton = L.marker([0.35171, -78.12233]).bindPopup('This is Littleton, CO.');
-littleton.addTo(map);
-map.on('locationerror', errorLocalizacion);
-map.on('locationfound', buscarLocalizacion).bindPopup('This is Littleton, CO.');
-
-
-function buscarLocalizacion(e) {
-    var littleton= L.marker(e.latlng).addTo(map);
-    littleton.bindPopup('This is Littleton, CO.');
-}
-
-function errorLocalizacion(e) {
-   alert("No es posible encontrar su ubicación. Es posible que tenga que activar la geolocalización.");
-}
-
+    window.onload = locationVehicleEnable;
 </script>

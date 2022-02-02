@@ -28,8 +28,8 @@
                     <th>NOMBRE</th>
                     <th>APELLIDO</th>
                     <th>CEDULA</th>
-                    <th>UNIDAD</th>
                     <th>PLACA</th>
+                    <th>UNIDAD</th>
                     <th>FRECUENCIA</th>
                     <th>ACCIÓN</th>
                 </tr>

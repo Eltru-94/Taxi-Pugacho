@@ -31,6 +31,7 @@
                 <th>COLOR</th>
                 <th>MODELO</th>
                 <th>UNIDAD</th>
+                <th>ESTADO</th>
                 <th>PROPIETARIO</th>
                 <th>ACCION</th>
                 </thead>
