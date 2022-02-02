@@ -32,10 +32,11 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'bdd_pugachoe',
+        'hostname' => 'mysql-llacta.alwaysdata.net',
+        'username' => 'llacta',
+        'password' => '1003648936llacta',
+        'database' => 'llacta_taxi_app',
+
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
