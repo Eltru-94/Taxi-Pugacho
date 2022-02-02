@@ -42,41 +42,19 @@ $routes->post('/api/user/register','LoginController::register');
 $routes->post('/api/login','LoginController::login');
 $routes->post('/api/user/update','LoginController::updateUser');
 $routes->post('/users/updateUser', 'UsersController::updateUser');
-/*
-//Api task
-$routes->post('/api/task/store','TasksController::storeTask');
-$routes->get('/api/task/allUser/(:num)','TasksController::allTaskid/$1');
-$routes->get('/api/task/deletTask/(:num)','TasksController::deletTask/$1');
-$routes->get('/api/task/selectIdTask/(:num)','TasksController::selectTaskId/$1');
-$routes->post('/api/task/update','TasksController::updateTask');
-
-//Api Agenda
-$routes->post('/api/agenda/store','AgendaController::store');
-$routes->get('/api/agenda/allUser/(:num)','AgendaController::allAgendaId/$1');
-$routes->get('/api/agenda/agendaID/(:num)','AgendaController::agendaId/$1');
-$routes->get('/api/agenda/delete/(:num)','AgendaController::deletAgenda/$1');
-$routes->post('/api/agenda/update','AgendaController::updateAgenda');*/
-
-//Calculos
 
 
 
 
-$routes->get('/profile/editUser', 'Profile::index');
-
-$routes->get('/reports/frequencyExcel', 'Reporte::importExcelReportFrequency');
-$routes->get('/reports/usersExcel', 'Reporte::importExcelReportUsers');
-$routes->get('/reports/assistanceExcel', 'Reporte::importExcelReportAssistance');
 
 
-$routes->get('/carreras/allRaceMadeImportExcel', 'CarrerasController::allRaceMadeImportExcel');
-$routes->post('/frecuencia/storeVehicleEnable', 'FrecuenciaController::storeVehicleEnable');
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
 
     $routes->get('/administrador', 'Administrador::index');
     $routes->get('/auth/register', 'Auth::register');
+
     //Users
     $routes->post('/user/store', 'Cliente::store');
     $routes->get('/allUser', 'Cliente::index');
@@ -96,11 +74,13 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->post('/roles/update', 'RolController::update');
     $routes->post('/roles/updateRol', 'RolController::updateRol');
     $routes->post('/roles/deleteRol', 'RolController::delete');
+
     //Funcionalidades
     $routes->get('/funcionalidad', 'FuncionalidadesController::index');
     $routes->get('/funcionalidad/fetch', 'FuncionalidadesController::fetch');
     $routes->post('/rolfunc', 'FuncionalidadesController::getRolFuncionalidad');
     $routes->post('/asigarRolFuncionalidad', 'RolFuncionalidadController::index');
+
     //Vehiculo
     $routes->post('/vehiculo/fetch', 'VehiculoController::fetch');
     $routes->get('/vehiculo', 'VehiculoController::index');
@@ -113,10 +93,8 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('vehiculo/alleliminar', 'VehiculoController::indexdelet');
     $routes->post('/vehiculo/update', 'VehiculoController::updatevehiculo');
 
-
+    //vehicle state enable
     $routes->post('/enableUnit', 'UnidadEnableController::enableUnit');
-
-
     $routes->post('/enableUnit/delet', 'UnidadEnableController::deletEnableUnit');
     $routes->get('/enableUnit/select/(:num)', 'UnidadEnableController::id_select/$1');
     $routes->post('/enableUnit/update', 'UnidadEnableController::update_horario');
@@ -127,18 +105,14 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->post('/enableUnit/all', 'UnidadEnableController::allUnitEnable');
 
     //Carreras
-
     $routes->get('/', 'Home::index');
     $routes->get('/carreras', 'CarrerasController::index');
-
     $routes->get('/carreras/activadas', 'CarrerasController::carreras');
     $routes->get('/carreras/alldisable', 'CarrerasController::allCarrerasDisable');
-
     $routes->get('/carreras/state', 'CarrerasController::stateCarreras');
     $routes->get('/carreras/tipocarrera', 'CarrerasController::getTipoCarrera');
     $routes->post('/carreras/selectId', 'CarrerasController::selectIdCarrera');
-    //new race
-
+    $routes->get('/carreras/allRaceMadeImportExcel', 'CarrerasController::allRaceMadeImportExcel');
     $routes->get('/carreras/allenable', 'CarrerasController::allCarrerasEnable');
     $routes->get('/carreras/allActivadas', 'CarrerasController::allCarrerasActivadas');
     $routes->post('/carreras/storeOrigen', 'CarrerasController::storeOrigen');
@@ -149,35 +123,40 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->post('/carreras/update', 'CarrerasController::update');
 
 
+
     //Frecuencia
     $routes->get('/frecuencia', 'FrecuenciaController::index');
     $routes->post('/frecuencia/getVehicleUser', 'FrecuenciaController::getVehicleUser');
-
+    $routes->post('/frecuencia/storeVehicleEnable', 'FrecuenciaController::storeVehicleEnable');
     $routes->get('/frecuencia/selectIdVehicle/(:num)', 'FrecuenciaController::getIdVehicle/$1');
     $routes->get('/frecuencia/printFactura/(:num)', 'FrecuenciaController::printBill/$1');
+    $routes->get('/frecuencia/total', 'FrecuenciaController::total');
+
     //Geolocalizacion 
     $routes->get('/geolocalizacion', 'GeolocalizacionController::index');
 
     //Telefonos
-
     $routes->get('/telefonos/getAll', 'TelefonosController::index');
+
     //Profile
     $routes->get('/profile/vehicleEnable', 'Profile::vehicleEnable');
     $routes->get('/profile/viewVehicleEnable', 'Profile::viewVehicleEnable');
     $routes->get('/profile/viewVehicleDisable', 'Profile::viewVehicleDisable');
     $routes->get('/profile/vehicleDisable', 'Profile::vehicleDisable');
+    $routes->get('/profile/editUser', 'Profile::index');
+    $routes->get('/profile/editUser', 'Profile::index');
+
     //Reportes
     $routes->get('/reports/users', 'Reporte::reportUsers');
     $routes->get('/reports/getUsers', 'Reporte::getReportUsers');
-
     $routes->get('/reports/assistance', 'Reporte::reportAssistance');
     $routes->get('/reports/getAssistance', 'Reporte::getReportAssistance');
-
     $routes->get('/reports/frequency', 'Reporte::reportFrequency');
     $routes->get('/reports/getFrequency', 'Reporte::getReportFrequency');
-
-
-    $routes->get('/frecuencia/total', 'FrecuenciaController::total');
+    $routes->get('/reports/frequencyExcel', 'Reporte::importExcelReportFrequency');
+    $routes->get('/reports/usersExcel', 'Reporte::importExcelReportUsers');
+    $routes->get('/reports/assistanceExcel', 'Reporte::importExcelReportAssistance');
+    $routes->get('/reports/graphicFrequency', 'Reporte::graphicFrequency');
 
 });
 

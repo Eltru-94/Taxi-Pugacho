@@ -98,7 +98,6 @@ class FrecuenciaController extends BaseController
         return $this->getRespose(
             [
                 'success' => "Unidad Pagada",
-                'a' => $input
             ]
         );
     }

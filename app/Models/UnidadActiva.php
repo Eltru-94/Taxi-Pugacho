@@ -168,4 +168,15 @@ class UnidadActiva extends Model
 
     }
 
+    public function sumMonth($anio)
+    {
+        $builder = $this->db->table('unidadesactivas');
+        $builder->select(' SUM(unidadesactivas.valor) AS TOTAL, unidadesactivas.mesname AS mes');
+        $builder->where('unidadesactivas.anio', $anio);
+        $builder->groupBy('unidadesactivas.mesname');
+        $query = $builder->get();
+        return $query->getResultArray();
+
+    }
+
 }

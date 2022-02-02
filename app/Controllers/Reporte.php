@@ -189,7 +189,7 @@ class Reporte extends BaseController
             $sheet->setCellValue('E' . $count, $row['placa']);
             $sheet->setCellValue('F' . $count, $row['unidad']);
             $sheet->setCellValue('G' . $count, $row['valor']);
-            $sheet->setCellValue('H' . $count, $row['day']."/".$row['mes']."/".$row['year']);
+            $sheet->setCellValue('H' . $count, $row['dia']."/".$row['mesId']."/".$row['anio']);
             $count++;
         }
 
@@ -207,5 +207,14 @@ class Reporte extends BaseController
 
         exit;
 
+    }
+
+    public function  graphicFrequency(){
+        $anio=date('y');
+        $modelUnidadesActivas=new UnidadActiva();
+        $query=$modelUnidadesActivas->sumMonth($anio);
+        return $this->getRespose([
+            $query
+        ]);
     }
 }
