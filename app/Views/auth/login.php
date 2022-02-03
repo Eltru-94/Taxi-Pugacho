@@ -17,14 +17,14 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-12 mb-sm-0">
                                         <label class="small mb-1">Correo</label>
-                                        <input type="text" class="form-control" name="correo" id="correo">
+                                        <input type="text" class="form-control" name="correo" id="correo" placeholder="Ingrese el correo">
                                         <span class="text-danger error-text correo_error"></span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-12 mb-sm-0">
                                         <label class="small mb-1">Contraseña</label>
-                                        <input type="password" class="form-control" name="contrasenia" id="contrasenia">
+                                        <input type="password" class="form-control" name="contrasenia" id="contrasenia" placeholder="Ingrese la contraseña">
                                         <span class="text-danger error-text contrasenia_error"></span>
                                     </div>
                                 </div>

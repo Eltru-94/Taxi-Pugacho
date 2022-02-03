@@ -1,5 +1,5 @@
 <script>
-    var map = L.map('map').setView([0.35171, -78.12233], 10);
+    var map = L.map('map').setView([0.35171, -78.12233], 15);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {
         foo: 'bar',
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
