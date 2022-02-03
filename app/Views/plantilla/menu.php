@@ -21,8 +21,8 @@
                         <a class="nav-link" href="/users"><i class="fas fa-user-edit"></i> &nbsp;Usuario</a>
                         <a class="nav-link" href="/roles"><i class="fas fa-box"></i> &nbsp;Roles</a>
                         <a class="nav-link" href="/funcionalidad"><i class="fas fa-file-alt"></i> &nbsp;Funcionalidad</a>
-                        <a class="nav-link" href="/users/block"><i class="fas fa-user-lock"></i> &nbsp;Usuarios bloqueados</a>
-                        <a class="nav-link" href="/users/blockUser"><i class="fas fa-user-lock"></i> &nbsp;Usuarios bloqueados P</a>
+                        <!--<a class="nav-link" href="/users/block"><i class="fas fa-user-lock"></i> &nbsp;Usuarios bloqueados</a>-->
+                        <a class="nav-link" href="/users/blockUser"><i class="fas fa-user-lock"></i> &nbsp;Usuarios bloqueados </a>
                     </nav>
                 </div>
                 <?php } ?>
