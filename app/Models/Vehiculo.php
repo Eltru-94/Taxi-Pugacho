@@ -53,10 +53,10 @@ class Vehiculo extends Model
         }
     }
 
-    public function updateVehiculo($id_vehiculo, $placa, $marca, $modelo, $fechafabricacion, $unidad, $color)
+    public function updateVehiculo($id_vehiculo, $placa, $marca, $modelo, $fechafabricacion, $unidad, $color,$imagen1,$imagen2,$imagen3)
     {
 
-        $query = $this->db->query('update vehiculo set placa=?, marca=?, modelo=?,fechafabricacion=?,unidad=?,color=? where id_vehiculo=?', [$placa, $marca, $modelo, $fechafabricacion, $unidad, $color, $id_vehiculo]);
+        $query = $this->db->query('update vehiculo set placa=?, marca=?, modelo=?,fechafabricacion=?,unidad=?,color=?, imagen1=?,imagen2=?,imagen3=? where id_vehiculo=?', [$placa, $marca, $modelo, $fechafabricacion, $unidad, $color,$imagen1,$imagen2,$imagen3, $id_vehiculo]);
 
         if ($query) {
             return true;

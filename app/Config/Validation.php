@@ -104,6 +104,9 @@ class Validation
         'fechafabricacion'=>'required',
         'unidad'=>'required',
         'color'=>'required',
+        'imagen1'=>'uploaded[imagen1]|max_size[imagen1,255]|is_image[imagen1]',
+        'imagen2'=>'uploaded[imagen2]|max_size[imagen2,255]|is_image[imagen2]',
+        'imagen3'=>'uploaded[imagen3]|max_size[imagen3,255]|is_image[imagen3]',
     ];
 
     public $unitEnable=[

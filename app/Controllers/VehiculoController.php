@@ -167,9 +167,17 @@ class VehiculoController extends BaseController
             $image1 = $this->request->getFile('imagen1');
             $image2 = $this->request->getFile('imagen2');
             $image3 = $this->request->getFile('imagen3');
+            $newName1 = $image1->getRandomName();
+            $image1->move(ROOTPATH . '/public/vehiculos', $newName1);
+
+            $newName2 = $image2->getRandomName();
+            $image2->move(ROOTPATH . '/public/vehiculos', $newName2);
+
+            $newName3 = $image3->getRandomName();
+            $image3->move(ROOTPATH . '/public/vehiculos', $newName3);
 
             $vehiculoModel = new Vehiculo();
-            $query = $vehiculoModel->updateVehiculo($id_vehiculo, $placa, $marca, $modelo, $fechafabricacion, $unidad, $color);
+            $query = $vehiculoModel->updateVehiculo($id_vehiculo, $placa, $marca, $modelo, $fechafabricacion, $unidad, $color,$newName1,$newName2,$newName3);
             if ($query) {
                 echo json_encode(['success' => 'Vehiculo Actualizado', 'error' => '']);
             }
