@@ -22,6 +22,7 @@
                         <a class="nav-link" href="/roles"><i class="fas fa-box"></i> &nbsp;Roles</a>
                         <a class="nav-link" href="/funcionalidad"><i class="fas fa-file-alt"></i> &nbsp;Funcionalidad</a>
                         <a class="nav-link" href="/users/block"><i class="fas fa-user-lock"></i> &nbsp;Usuarios bloqueados</a>
+                        <a class="nav-link" href="/users/blockUser"><i class="fas fa-user-lock"></i> &nbsp;Usuarios bloqueados P</a>
                     </nav>
                 </div>
                 <?php } ?>
@@ -39,6 +40,7 @@
                         <a class="nav-link" href="/vehiculo/alleliminar"><i class="fas fa-trash"></i> &nbsp; Eliminadas</a>
                         <a class="nav-link" href="/vehiculo/activar"><i class="fas fa-check-circle"></i> &nbsp; Activas</a>
                         <a class="nav-link" href="/enableUnit/Report"><i class="fas fa-file-signature"></i> &nbsp;No Reportado</a>
+
 
                     </nav>
                 </div>

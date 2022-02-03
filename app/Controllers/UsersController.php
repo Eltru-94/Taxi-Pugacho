@@ -39,6 +39,14 @@ class UsersController extends BaseController
         return view('admin/users/block', $datos);
     }
 
+    public function blockUser()
+    {
+        $datos = [
+            'title' => "Bloqueados block"
+        ];
+        return view('admin/users/indexUserBlock', $datos);
+    }
+
     public function save()
     {
 

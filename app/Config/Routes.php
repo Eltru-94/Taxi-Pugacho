@@ -49,7 +49,7 @@ $routes->post('/api/updateVehicleEnable', 'GeolocalizacionController::updateLoca
 
 
 $routes->get('/auth/register', 'Auth::register');
-
+$routes->get('/users/blockUser', 'UsersController::blockUser');
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 

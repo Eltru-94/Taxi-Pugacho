@@ -6,13 +6,13 @@
 <?= $this->section('contenido')?>
 
 <br>
-<?=$this->include('/admin/users/formulario') ?>
 
-<?=$this->include('/admin/users/tabla') ?>
+
+<?=$this->include('/admin/users/tablaUsersBlock') ?>
 
 
 <?= $this->endSection()?>
-
+/*Scripts Usuario*/
 <?= $this->section('scripts')?>
-<?=$this->include('/admin/users/user') ?>
+<?=$this->include('/admin/users/usersBlock') ?>
 <?= $this->endSection()?>
