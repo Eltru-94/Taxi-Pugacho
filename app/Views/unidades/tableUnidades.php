@@ -10,17 +10,16 @@
     <div class="card-body">
 
         <div class="table-responsive">
-            <!--
+
             <div class="row">
                 <div class="col-md-12">
-                    <button type="button"  title="Activar Unidad" class="btn btn-outline-primary my-2 my-sm-0"  data-bs-toggle="modal"
-                            data-bs-target="#modalUnidadesEnable">
+                    <button type="button" name="btnDeleteFrequency"  onclick="deleteFrequency()" id="btnDeleteFrequency" title="Desactivar Frecuencia" class="btn btn-outline-danger my-2 my-sm-0">
                         <i class="fas fa-plus-square"></i>
                     </button>
 
                 </div>
             </div>
-            -->
+
             <br>
             <table class="table table-hover table-sm" style="width:100%" id="tablaVehiculoEnable" name="tablaVehiculoEnable">
                 <thead>

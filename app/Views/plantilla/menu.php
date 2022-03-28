@@ -22,7 +22,7 @@
                         <a class="nav-link" href="/roles"><i class="fas fa-box"></i> &nbsp;Roles</a>
                         <a class="nav-link" href="/funcionalidad"><i class="fas fa-file-alt"></i> &nbsp;Funcionalidad</a>
                         <!--<a class="nav-link" href="/users/block"><i class="fas fa-user-lock"></i> &nbsp;Usuarios bloqueados</a>-->
-                        <a class="nav-link" href="/users/blockUser"><i class="fas fa-user-lock"></i> &nbsp;Usuarios bloqueados </a>
+                        <a class="nav-link" href="/users/locked"><i class="fas fa-user-lock"></i> &nbsp;Usuarios bloqueados </a>
                     </nav>
                 </div>
                 <?php } ?>
@@ -120,6 +120,7 @@
                         <a class="nav-link" href="/reports/users"><i class="fas fa-users"></i> &nbsp;Usuarios</a>
                         <a class="nav-link" href="/reports/frequency"><i class="fas fa-wallet"></i> &nbsp;Frecuencia</a>
                         <a class="nav-link" href="/reports/assistance"><i class="fas fa-car"></i> &nbsp;Asistencia</a>
+                        <a class="nav-link" href="/operadores"><i class="fas fa-user"></i> &nbsp;Operadores</a>
                     </nav>
                 </div>
                 <?php } ?>

@@ -1,25 +1,9 @@
 <script>
 //Declaracion de variables
-var a = document.getElementById("tituloModal");
-var titulo = document.getElementById("tituloAsignarRol");
+let a = document.getElementById("tituloModal");
+let titulo = document.getElementById("tituloAsignarRol");
 let edit = false;
-toastr.options = {
-    "closeButton": false,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": true,
-    "positionClass": "toast-bottom-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "2000",
-    "timeOut": "2000",
-    "extendedTimeOut": "2000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-}
+
 
 let tablaRoles = $('#tablaRoles').DataTable({
     "language": {

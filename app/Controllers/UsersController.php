@@ -5,14 +5,12 @@ namespace App\Controllers;
 use \App\Models\Users;
 use \App\Models\UserRolModel;
 use App\Libraries\Hash;
+use App\Models\Vehiculo;
+use function PHPUnit\Framework\isEmpty;
 
 class UsersController extends BaseController
 {
 
-    public function __construct()
-    {
-        helper(['url', 'form']);
-    }
 
     public function index()
     {
@@ -23,12 +21,17 @@ class UsersController extends BaseController
         return view('admin/users/index', $datos);
     }
 
-    public function fetch()
+    public function enable()
     {
-        $estado = $this->request->getPost('estado');
-        $userModel = new Users();
-        $datos = $userModel->getUsers($estado);
-        echo json_encode($datos);
+        $state = $this->request->getPost('estado');
+        $modelUser = new Users();
+        $query = $modelUser->get_users($state);
+
+        return $this->getRespose(
+            [
+                'users' => $query
+            ]
+        );
     }
 
     public function block()
@@ -39,94 +42,93 @@ class UsersController extends BaseController
         return view('admin/users/block', $datos);
     }
 
-    public function blockUser()
+    public function locked()
     {
         $datos = [
-            'title' => "Bloqueados block"
+            'title' => "Usuarios Bloqueados"
         ];
         return view('admin/users/indexUserBlock', $datos);
     }
 
-    public function save()
+    public function create()
     {
-
+        $input = $this->getRequestInput($this->request);
         $validation = \Config\Services::validation();
         if (!$this->validate('user')) {
-            $errors = $validation->getErrors();
-            echo json_encode(['success' => '', 'error' =>  $errors]);
-        } else {
-
-            $imagefile = $this->request->getFile('imagen');
-            $newName = $imagefile->getRandomName();
-            $imagefile->move(ROOTPATH . '/public/image', $newName);
-            //Datos
-            $nombre = $this->request->getPost('nombre');
-            $apellido = $this->request->getPost('apellido');
-            $cedula = $this->request->getPost('cedula');
-            $correo = $this->request->getPost('correo');
-            $telefono = $this->request->getPost('telefono');
-            $fechanacimiento = $this->request->getPost('fechanacimiento');
-            $genero = $this->request->getPost('genero');
-            $licencia = $this->request->getPost('licencia');
-            $direccion = $this->request->getPost('direccion');
-            $password = $this->request->getPost('password');
-            $id_rol = $this->request->getPost('roles');
-
-            $user = [
-                'nombre' => $nombre,
-                'apellido' => $apellido,
-                'cedula' => $cedula,
-                'telefono' => $telefono,
-                'correo' => $correo,
-                'clave' => Hash::make($password),
-                'estado' => 1,
-                'genero' => $genero,
-                'licencia' => $licencia,
-                'direccion' => $direccion,
-                'fechanacimiento' => $fechanacimiento,
-                'foto' => $newName
-
-            ];
-            $UserModel = new Users();
-            $query = $UserModel->insert($user);
-            if ($query) {
-
-                $userRol = [
-                    'id_user' => $query,
-                    'id_rol' => $id_rol,
-                    'estado' => 1
-                ];
-
-                $UserRolModel = new UserRolModel();
-                $UserRolModel->insert($userRol);
-                echo json_encode(['success' => 'Usuario registrado..!','error'=>'']);
-
-            } else {
-                echo json_encode(['success' => '', 'error' => 'Usuario no registrado']);
-            }
+            return $this->getRespose([
+                'error' => $validation->getErrors()
+            ]);
         }
+        $fileImagen = $this->request->getFile('imagen');
+        $input['foto'] = $fileImagen->getRandomName();
+        $input['estado'] = 1;
+        $id_rol = $input['roles'];
+        $input['clave'] = Hash::make($input['password']);
+        unset($input['roles']);
+        unset($input['password']);
+        unset($input['cpassword']);
+        unset($input['id_user']);
+
+        $UserModel = new Users();
+        $query = $UserModel->insert($input);
+        if ($query) {
+            $fileImagen->move(ROOTPATH . '/public/image', $input['foto']);
+            $userRol = [
+                'id_user' => $query,
+                'id_rol' => $id_rol,
+                'estado' => 1
+            ];
+
+            $modelUserRol = new UserRolModel();
+            $modelUserRol->insert($userRol);
+            return $this->getRespose([
+                'success' => "Registrado",
+            ]);
+
+        }
+
     }
 
 
     public function delete()
     {
 
-        $UserModel = new Users();
-        $id_user = $this->request->getPost('id_user');
-        $estado = $this->request->getPost('estado');
-        $query = $UserModel->deleteUsers($estado, $id_user);
+        $input = $this->getRequestInput($this->request);
+        $id_user = $input['id_user'];
+        $modelVehiculo = new Vehiculo();
+        $query1 = $modelVehiculo->total_vehicle_users($id_user);
+        if ($input['estado'] == 0) {
 
-        if ($query) {
-            if ($estado == 0) {
-                echo json_encode(['code' => 1, 'msg' => "Usuario Eliminado"]);
-            } else {
-                echo json_encode(['code' => 1, 'msg' => "Usuario Activado"]);
+            if ($query1[0]['TOTAL']) {
+                return $this->getRespose(
+                    [
+                        'alert' => "Unidades Activas"
+                    ]
+                );
+
             }
-        } else {
-            echo json_encode(['code' => 0, 'msg' => "Usuario no Eliminado"]);
         }
-    }
 
+        unset($input['id_user']);
+        $modelUser = new Users();
+        $query = $modelUser->delete_users($input, $id_user);
+        if ($query) {
+            if ($input['estado'] == 0) {
+                return $this->getRespose(
+                    [
+                        'success' => "Eliminado"
+                    ]
+                );
+            }
+            return $this->getRespose(
+                [
+                'success' => "Activado"
+                ]
+            );
+        }
+
+
+    }
 
 
     public function update()
@@ -134,68 +136,60 @@ class UsersController extends BaseController
 
         $UserModel = new Users();
         $id_user = $this->request->getPost('id_user');
-        $data = $UserModel->getIdUser($id_user);
-        echo json_encode($data);
+        $query = $UserModel->select_user_id($id_user);
+        return $this->getRespose(
+            [
+                'user' => $query
+            ]
+        );
     }
 
 
-    public function updateUser()
+    public function update_data()
     {
         $validation = \Config\Services::validation();
+        $input = $this->getRequestInput($this->request);
+        if (!$this->validate('userupdate')) {
 
-
-       if (!$this->validate('userupdate')) {
-
-            $errors = $validation->getErrors();
-            echo json_encode(['success' => '', 'error' =>$errors]);
-
-        } else {
-
-           $UserModel = new Users();
-           $UserRolModel = new UserRolModel();
-
-           $imagefile = $this->request->getFile('imagen');
-           $id_user = $this->request->getPost('id_user');
-           $nombre = $this->request->getPost('nombre');
-           $apellido = $this->request->getPost('apellido');
-           $cedula = $this->request->getPost('cedula');
-           $correo = $this->request->getPost('correo');
-           $telefono = $this->request->getPost('telefono');
-           $fechanacimiento = $this->request->getPost('fechanacimiento');
-           $genero = $this->request->getPost('genero');
-           $licencia = $this->request->getPost('licencia');
-           $direccion = $this->request->getPost('direccion');
-           $clave = $this->request->getPost('password');
-           $id_rol = $this->request->getPOst('roles');
-
-           if (!empty($clave)) {
-               $clave = Hash::make($clave);
-           }
-
-           if(!empty($imagefile->getClientName())){
-
-               if (!$this->validate('updateImagen')) {
-                   $errors = $validation->getErrors();
-                   echo json_encode(['success' => '', 'error' =>$errors]);
-               }else{
-                   $newName = $imagefile->getRandomName();
-                   $imagefile->move(ROOTPATH . '/public/image', $newName);
-
-                   $query = $UserModel->updateUser($id_user, $nombre, $apellido, $cedula, $correo, $telefono, $clave, $fechanacimiento, $genero, $licencia, $newName, $direccion);
-                   if ($query) {
-                       $UserRolModel->__update($id_user, $id_rol);
-                       echo json_encode(['success' => 'Usuario Actualizado con exito..!!', 'error' => '']);
-                   }
-               }
-           }else {
-               $query = $UserModel->updateUserImagen($id_user, $nombre, $apellido, $cedula, $correo, $telefono, $clave, $fechanacimiento, $genero, $licencia, $direccion);
-               if ($query) {
-                   $UserRolModel->__update($id_user, $id_rol);
-                   echo json_encode(['success' => 'Usuario Actualizado con exito..!!', 'error' => '']);
-               }
-           }
-
+            return $this->getRespose([
+                'error' => $validation->getErrors()
+            ]);
         }
+        $imagefile = $this->request->getFile('imagen');
+        if (!empty($input['password'])) {
+            $input['clave'] = Hash::make($input['password']);
+        }
+        $id_rol = $input['roles'];
+        $id_user = $input['id_user'];
+
+        unset($input['roles']);
+        unset($input['id_user']);
+        unset($input['password']);
+        unset($input['cpassword']);
+        $a = $imagefile->getClientName();
+        if ($a != "") {
+            if (!$this->validate('updateImagen')) {
+                return $this->getRespose([
+                    'error' => $validation->getErrors()
+                ]);
+            }
+
+            $newName = $imagefile->getRandomName();
+            $imagefile->move(ROOTPATH . '/public/image', $newName);
+            $input['foto'] = $newName;
+        }
+
+        $modelUser = new Users();
+        $modelUser->update_data($input, $id_user);
+        $rolUser = [
+            'id_rol' => $id_rol
+        ];
+        $modelRolUser = new UserRolModel();
+        $modelRolUser->update_data($rolUser, $id_user);
+        return $this->getRespose([
+            'success' => "Actualizado",
+        ]);
+
     }
 
 
@@ -211,11 +205,11 @@ class UsersController extends BaseController
             $cedula = $this->request->getPost('cedula');
             $UserModel = new Users();
             $datos = $UserModel->getUserID($cedula);
-           
+
             $temDatos = count($UserModel->getUserIDVehiculos($cedula));
-           
-            if ($temDatos< 3  ) {
-               
+
+            if ($temDatos < 3) {
+
                 echo json_encode(['error' => '', 'success' => $datos]);
             } else {
                 $errors = [
@@ -223,7 +217,7 @@ class UsersController extends BaseController
                 ];
                 echo json_encode(['code' => 0, 'error' => $errors]);
             }
-            
+
         }
     }
 

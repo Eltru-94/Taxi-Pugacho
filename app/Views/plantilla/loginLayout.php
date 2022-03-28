@@ -2,34 +2,29 @@
 <html lang="en">
 
 <head>
-    <?=$this->include('plantilla/header') ?>
+    <?= $this->include('plantilla/header') ?>
 
 </head>
 
 <body class="bg-warning">
 
 
+<div class="container">
+    <div class="row login-page">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
 
-<div id="layoutSidenav">
-
-
-
-    <div id="layoutSidenav_content">
-        <main>
-            <div class="container-fluid">
-
-                <?= $this->renderSection('contenido')?>
-
-            </div>
-        </main>
+            <?= $this->renderSection('contenido')?>
+        </div>
 
     </div>
 
 </div>
 
-<?= $this->renderSection('scripts')?>
+<?= $this->renderSection('scripts') ?>
 
-<?=$this->include('plantilla/links')?>
+<?= $this->include('plantilla/links') ?>
 </body>
 
 </html>

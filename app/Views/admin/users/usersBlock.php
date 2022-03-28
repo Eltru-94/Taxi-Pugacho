@@ -1,6 +1,6 @@
 <script>
 
-    let tablaUsers = $('#tablaUsersBlockPrueba').DataTable({
+    let tablaUsersLocked = $('#tablaUsersBlockPrueba').DataTable({
         "language": {
             "lengthMenu": "Mostrar _MENU_ Usuarios",
             "zeroRecords": "No se encontraron resultados",
@@ -18,22 +18,22 @@
     });
 
     function loadUsers() {
-        tablaUsers.row().clear();
-        let Url = "<?php echo base_url('users/fetch') ?>";
+        tablaUsersLocked.row().clear();
+        let Url = "<?php echo base_url('users/state') ?>";
         $.ajax({
             'type': 'post',
             url: Url,
-            data:{
-                'estado':0
+            data: {
+                'estado': 0
             },
             dataType: 'json',
-            success: function(res) {
+            success: function (res) {
                 let cont = 1;
-                var temp = "";
-                console.log(res)
+                let temp = "";
+
                 res['users'].forEach(user => {
                     let edad = calcularEdad(user.fechanacimiento);
-                    temp = tablaUsers.row.add([cont, `<img class="rounded-circle" width='100' src="<?=base_url()?>/image/` +
+                    temp = tablaUsersLocked.row.add([cont, `<img class="rounded-circle" width='100' src="<?=base_url()?>/image/` +
                     user.foto + `">`, user.nombre, user.apellido, user.correo, user
                         .cedula, user.telefono, user.licencia, edad + " años", user.rol,
                         "<div> <a class='btn btn-outline-primary'   onclick='activarUsers(" +
@@ -42,23 +42,14 @@
                     ]);
                     cont++;
                 });
-                tablaUsers.draw(true);
+                tablaUsersLocked.draw(true);
             }
         });
     }
-    function calcularEdad(fecha) {
-        var hoy = new Date();
-        var cumpleanos = new Date(fecha);
-        var edad = hoy.getFullYear() - cumpleanos.getFullYear();
-        var m = hoy.getMonth() - cumpleanos.getMonth();
-        if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
-            edad--;
-        }
-        return edad;
-    }
+
     function activarUsers(id) {
 
-        let Url = "<?php echo base_url('users/deleteUser') ?>";
+        let Url = "<?php echo base_url('users/delete') ?>";
         Swal.fire({
             title: 'Esta seguro?',
             text: "No podra reverti esto!",
@@ -74,14 +65,14 @@
                     url: Url,
                     data: {
                         'id_user': id,
-                        'estado':1
+                        'estado': 1
                     },
                     dataType: 'json',
-                    success: function(res) {
-                        if ($.isEmptyObject(res.error)) {
+                    success: function (res) {
+                        if (res.success) {
                             edit = false;
                             loadUsers();
-                            toastr["success"](res.msg,"Usuario");
+                            toastr["success"](res.success, "Usuario");
                         }
                     }
                 });
@@ -89,8 +80,7 @@
         });
     }
 
-
-    window.onload=loadUsers;
+    window.onload = loadUsers;
 
 </script>
 

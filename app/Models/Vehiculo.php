@@ -72,6 +72,7 @@ class Vehiculo extends Model
         $builder->select('*');
         $builder->join('users', 'users.id_user=vehiculo.id_user');
         $builder->where('users.cedula', $identification);
+        $builder->where('users.estado',1);
         $builder->where('vehiculo.estado', 1);
         $query = $builder->get();
         return $query;
@@ -135,6 +136,17 @@ class Vehiculo extends Model
         $builder->join('users', 'vehiculo.id_user = users.id_user');
         $builder->where('unidadesactivas.estado', 1);
         $builder->where('users.id_user', $id_user);
+        $query = $builder->get();
+        return $query->getResultArray();
+
+    }
+
+    public function total_vehicle_users($id_user)
+    {
+        $builder = $this->db->table('vehiculo');
+        $builder->select(' SUM(vehiculo.pago) AS TOTAL');
+        $builder->where('vehiculo.pago', 1);
+        $builder->where('vehiculo.id_user', $id_user);
         $query = $builder->get();
         return $query->getResultArray();
 

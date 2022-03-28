@@ -10,7 +10,7 @@ class Administrador extends BaseController
     {
 
         $modelUser=new Users();
-        $query=$modelUser->getIdUser(session('loggedUser'));
+        $query=$modelUser->select_user_id(session('loggedUser'));
         $datos=[
             'title'=>session('rol'),
             'user'=>$query

@@ -2,48 +2,47 @@
 
 <?= $this->section('contenido') ?>
 <br>
-<div id="layoutAuthentication">
-    <div id="layoutAuthentication_content">
-        <main>
-            <div class="row justify-content-center">
-                <div class="col-lg-5">
-                    <div class="card shadow-lg border-0 rounded-lg mt-5">
-                        <div class="card-header">
-                            <h3 class="text-center font-weight-light my-4">Iniciar Session</h3>
-                        </div>
-                        <div class="card-body">
+<br>
+<div class="card shadow mb-4">
+    <div class="card-header py-3 centro">
 
-                            <form name="formLogin" id="formLogin">
-                                <div class="form-group row">
-                                    <div class="col-sm-12 mb-12 mb-sm-0">
-                                        <label class="small mb-1">Correo</label>
-                                        <input type="text" class="form-control" name="correo" id="correo" placeholder="Ingrese el correo">
-                                        <span class="text-danger error-text correo_error"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12 mb-12 mb-sm-0">
-                                        <label class="small mb-1">Contraseña</label>
-                                        <input type="password" class="form-control" name="contrasenia" id="contrasenia" placeholder="Ingrese la contraseña">
-                                        <span class="text-danger error-text contrasenia_error"></span>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
+        <h4 class="m-0 font-weight-bold text-dark text-center"><?php echo $title; ?></h4>
 
+    </div>
+    <div class="modal-body">
 
-                                    <input type="submit" id="btnLogin" name="btnLogin" class="btn btn-dark"
-                                           value="Iniciar sessión">
-                                </div>
+        <form name="formLogin" id="formLogin">
+            <div class="form-group row">
+                <div class="col-sm-12 col-mb-12 col-mb-sm-0">
+                    <label class="small mb-1">Correo</label>
+                    <input type="text" class="form-control" name="correo" id="correo"
+                           placeholder="Ingrese el correo">
+                    <span class="text-danger error-text correo_error"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12 col-mb-12  col-mb-sm-0">
+                    <label class="small mb-1">Contraseña</label>
+                    <input type="password" class="form-control" name="contrasenia" id="contrasenia"
+                           placeholder="Ingrese la contraseña">
+                    <span class="text-danger error-text contrasenia_error"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12 col-mb-12  col-mb-sm-0">
 
-                            </form>
-                        </div>
-                    </div>
+                    <input type="submit" id="btnLogin" name="btnLogin" class="btn btn-dark btn-lg btn-block"
+                           value="Iniciar sessión">
                 </div>
             </div>
 
-        </main>
+
+
+        </form>
+
     </div>
 </div>
+
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>

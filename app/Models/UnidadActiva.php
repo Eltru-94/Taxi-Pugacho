@@ -9,13 +9,13 @@ class UnidadActiva extends Model
 
     protected $table = 'unidadesactivas';
     protected $primaryKey = 'id_unitActiva';
-    protected $allowedFields = ['id_vehiculo', 'horario', 'id_operador', 'valor', 'estado', 'carrera', 'reporte', 'dia', 'mesname','mesId', 'anio','latitud','logitud'];
+    protected $allowedFields = ['id_vehiculo', 'horario', 'id_operador', 'valor', 'estado', 'carrera', 'reporte', 'dia', 'mesname', 'mesId', 'anio', 'latitud', 'logitud'];
 
 
     public function __construct()
     {
         parent::__construct();
-        $db = \Config\Database::connect();
+        //$db = \Config\Database::connect();
     }
 
     public function selectUnit($id_vehiculo, $estado)
@@ -171,20 +171,32 @@ class UnidadActiva extends Model
     public function sumMonth($anio)
     {
         $builder = $this->db->table('unidadesactivas');
-        $builder->select(' SUM(unidadesactivas.valor) AS TOTAL, unidadesactivas.mesname AS mes');
-        $builder->where('unidadesactivas.anio', $anio);
-        $builder->groupBy('unidadesactivas.mesname');
+        $builder->select(' SUM(unidadesactivas.valor) AS TOTAL, MONTH(unidadesactivas.created_at) AS mes');
+        $builder->where(' YEAR(unidadesactivas.created_at) ', $anio);
+        $builder->groupBy('MONTH(unidadesactivas.created_at)');
         $query = $builder->get();
         return $query->getResultArray();
 
     }
 
 
-    public function updateLocation($data,$id_unitActiva){
+    public function updateLocation($data, $id_unitActiva)
+    {
 
-        $builder= $this->db->table('unidadesactivas');
-        $builder->where('id_unitActiva',$id_unitActiva);
+        $builder = $this->db->table('unidadesactivas');
+        $builder->where('id_unitActiva', $id_unitActiva);
         $builder->update($data);
+
+    }
+
+
+    public function deleteFrequency()
+    {
+        $builder = $this->db->table('unidadesactivas');
+        $builder->select('id_unitActiva,id_vehiculo');
+        $builder->where('estado',1);
+        $query = $builder->get();
+        return $query->getResultArray();
 
     }
 

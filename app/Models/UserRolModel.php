@@ -15,15 +15,19 @@ class UserRolModel extends Model
         $db = \Config\Database::connect();
     }
 
-    public function __update($id_user,$id_rol){
+    public function update_data($data,$id_user){
         
-        $query = $this->db->query('update userrol set id_rol=? where id_user=?',[$id_rol,$id_user]);
+        /*$query = $this->db->query('update userrol set id_rol=? where id_user=?',[$id_rol,$id_user]);
 
         if($query){
             return true;
         }else{
             return false;
-        }
+        }*/
+        $builder = $this->db->table('userrol');
+        $builder->where('userrol.id_user', $id_user);
+        $query = $builder->update($data);
+        return $query;
     }
 
 }

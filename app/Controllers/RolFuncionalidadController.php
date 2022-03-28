@@ -50,7 +50,7 @@ class RolFuncionalidadController extends BaseController
             }
 
                 
-            echo json_encode(['success' => 'Funcionalidades Asignadas', 'error' => '']);      
+            echo json_encode(['success' => 'Asignada', 'error' => '']);
         }else{
 
             $errors=[

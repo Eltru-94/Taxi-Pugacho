@@ -60,7 +60,9 @@ class Reporte extends BaseController
         ]);
 
     }
-    public function importExcelReportAssistance(){
+
+    public function importExcelReportAssistance()
+    {
         $modelReport = new Reportes();
         $query = $modelReport->getReportAssistance();
         $fileName = 'assistance.xlsx';
@@ -107,7 +109,9 @@ class Reporte extends BaseController
         ]);
 
     }
-    public function importExcelReportUsers(){
+
+    public function importExcelReportUsers()
+    {
 
         $modelUser = new Users();
         $query = $modelUser->getReportUser();
@@ -189,7 +193,7 @@ class Reporte extends BaseController
             $sheet->setCellValue('E' . $count, $row['placa']);
             $sheet->setCellValue('F' . $count, $row['unidad']);
             $sheet->setCellValue('G' . $count, $row['valor']);
-            $sheet->setCellValue('H' . $count, $row['dia']."/".$row['mesId']."/".$row['anio']);
+            $sheet->setCellValue('H' . $count, $row['dia'] . "/" . $row['mesId'] . "/" . $row['anio']);
             $count++;
         }
 
@@ -209,10 +213,11 @@ class Reporte extends BaseController
 
     }
 
-    public function  graphicFrequency(){
-        $anio=date('y');
-        $modelUnidadesActivas=new UnidadActiva();
-        $query=$modelUnidadesActivas->sumMonth($anio);
+    public function graphicFrequency()
+    {
+        $anio = date('y');
+        $modelUnidadesActivas = new UnidadActiva();
+        $query = $modelUnidadesActivas->sumMonth(2022);
         return $this->getRespose([
             $query
         ]);

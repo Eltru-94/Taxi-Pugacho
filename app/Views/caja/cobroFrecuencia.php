@@ -38,7 +38,6 @@
                         let unidad = colorUnidad(0, vehiculo.unidad);
                         let frecuencia = colorFrecuencia(vehiculo.pago);
                         let button = colorButtonFrequency(vehiculo.pago, vehiculo.id_vehiculo);
-
                         tablaFrecuencia.row.add([contador, vehiculo.nombre, vehiculo.apellido, vehiculo.cedula, vehiculo.placa, unidad, frecuencia, button])
                         contador++;
                     });

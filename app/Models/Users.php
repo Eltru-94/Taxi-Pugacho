@@ -10,78 +10,53 @@ class Users extends Model
     protected $primarykey = 'id_user';
     protected $allowedFields = ['nombre', 'apellido', 'cedula', 'correo', 'telefono', 'clave', 'estado', 'fechanacimiento', 'genero', 'licencia', 'foto', 'direccion'];
 
-    public function __construct()
-    {
-        parent::__construct();
-        $db = \Config\Database::connect();
-    }
 
-    public function getUsers($estado)
+    public function get_users($estado)
     {
 
+        $builder = $this->db->table('users');
+        $builder->select('*');
+        $builder->join('userrol', 'users.id_user = userrol.id_user');
+        $builder->join('roles', 'userrol.id_rol = roles.id_rol');
+        $builder->where('users.estado', $estado);
+        $query = $builder->get();
 
-        $query = $this->db->query('SELECT * FROM users INNER JOIN userrol ON (users.id_user = userrol.id_user) INNER JOIN roles ON (userrol.id_rol = roles.id_rol) WHERE users.estado =?', [$estado]);
-        $array = json_decode(json_encode($query->getResult()), true);
-        $datos = [
-            'users' => $array
-        ];
-        return $datos;
+        return $query->getResultArray();
 
     }
 
-    public function deleteUsers($estado, $id_user)
+    public function delete_users($data, $id_user)
     {
 
-        $query = $this->db->query('update users set estado=? where id_user=?', [$estado, $id_user]);
-
-        if ($query) {
-            return true;
-        } else {
-            return false;
-        }
+        $builder = $this->db->table('users');
+        $builder->where('id_user', $id_user);
+        $query = $builder->update($data);
+        return $query;
     }
 
-    public function getIdUser($id_user)
+    public function select_user_id($id_user)
     {
 
-        $query = $this->db->query('SELECT * FROM users INNER JOIN userrol ON (users.id_user = userrol.id_user) INNER JOIN roles ON (userrol.id_rol = roles.id_rol) WHERE users.id_user =?', [$id_user]);
-        $array = json_decode(json_encode($query->getResult()), true);
-        return $array;
+
+        $builder = $this->db->table('users');
+        $builder->select('*');
+        $builder->join('userrol', 'users.id_user = userrol.id_user');
+        $builder->join('roles', 'userrol.id_rol = roles.id_rol');
+        $builder->where('users.id_user', $id_user);
+        $query = $builder->get();
+
+        return $query->getResultArray();
     }
 
-    public function updateUser($id_user, $nombre, $apellido, $cedula, $correo, $telefono, $clave, $fechanacimiento, $genero, $licencia, $foto, $direccion)
+    public function update_data($data, $id_user)
     {
 
-        if (empty($clave)) {
-            $query = $this->db->query('update users set nombre=?, apellido=?, cedula=?,correo=?,telefono=?,fechanacimiento=?,genero=?,licencia=?,foto=?,direccion=? where id_user=?', [$nombre, $apellido, $cedula, $correo, $telefono, $fechanacimiento, $genero, $licencia, $foto, $direccion, $id_user]);
-        } else {
-            $query = $this->db->query('update users set nombre=?, apellido=?, cedula=?,correo=?,telefono=?,fechanacimiento=?,genero=?,licencia=?,foto=?,direccion=?,clave=? where id_user=?', [$nombre, $apellido, $cedula, $correo, $telefono, $fechanacimiento, $genero, $licencia, $foto, $direccion, $clave, $id_user]);
-        }
-
-
-        if ($query) {
-            return true;
-        } else {
-            return false;
-        }
+        $builder = $this->db->table('users');
+        $builder->where('id_user', $id_user);
+        $query = $builder->update($data);
+        return $query;
     }
 
-    public function updateUserImagen($id_user, $nombre, $apellido, $cedula, $correo, $telefono, $clave, $fechanacimiento, $genero, $licencia, $direccion)
-    {
-
-        if (empty($clave)) {
-            $query = $this->db->query('update users set nombre=?, apellido=?, cedula=?,correo=?,telefono=?,fechanacimiento=?,genero=?,licencia=?,direccion=? where id_user=?', [$nombre, $apellido, $cedula, $correo, $telefono, $fechanacimiento, $genero, $licencia, $direccion, $id_user]);
-        } else {
-            $query = $this->db->query('update users set nombre=?, apellido=?, cedula=?,correo=?,telefono=?,fechanacimiento=?,genero=?,licencia=?,direccion=?,clave=? where id_user=?', [$nombre, $apellido, $cedula, $correo, $telefono, $fechanacimiento, $genero, $licencia, $direccion, $clave, $id_user]);
-        }
-
-
-        if ($query) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public function getUserFunction($id_user)
     {

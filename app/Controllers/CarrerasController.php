@@ -232,5 +232,16 @@ class CarrerasController extends BaseController
         ]);
     }
 
+    public function total_race_day(){
+        $input=$this->getRequestInput($this->request);
+        $day = date('d');
+        $month = date('m');
+        $modelCarreras=new Carreras();
+        $query=$modelCarreras->total_race_day($day,$month,$input['qualify']);
+        return $this->getRespose([
+            "Total_race_day"=>$query[0]['TOTAL'],
+        ]);
+    }
+
 
 }

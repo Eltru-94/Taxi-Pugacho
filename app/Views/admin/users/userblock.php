@@ -1,6 +1,5 @@
 <script>
-var a = document.getElementById("tituloModal");
-let edit = false;
+
 //Cargar datos para la tabla
 let tablaUsers = $('#tablaUsersBlock').DataTable({
     "language": {
@@ -21,12 +20,12 @@ let tablaUsers = $('#tablaUsersBlock').DataTable({
 
 function loadUsers() {
     tablaUsers.row().clear();
-    let Url = "<?php echo base_url('users/fetch') ?>";
+    let Url = "<?php echo base_url('users/state') ?>";
     $.ajax({
         'type': 'post',
         url: Url,
         data:{
-            'estado':0
+            'estado':1
         },
         dataType: 'json',
         success: function(res) {
@@ -51,17 +50,6 @@ function loadUsers() {
 
 
 
-//Calcular edad
-function calcularEdad(fecha) {
-    var hoy = new Date();
-    var cumpleanos = new Date(fecha);
-    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
-    var m = hoy.getMonth() - cumpleanos.getMonth();
-    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
-        edad--;
-    }
-    return edad;
-}
 
 
 //Eliminar usuario 
@@ -87,10 +75,11 @@ function activarUsers(id) {
                 },
                 dataType: 'json',
                 success: function(res) {
-                    if ($.isEmptyObject(res.error)) {
-                        edit = false;
+                    console.log(res)
+                    if (res.success) {
+
                         loadUsers();
-                        toastr["success"](res.msg,"Usuario");
+                        toastr["success"](res.success,"Usuario");
                     }
                 }
             });

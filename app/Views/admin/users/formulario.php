@@ -10,8 +10,6 @@
             <div class="modal-body">
                 <form name="forUser" id="forUser" enctype="multipart/form-data">
 
-
-
                     <div class="form-group row">
 
                         <div class="col-sm-4 mb-4 mb-sm-0">

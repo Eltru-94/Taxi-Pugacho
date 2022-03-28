@@ -1,6 +1,6 @@
 <script>
 
-    let arraycolor = ["AZUL", "VERDE", "ROJO", "AMARILLO","BLANCO","NEGRO","PLOMO"];
+    let arraycolor = ["AZUL", "VERDE", "ROJO", "AMARILLO", "BLANCO", "NEGRO", "PLOMO"];
     let scheduleTaxis = ["Velada", "Mañana", "Tarde"];
     toastr.options = {
         "closeButton": false,
@@ -77,6 +77,20 @@
         return mensaje;
     }
 
+    function colorOperadorStates(valor) {
+        let mensaje = "";
+        switch (valor) {
+            case ('1'):
+                mensaje = `<span class="badge badge-pill bg-success">Activo</span>`;
+                break;
+            case ('0'):
+                mensaje = `<span class="badge badge-pill bg-success">Reportado</span>`;
+                break;
+        }
+        return mensaje;
+    }
+
+
 
     function colorButtonFrequency(pago, id_vehiculo) {
         let mensaje = "";
@@ -85,22 +99,22 @@
                 id_vehiculo +
                 ")'> <i class='fas fa-money-bill'></i></a>";
         } else {
-            mensaje = `<a class='btn btn-outline-danger' title='Imprimir Factura'  href='<?php echo base_url()?>/frecuencia/printFactura/`+id_vehiculo+`'> <i class='fas fa-file-pdf'></i></a>`;
+            mensaje = `<a class='btn btn-outline-danger' title='Imprimir Factura'  href='<?php echo base_url()?>/frecuencia/printFactura/` + id_vehiculo + `'> <i class='fas fa-file-pdf'></i></a>`;
         }
         return mensaje;
     }
 
-    function reporteColor(id){
-        var reporte="";
-        switch (id){
+    function reporteColor(id) {
+        var reporte = "";
+        switch (id) {
             case '1':
-                reporte=' <span class="badge badge-pill bg-success">Reportado</span>';
+                reporte = ' <span class="badge badge-pill bg-success">Reportado</span>';
                 break;
             case '2':
-                reporte=' <span class="badge badge-pill bg-danger">No reportado</span>';
+                reporte = ' <span class="badge badge-pill bg-danger">No reportado</span>';
                 break;
             default:
-                reporte=' <span class="badge badge-pill bg-info">Sin Verificar</span>';
+                reporte = ' <span class="badge badge-pill bg-info">Sin Verificar</span>';
                 break;
         }
         return reporte;
@@ -127,8 +141,6 @@
         }
         return reporte;
     }
-
-
 
 
     $("#forEnableUnidadReporte").on('submit', function (e) {
@@ -160,8 +172,8 @@
     });
 
 
-    function  colorSechendulle(id){
-        let mensaje=""
+    function colorSechendulle(id) {
+        let mensaje = ""
         switch (id) {
             case ('3'):
                 mensaje = ' <span class="badge badge-pill bg-primary">Tarde</span>'
@@ -177,6 +189,50 @@
                 break;
         }
 
+        return mensaje;
+    }
+
+    function Roles(aux) {
+
+        let Url = "<?php echo base_url('roles/fetch') ?>";
+        let rol = document.getElementById("roles");
+        let mensaje = " <option  value=''>Escoga el rol...</option>";
+        $.ajax({
+            'type': 'get',
+            url: Url,
+            dataType: 'json',
+            success: function (res) {
+
+                res['roles'].forEach(roles => {
+                    if (aux == roles.id_rol) {
+                        mensaje += "<option  selected value='" + roles.id_rol + "'>" + roles.rol +
+                            "</option>";
+                    } else {
+                        mensaje += "<option value='" + roles.id_rol + "'>" + roles.rol + "</option>";
+                    }
+
+                });
+                rol.innerHTML = mensaje;
+            }
+        });
+    }
+
+    function calcularEdad(fecha) {
+        var hoy = new Date();
+        var cumpleanos = new Date(fecha);
+        var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+        var m = hoy.getMonth() - cumpleanos.getMonth();
+        if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+            edad--;
+        }
+        return edad;
+    }
+
+    function buttonDelet(id, method) {
+
+        let mensaje = `<a class='btn btn-outline-danger' title='Eliminar'  onclick='` + method + `(` +
+            id +
+            `)'> <i class='fas fa-trash'></i></a>`;
         return mensaje;
     }
 

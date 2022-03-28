@@ -149,7 +149,7 @@
                     }
                     tablaVehiculoEnable.row.add([cont, horario, auto + '&nbsp <span class="badge badge-pill bg-warning">Activa</span>',
                         reporte, unitEnable.created_at, ` <a class='btn btn-outline-primary' title="Actualizar" data-bs-toggle="modal"
-                        data-bs-target="#modalUnidadesEnableEdit" onclick="editUnitEnable(` + unitEnable.id_unitActiva + `)"> <i class='fas fa-car'></i></a>&nbsp;` + reporteCarrera+`&nbsp`+btnEliminar]);
+                        data-bs-target="#modalUnidadesEnableEdit" onclick="editUnitEnable(` + unitEnable.id_unitActiva + `)"> <i class='fas fa-car'></i></a>&nbsp;` + reporteCarrera + `&nbsp` + btnEliminar]);
                     cont++;
 
                 });
@@ -223,6 +223,39 @@
             }
         });
 
+    }
+
+    function deleteFrequency() {
+
+        let Url = `<?php echo base_url()?>/enableUnit/deleteFrequency`;
+        Swal.fire({
+            title: 'Esta seguro?',
+            text: "No podra revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Eliminar Frecuencia!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+
+                $.ajax({
+                    'type': "get",
+                    url: Url,
+                    dataType: 'json',
+                    success: function (res) {
+
+                        if (res.success) {
+
+                            toastr["success"](res.success);
+                            loadUnitEnable();
+
+                        }
+                    }
+                });
+            }
+        });
     }
 
 

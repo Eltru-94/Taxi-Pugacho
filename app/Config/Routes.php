@@ -36,20 +36,19 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 /* Ruta de loggin */
 
-$routes->get('/apiall','LoginController::index');
+$routes->get('/apiall', 'LoginController::index');
 //Api User
-$routes->post('/api/user/register','LoginController::register');
-$routes->post('/api/login','LoginController::login');
-$routes->post('/api/user/update','LoginController::updateUser');
+$routes->post('/api/user/register', 'LoginController::register');
+$routes->post('/api/login', 'LoginController::login');
+$routes->post('/api/user/update', 'LoginController::updateUser');
 $routes->post('/users/updateUser', 'UsersController::updateUser');
 $routes->get('/api/user/vehicles/(:num)', 'LoginController::vehiclesUser/$1');
 $routes->post('/api/updateVehicleEnable', 'GeolocalizacionController::updateLocationVehicleEnable');
 
 
-
-
 $routes->get('/auth/register', 'Auth::register');
-$routes->get('/users/blockUser', 'UsersController::blockUser');
+
+
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
@@ -58,18 +57,19 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
 
     //Users
-    $routes->post('/user/store', 'Cliente::store');
-    $routes->get('/allUser', 'Cliente::index');
     $routes->get('/users', 'UsersController::index');
-    $routes->get('/users/block', 'UsersController::block');
-    $routes->post('/users/fetch', 'UsersController::fetch');
-    $routes->post('/users/save', 'UsersController::save');
-    $routes->post('/users/deleteUser', 'UsersController::delete');
+    $routes->post('/users/state', 'UsersController::enable');
+    $routes->get('/users/locked', 'UsersController::locked');
+    $routes->post('/users/delete', 'UsersController::delete');
+    $routes->post('/users/create', 'UsersController::create');
     $routes->post('/users/update', 'UsersController::update');
-    $routes->post('/users/updateUser', 'UsersController::updateUser');
+
+    //$routes->get('/users/block', 'UsersController::block');
+
+    $routes->post('/users/update_data', 'UsersController::update_data');
     $routes->post('/users/searchID', 'UsersController::searchID');
 
-    //Roles
+//Roles
     $routes->get('/roles', 'RolController::index');
     $routes->post('/roles/save', 'RolController::save');
     $routes->get('/roles/fetch', 'RolController::fetch');
@@ -77,13 +77,13 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->post('/roles/updateRol', 'RolController::updateRol');
     $routes->post('/roles/deleteRol', 'RolController::delete');
 
-    //Funcionalidades
+//Funcionalidades
     $routes->get('/funcionalidad', 'FuncionalidadesController::index');
     $routes->get('/funcionalidad/fetch', 'FuncionalidadesController::fetch');
     $routes->post('/rolfunc', 'FuncionalidadesController::getRolFuncionalidad');
     $routes->post('/asigarRolFuncionalidad', 'RolFuncionalidadController::index');
 
-    //Vehiculo
+//Vehiculo
     $routes->post('/vehiculo/fetch', 'VehiculoController::fetch');
     $routes->get('/vehiculo', 'VehiculoController::index');
     $routes->get('/vehiculo/details/(:num)', 'VehiculoController::vehiculoDetails/$1');
@@ -95,7 +95,7 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('vehiculo/alleliminar', 'VehiculoController::indexdelet');
     $routes->post('/vehiculo/update', 'VehiculoController::updatevehiculo');
 
-    //vehicle state enable
+//vehicle state enable
     $routes->post('/enableUnit', 'UnidadEnableController::enableUnit');
     $routes->post('/enableUnit/delet', 'UnidadEnableController::deletEnableUnit');
     $routes->get('/enableUnit/select/(:num)', 'UnidadEnableController::id_select/$1');
@@ -105,8 +105,9 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('/enableUnit/selectReport', 'UnidadEnableController::getVehicleEnableReport');
     $routes->get('/enableUnit/Report', 'UnidadEnableController::index');
     $routes->post('/enableUnit/all', 'UnidadEnableController::allUnitEnable');
+    $routes->get('/enableUnit/deleteFrequency', 'UnidadEnableController::deleteFrequency');
 
-    //Carreras
+//Carreras
     $routes->get('/', 'Home::index');
     $routes->get('/carreras', 'CarrerasController::index');
     $routes->get('/carreras/activadas', 'CarrerasController::carreras');
@@ -123,10 +124,10 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->post('/carreras/updateDestino', 'CarrerasController::updateDestino');
     $routes->post('/carreras/qualify', 'CarrerasController::qualifyCarrera');
     $routes->post('/carreras/update', 'CarrerasController::update');
+    $routes->post('/carreras/total_race_day', 'CarrerasController::total_race_day');
 
 
-
-    //Frecuencia
+//Frecuencia
     $routes->get('/frecuencia', 'FrecuenciaController::index');
     $routes->post('/frecuencia/getVehicleUser', 'FrecuenciaController::getVehicleUser');
     $routes->post('/frecuencia/storeVehicleEnable', 'FrecuenciaController::storeVehicleEnable');
@@ -134,15 +135,15 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('/frecuencia/printFactura/(:num)', 'FrecuenciaController::printBill/$1');
     $routes->get('/frecuencia/total', 'FrecuenciaController::total');
 
-    //Geolocalizacion 
+//Geolocalizacion
     $routes->get('/geolocalizacion', 'GeolocalizacionController::index');
     $routes->get('/geolocalizacion/vehicleEnable', 'GeolocalizacionController::locationVehicleEnable');
     $routes->post('/geolocalizacion/updateVehicleEnable', 'GeolocalizacionController::updateLocationVehicleEnable');
 
-    //Telefonos
+//Telefonos
     $routes->get('/telefonos/getAll', 'TelefonosController::index');
 
-    //Profile
+//Profile
     $routes->get('/profile/vehicleEnable', 'Profile::vehicleEnable');
     $routes->get('/profile/viewVehicleEnable', 'Profile::viewVehicleEnable');
     $routes->get('/profile/viewVehicleDisable', 'Profile::viewVehicleDisable');
@@ -150,7 +151,7 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('/profile/editUser', 'Profile::index');
     $routes->get('/profile/editUser', 'Profile::index');
 
-    //Reportes
+//Reportes
     $routes->get('/reports/users', 'Reporte::reportUsers');
     $routes->get('/reports/getUsers', 'Reporte::getReportUsers');
     $routes->get('/reports/assistance', 'Reporte::reportAssistance');
@@ -162,10 +163,18 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('/reports/assistanceExcel', 'Reporte::importExcelReportAssistance');
     $routes->get('/reports/graphicFrequency', 'Reporte::graphicFrequency');
 
+    //Operadores
+    $routes->get('/operadores', 'Operador::index');
+
+    $routes->get('/operadores/selectForId/(:num)', 'Operador::selectForId/$1');
+    $routes->post('/operadores/create', 'Operador::store');
+    $routes->post('/operadores/update', 'Operador::update');
+
 });
 
-
+$routes->get('/operadores/select', 'Operador::select');
 $routes->group('', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
+
 
     $routes->get('/auth', 'Auth::index');
 });
